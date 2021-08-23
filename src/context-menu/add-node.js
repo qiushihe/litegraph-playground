@@ -1,4 +1,3 @@
-import { LGraphCanvas, LiteGraph } from "litegraph.js/build/litegraph.min";
 import flow from "lodash/fp/flow";
 import keys from "lodash/fp/keys";
 import reduce from "lodash/fp/reduce";
@@ -9,63 +8,55 @@ import map from "lodash/fp/map";
 import trim from "lodash/fp/trim";
 import split from "lodash/fp/split";
 import join from "lodash/fp/join";
-import getOr from "lodash/fp/getOr";
+import first from "lodash/fp/first";
+import last from "lodash/fp/last";
 import over from "lodash/fp/over";
 import sortBy from "lodash/fp/sortBy";
 import identity from "lodash/fp/identity";
 import constant from "lodash/fp/constant";
 import concat from "lodash/fp/concat";
-import reverse from "lodash/fp/reverse";
 import negate from "lodash/fp/negate";
 import slice from "lodash/fp/slice";
-import last from "lodash/fp/last";
 import isEmpty from "lodash/fp/isEmpty";
 import startsWith from "lodash/fp/startsWith";
 
 import plainSet from "../util/plain-set";
 import plainGet from "../util/plain-get";
 
-const nodeTypesIndexer = ({ filterNodeTypes }) =>
+const nodeTypesIndexer = ({ LiteGraph, filterNodeTypes }) =>
   flow([
     keys,
     filter(filterNodeTypes),
     map(trim),
     compact,
-    reduce((acc, nodeTypeKey) => {
-      const nodeType = LiteGraph.registered_node_types[nodeTypeKey];
-      const nodeTypePaths = split("/")(nodeTypeKey);
-      const nodeTypePath = join(".")(nodeTypePaths);
-
-      const nodeTypeIsMenuPath = flow([
-        split("."),
-        slice(0, -1),
-        reverse,
-        concat("@@@isMenu"),
-        reverse,
-        join(".")
-      ])(nodeTypePath);
-
-      const nodeTypeEntriesPath = flow([
-        split("."),
-        slice(0, -1),
-        reverse,
-        concat("@@@entries"),
-        reverse,
-        join(".")
-      ])(nodeTypePath);
-
-      return flow([
-        plainSet(nodeTypeIsMenuPath, true),
-        plainSet(nodeTypeEntriesPath, [
-          ...getOr([], nodeTypeEntriesPath)(acc),
-          last(nodeTypePaths)
-        ]),
-        plainSet(nodeTypePath, nodeType)
-      ])(acc);
-    }, {})
+    map(
+      over([
+        flow([split("/"), join(".")]),
+        (nodeTypeKey) => LiteGraph.registered_node_types[nodeTypeKey]
+      ])
+    ),
+    reduce(
+      (acc, [nodeTypePath, nodeType]) =>
+        flow([
+          ...flow([
+            split("."),
+            over([first, slice(1, -1)]),
+            ([fragment, fragments]) => [
+              ...reduce(
+                (acc, fragment) => [...acc, `${last(acc)}.${fragment}`],
+                [fragment]
+              )(fragments)
+            ],
+            map((path) => plainSet(`${path}.@@@isMenu`, true))
+          ])(nodeTypePath),
+          plainSet(nodeTypePath, nodeType)
+        ])(acc),
+      {}
+    )
   ]);
 
 const menuBuilder = ({
+  LiteGraph,
   indexedNodeTypes,
   mapMenuLabel,
   mapEntryLabel,
@@ -155,6 +146,8 @@ const menuBuilder = ({
 
 const addNode =
   ({
+    LGraphCanvas,
+    LiteGraph,
     filterNodeTypes = constant(true),
     mapMenuLabel = identity,
     mapEntryLabel = identity
@@ -166,11 +159,12 @@ const addNode =
       return;
     }
 
-    const indexNodeTypes = nodeTypesIndexer({ filterNodeTypes });
+    const indexNodeTypes = nodeTypesIndexer({ LiteGraph, filterNodeTypes });
 
     const indexedNodeTypes = indexNodeTypes(LiteGraph.registered_node_types);
 
     const buildMenu = menuBuilder({
+      LiteGraph,
       indexedNodeTypes,
       mapMenuLabel,
       mapEntryLabel,

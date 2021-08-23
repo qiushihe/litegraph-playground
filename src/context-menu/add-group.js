@@ -1,5 +1,3 @@
-import { LGraphCanvas } from "litegraph.js/build/litegraph.min";
-
-const addGroup = () => LGraphCanvas.onGroupAdd;
+const addGroup = ({ LGraphCanvas }) => LGraphCanvas.onGroupAdd;
 
 export default addGroup;
