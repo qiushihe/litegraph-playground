@@ -36,6 +36,8 @@ const App = () => {
     const graph = new LGraph();
     const graphCanvas = new LGraphCanvas(canvasRef.current, graph);
 
+    graphCanvas.allow_searchbox = false;
+
     graphCanvas.getMenuOptions = () => [
       {
         content: "Add Node",
