@@ -1,5 +1,7 @@
+import reverse from "lodash/fp/reverse";
+
 const nodeType = {
-  title: "Sum",
+  title: "Reverse",
   defaultClass: null
 };
 
@@ -11,23 +13,12 @@ const defineNodeType = ({ LGraphNode }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addInput("A", "number");
-        this.addInput("B", "number");
-        this.addOutput("A+B", "number");
+        this.addInput("array", "array");
+        this.addOutput("reversed", "array");
       }
 
       onExecute() {
-        let A = this.getInputData(0);
-        if (A === undefined) {
-          A = 0;
-        }
-
-        let B = this.getInputData(1);
-        if (B === undefined) {
-          B = 0;
-        }
-
-        this.setOutputData(0, A + B);
+        this.setOutputData(0, reverse(this.getInputData(0)));
       }
     };
   }

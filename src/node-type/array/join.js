@@ -1,5 +1,7 @@
+import join from "lodash/fp/join";
+
 const nodeType = {
-  title: "Sum",
+  title: "Join",
   defaultClass: null
 };
 
@@ -11,23 +13,16 @@ const defineNodeType = ({ LGraphNode }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addInput("A", "number");
-        this.addInput("B", "number");
-        this.addOutput("A+B", "number");
+        this.addInput("array", "array");
+        this.addInput("separator", "");
+        this.addOutput("string", "");
       }
 
       onExecute() {
-        let A = this.getInputData(0);
-        if (A === undefined) {
-          A = 0;
-        }
-
-        let B = this.getInputData(1);
-        if (B === undefined) {
-          B = 0;
-        }
-
-        this.setOutputData(0, A + B);
+        this.setOutputData(
+          0,
+          join(this.getInputData(1) || "")(this.getInputData(0))
+        );
       }
     };
   }
