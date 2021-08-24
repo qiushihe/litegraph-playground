@@ -9,6 +9,7 @@ import utilButton from "./util/button";
 import utilConsoleLog from "./util/console-log";
 import utilInvokeFunction from "./util/invoke-function";
 import utilPortal from "./util/portal";
+import utilVariable from "./util/variable";
 
 import fnCollectionReduce from "./fn/collection/reduce";
 
@@ -26,6 +27,7 @@ export const registerNodes = (registerNode, context) => {
   registerNode("_custom::util/console-log", utilConsoleLog(context));
   registerNode("_custom::util/invoke-function", utilInvokeFunction(context));
   registerNode("_custom::util/portal", utilPortal(context));
+  registerNode("_custom::util/variable", utilVariable(context));
 
   registerNode("_custom::fn/collection/reduce", fnCollectionReduce(context));
 
