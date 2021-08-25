@@ -140,7 +140,7 @@ const Editor = ({ className, autoStart }) => {
     []
   );
 
-  useCustomNodeTypes({ LiteGraph, LGraphNode });
+  useCustomNodeTypes({ prefix: "_custom::", LiteGraph, LGraphNode });
 
   useEffect(() => {
     const { current: graph } = graphRef;

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 
 import { registerNodes } from "../node-type";
 
-export const useCustomNodeTypes = ({ LiteGraph, LGraphNode }) => {
+export const useCustomNodeTypes = ({ prefix, LiteGraph, LGraphNode }) => {
   useEffect(() => {
-    registerNodes(LiteGraph.registerNodeType.bind(LiteGraph), {
+    registerNodes(prefix, LiteGraph.registerNodeType.bind(LiteGraph), {
       LGraphNode,
       LiteGraph
     });
