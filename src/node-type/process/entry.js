@@ -1,5 +1,5 @@
 const nodeType = {
-  title: "ConsoleLog",
+  title: "Entry",
   defaultClass: null
 };
 
@@ -13,32 +13,34 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
 
         this.addInput("action", LiteGraph.ACTION);
         this.addInput("data", "");
+        this.addOutput("event", LiteGraph.EVENT);
+        this.addOutput("data", "");
 
+        this.properties = { name: "my-entry" };
         this.tasks = [];
-        this.silent = false;
       }
 
-      disableOutput() {
-        this.silent = true;
+      sendSignal(param) {
+        this.tasks.push({ name: "send-signal", param });
       }
 
-      enableOutput() {
-        this.silent = false;
-      }
-
-      onAction(action) {
+      onAction(action, param) {
         if (action === "action") {
-          this.tasks.push({ name: "log-data" });
+          this.sendSignal(param);
         }
       }
 
       onExecute() {
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();
-          if (task.name === "log-data") {
-            if (!this.silent) {
-              console.log(this.getInputData(1));
+
+          if (task.name === "send-signal") {
+            if (task.param && task.param.inputData !== undefined) {
+              this.setOutputData(1, task.param.inputData);
+            } else {
+              this.setOutputData(1, this.getInputData(1));
             }
+            this.triggerSlot(0, task.param);
           }
         }
       }

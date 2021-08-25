@@ -8,5 +8,5 @@ export const useCustomNodeTypes = ({ prefix, LiteGraph, LGraphNode }) => {
       LGraphNode,
       LiteGraph
     });
-  }, [LiteGraph, LGraphNode]);
+  }, [prefix, LiteGraph, LGraphNode]);
 };

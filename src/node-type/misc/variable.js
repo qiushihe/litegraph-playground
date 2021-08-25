@@ -16,7 +16,7 @@ const defineNodeType = ({ LGraphNode }) => {
         this.addInput("in", "");
         this.addOutput("out", "");
 
-        this.properties = { name: "myvar" };
+        this.properties = { name: "my-var" };
       }
 
       onAdded() {

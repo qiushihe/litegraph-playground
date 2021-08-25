@@ -39,7 +39,7 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
       }
 
       onExecute() {
-        const inputArray = this.getInputData(1);
+        const inputArray = this.getInputData(1) || [];
 
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();

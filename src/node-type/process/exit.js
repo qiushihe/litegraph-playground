@@ -1,5 +1,5 @@
 const nodeType = {
-  title: "ConsoleLog",
+  title: "Exit",
   defaultClass: null
 };
 
@@ -14,31 +14,33 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.addInput("action", LiteGraph.ACTION);
         this.addInput("data", "");
 
+        this.properties = { name: "my-exit" };
         this.tasks = [];
-        this.silent = false;
+        this.listeners = [];
       }
 
-      disableOutput() {
-        this.silent = true;
+      addListener(listener) {
+        this.listeners.push(listener);
       }
 
-      enableOutput() {
-        this.silent = false;
+      fireEvent(param) {
+        this.tasks.push({ name: "fire-event", param });
       }
 
-      onAction(action) {
+      onAction(action, param) {
         if (action === "action") {
-          this.tasks.push({ name: "log-data" });
+          this.fireEvent(param);
         }
       }
 
       onExecute() {
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();
-          if (task.name === "log-data") {
-            if (!this.silent) {
-              console.log(this.getInputData(1));
-            }
+
+          if (task.name === "fire-event") {
+            this.listeners.forEach((listener) => {
+              listener(this.getInputData(1));
+            });
           }
         }
       }

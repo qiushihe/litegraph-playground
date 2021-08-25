@@ -13,6 +13,7 @@ import {
   LiteGraph
 } from "litegraph.js/build/litegraph.core";
 
+import { PREFIX } from "../enum/node-type.enum";
 import addNode from "../context-menu/add-node";
 import addGroup from "../context-menu/add-group";
 
@@ -140,7 +141,7 @@ const Editor = ({ className, autoStart }) => {
     []
   );
 
-  useCustomNodeTypes({ prefix: "_custom::", LiteGraph, LGraphNode });
+  useCustomNodeTypes({ prefix: PREFIX, LiteGraph, LGraphNode });
 
   useEffect(() => {
     const { current: graph } = graphRef;
@@ -169,6 +170,7 @@ const Editor = ({ className, autoStart }) => {
       });
 
       graphCanvas.allow_searchbox = false;
+      graphCanvas.align_to_grid = true;
 
       graphCanvas.getMenuOptions = () => [
         {

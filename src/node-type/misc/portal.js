@@ -18,10 +18,14 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.addInput("action", LiteGraph.ACTION);
         this.addOutput("event", LiteGraph.EVENT);
 
-        this.properties = { name: "myevent" };
+        this.properties = { name: "my-event" };
 
         this.uuid = uuidv4();
         this.tasks = [];
+      }
+
+      sendSignal(param) {
+        this.tasks.push({ name: "send-signal", param });
       }
 
       replicateSignal(param) {
@@ -38,13 +42,14 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
 
       onAction(action, param) {
         if (action === "action") {
-          this.tasks.push({ name: "send-signal", param });
+          this.sendSignal(param);
         }
       }
 
       onExecute() {
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();
+
           if (task.name === "send-signal") {
             Object.values(nodeType.defaultClass.portals)
               .filter((portal) => {
@@ -56,6 +61,7 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
               .forEach((portal) => {
                 portal.replicateSignal(task.param);
               });
+
             this.triggerSlot(0, task.param);
           } else if (task.name === "replicate-signal") {
             this.triggerSlot(0, task.param);
