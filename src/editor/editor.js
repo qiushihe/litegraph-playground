@@ -39,7 +39,7 @@ import {
   FilenameInput
 } from "./editor.style";
 
-const CUSTOM_MENU_PREFIX_REGEXP = new RegExp("^_custom::");
+const CUSTOM_MENU_PREFIX_REGEXP = new RegExp(`^${PREFIX}`);
 
 const EXECUTION_RATE = 1000 / 30;
 

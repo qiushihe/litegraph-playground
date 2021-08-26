@@ -1,7 +1,7 @@
-import join from "lodash/fp/join";
+import toString from "lodash/fp/toString";
 
 const nodeType = {
-  title: "Join",
+  title: "ToString",
   defaultClass: null
 };
 
@@ -13,16 +13,12 @@ const defineNodeType = ({ LGraphNode }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addInput("array", "");
-        this.addInput("separator", "");
+        this.addInput("value", "");
         this.addOutput("string", "");
       }
 
       onExecute() {
-        this.setOutputData(
-          0,
-          join(this.getInputData(1) || "")(this.getInputData(0))
-        );
+        this.setOutputData(0, toString(this.getInputData(0)));
       }
     };
   }

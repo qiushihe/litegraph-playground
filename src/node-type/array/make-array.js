@@ -1,7 +1,7 @@
 import times from "lodash/fp/times";
 
 const nodeType = {
-  title: "Array",
+  title: "MakeArray",
   defaultClass: null
 };
 
@@ -19,7 +19,7 @@ const defineNodeType = ({ LGraphNode }) => {
           this.addInput("", "");
         })(INPUTS_COUNT);
 
-        this.addOutput("array", "array");
+        this.addOutput("array", "");
       }
 
       onExecute() {

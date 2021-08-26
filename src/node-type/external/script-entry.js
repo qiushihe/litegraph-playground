@@ -1,5 +1,5 @@
 const nodeType = {
-  title: "Entry",
+  title: "ScriptEntry",
   defaultClass: null
 };
 

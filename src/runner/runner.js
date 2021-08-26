@@ -4,7 +4,6 @@ import {
   LiteGraph
 } from "litegraph.js/build/litegraph.core";
 
-import first from "lodash/fp/first";
 import flow from "lodash/fp/flow";
 import find from "lodash/fp/find";
 import get from "lodash/fp/get";
@@ -34,7 +33,7 @@ class Runner {
 
   silentConsoleLog() {
     this.graph
-      .findNodesByType("_custom::io/console-log")
+      .findNodesByType(`${PREFIX}input-output/console-log`)
       .forEach((node) => node.disableOutput());
   }
 
@@ -42,14 +41,14 @@ class Runner {
     this.graph.start();
 
     const entry = find(flow([get("properties.name"), eq(entryName)]))(
-      this.graph.findNodesByType("_custom::process/entry")
+      this.graph.findNodesByType(`${PREFIX}external/script-entry`)
     );
 
     if (entry) {
       entry.sendSignal(entryParam);
 
       const exit = find(flow([get("properties.name"), eq(exitName)]))(
-        this.graph.findNodesByType("_custom::process/exit")
+        this.graph.findNodesByType(`${PREFIX}external/script-exit`)
       );
 
       if (exit) {

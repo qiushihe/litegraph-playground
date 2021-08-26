@@ -1,5 +1,5 @@
 const nodeType = {
-  title: "Value",
+  title: "ConstantString",
   defaultClass: null
 };
 
@@ -11,25 +11,13 @@ const defineNodeType = ({ LGraphNode }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addOutput("value", "array");
+        this.addOutput("string", "");
 
         this.properties.value = "";
-
-        this.value = null;
-      }
-
-      onPropertyChanged(propertyName, propertyValue) {
-        if (propertyName === "value") {
-          try {
-            this.value = JSON.parse(`${propertyValue}`);
-          } catch {
-            this.value = null;
-          }
-        }
       }
 
       onExecute() {
-        this.setOutputData(0, this.value);
+        this.setOutputData(0, this.properties.value);
       }
     };
   }

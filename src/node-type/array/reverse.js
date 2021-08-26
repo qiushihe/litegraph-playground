@@ -13,8 +13,8 @@ const defineNodeType = ({ LGraphNode }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addInput("array", "array");
-        this.addOutput("reversed", "array");
+        this.addInput("array", "");
+        this.addOutput("reversed", "");
       }
 
       onExecute() {

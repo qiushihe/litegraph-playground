@@ -1,9 +1,9 @@
 const nodeType = {
-  title: "Array",
+  title: "ConstantArray",
   defaultClass: null
 };
 
-const defineNodeType = ({ LGraphNode, LiteGraph }) => {
+const defineNodeType = ({ LGraphNode }) => {
   if (nodeType.defaultClass === null) {
     nodeType.defaultClass = class extends LGraphNode {
       static title = nodeType.title;
@@ -11,8 +11,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addOutput("array", "array");
-        this.addOutput("length", "number");
+        this.addOutput("array", "");
+        this.addOutput("length", "");
 
         this.properties.value = "";
 

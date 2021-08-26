@@ -1,5 +1,5 @@
 const nodeType = {
-  title: "Exit",
+  title: "ScriptExit",
   defaultClass: null
 };
 

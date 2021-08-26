@@ -20,6 +20,6 @@ describe("runner", () => {
       }
     });
 
-    expect(result).toEqual(`final: 65`);
+    expect(result).toEqual("final: 65");
   });
 });
