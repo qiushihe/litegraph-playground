@@ -1,5 +1,7 @@
+import VariableStorage from "./variable-storage";
+
 const nodeType = {
-  title: "Entry",
+  title: "VariableSet",
   defaultClass: null
 };
 
@@ -8,26 +10,25 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
     nodeType.defaultClass = class extends LGraphNode {
       static title = nodeType.title;
 
+      static variables = {};
+
       constructor() {
         super(nodeType.title);
 
         this.addInput("action", LiteGraph.ACTION);
-        this.addInput("data", "");
+        this.addInput("in", "");
         this.addOutput("event", LiteGraph.EVENT);
-        this.addOutput("data", "");
 
-        this.properties = { name: "my-entry" };
+        this.properties = { name: "my-var" };
         this.tasks = [];
+
+        this.storage = VariableStorage.getDefaultInstance();
       }
 
-      // Called externally by graph runner.
-      sendSignal(param) {
-        this.tasks.push({ name: "send-signal", param });
-      }
-
-      onAction(action, param) {
+      onAction(action) {
         if (action === "action") {
-          this.sendSignal(param);
+          this.tasks.push({ name: "set-value" });
+          this.tasks.push({ name: "send-signal" });
         }
       }
 
@@ -35,13 +36,12 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();
 
-          if (task.name === "send-signal") {
-            if (task.param && task.param.inputData !== undefined) {
-              this.setOutputData(1, task.param.inputData);
-            } else {
-              this.setOutputData(1, this.getInputData(1));
+          if (task.name === "set-value") {
+            if (this.isInputConnected(1)) {
+              this.storage.setValue(this.properties.name, this.getInputData(1));
             }
-            this.triggerSlot(0, task.param);
+          } else if (task.name === "send-signal") {
+            this.triggerSlot(0, "");
           }
         }
       }

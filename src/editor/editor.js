@@ -14,6 +14,8 @@ import {
 } from "litegraph.js/build/litegraph.core";
 
 import { PREFIX } from "../enum/node-type.enum";
+import { getUploadedTextContent } from "../util/upload";
+import { sendAsTextDownload } from "../util/download";
 import addNode from "../context-menu/add-node";
 import addGroup from "../context-menu/add-group";
 
@@ -31,6 +33,7 @@ import {
   StopButton,
   UploadButton,
   DownloadButton,
+  ToggleGridSnapButton,
   Status,
   StatusText,
   FilenameInput
@@ -40,50 +43,13 @@ const CUSTOM_MENU_PREFIX_REGEXP = new RegExp("^_custom::");
 
 const EXECUTION_RATE = 1000 / 30;
 
-const getUploadedTextContent = ({ target: { files = [] } = {} } = {}) => {
-  const file = files[0];
-  if (!file) {
-    return Promise.resolve([null, new Error("No file")]);
-  }
-
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = ({ target: { result: content } = {} } = {}) => {
-      resolve([file.name, content, null]);
-    };
-    reader.onerror = () => {
-      resolve([null, null, reader.error]);
-    };
-    reader.onabort = () => {
-      resolve([null, null, new Error("Aborted")]);
-    };
-    reader.readAsText(file);
-  });
-};
-
-const sendAsTextDownload = (filename, textContent) => {
-  const elm = document.createElement("a");
-  elm.setAttribute(
-    "href",
-    "data:text/plain;charset=utf-8," + encodeURIComponent(textContent)
-  );
-  elm.setAttribute("download", filename);
-
-  elm.style.display = "none";
-  document.body.appendChild(elm);
-
-  elm.click();
-
-  setTimeout(() => {
-    document.body.removeChild(elm);
-  }, 1);
-};
-
 const Editor = ({ className, autoStart }) => {
   const graphRef = useRef(new LGraph());
+  const graphCanvasRef = useRef(null);
   const canvasRef = useRef(null);
   const [graphIsRunning, setGraphIsRunning] = useState(false);
   const [filename, setFilename] = useState("untitled.json");
+  const [snapToGrid, setSnapToGrid] = useState(false);
 
   const handleStartStop = useCallback(() => {
     const { current: graph } = graphRef;
@@ -141,6 +107,15 @@ const Editor = ({ className, autoStart }) => {
     []
   );
 
+  const handleToggleGridSnap = useCallback(() => {
+    const { current: graphCanvas } = graphCanvasRef;
+
+    if (graphCanvas) {
+      graphCanvas.align_to_grid = !snapToGrid;
+      setSnapToGrid(!snapToGrid);
+    }
+  }, [graphCanvasRef, snapToGrid]);
+
   useCustomNodeTypes({ prefix: PREFIX, LiteGraph, LGraphNode });
 
   useEffect(() => {
@@ -170,7 +145,6 @@ const Editor = ({ className, autoStart }) => {
       });
 
       graphCanvas.allow_searchbox = false;
-      graphCanvas.align_to_grid = true;
 
       graphCanvas.getMenuOptions = () => [
         {
@@ -196,6 +170,8 @@ const Editor = ({ className, autoStart }) => {
           })
         }
       ];
+
+      graphCanvasRef.current = graphCanvas;
     }
   }, []);
 
@@ -224,6 +200,11 @@ const Editor = ({ className, autoStart }) => {
           Filename:{" "}
           <FilenameInput value={filename} onChange={handleFilenameChange} />
         </div>
+        <ControlSeparator />
+        <ToggleGridSnapButton
+          $isActive={snapToGrid}
+          onClick={handleToggleGridSnap}
+        />
       </ControlsContainer>
       <CanvasContainer>
         <Canvas

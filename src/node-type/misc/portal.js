@@ -24,10 +24,7 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.tasks = [];
       }
 
-      sendSignal(param) {
-        this.tasks.push({ name: "send-signal", param });
-      }
-
+      // Called by other instance of this node type.
       replicateSignal(param) {
         this.tasks.push({ name: "replicate-signal", param });
       }
@@ -42,7 +39,7 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
 
       onAction(action, param) {
         if (action === "action") {
-          this.sendSignal(param);
+          this.tasks.push({ name: "send-signal", param });
         }
       }
 

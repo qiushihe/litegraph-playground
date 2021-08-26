@@ -10,7 +10,8 @@ import {
   Play as PlayIcon,
   Square as StopIcon,
   UploadCloud as UploadIcon,
-  DownloadCloud as DownloadIcon
+  DownloadCloud as DownloadIcon,
+  Grid as ToggleGridSnapIcon
 } from "react-feather";
 
 /* eslint-disable  import/no-webpack-loader-syntax */
@@ -155,6 +156,19 @@ export const DownloadButton = styled.button.attrs({
   children: <DownloadIcon />
 })`
   ${buttonStyle({ svgFill: "none", svgStroke: "black" })};
+`;
+
+export const ToggleGridSnapButton = styled.button.attrs({
+  children: <ToggleGridSnapIcon />
+})`
+  ${flow([
+    get("$isActive"),
+    cond([
+      [Boolean, constant("green")],
+      [stubTrue, constant("black")]
+    ]),
+    (svgStroke) => buttonStyle({ svgFill: "none", svgStroke })
+  ])};
 `;
 
 export const Status = styled.span`

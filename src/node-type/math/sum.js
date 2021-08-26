@@ -11,8 +11,8 @@ const defineNodeType = ({ LGraphNode }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addInput("A", "number");
-        this.addInput("B", "number");
+        this.addInput("A", "");
+        this.addInput("B", "");
         this.addOutput("A+B", "number");
       }
 

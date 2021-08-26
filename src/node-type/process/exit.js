@@ -19,10 +19,12 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.listeners = [];
       }
 
+      // Called externally by graph runner.
       addListener(listener) {
         this.listeners.push(listener);
       }
 
+      // Called externally by graph runner.
       fireEvent(param) {
         this.tasks.push({ name: "fire-event", param });
       }
