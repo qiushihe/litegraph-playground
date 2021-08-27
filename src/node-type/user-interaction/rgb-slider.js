@@ -1,4 +1,4 @@
-import padStart from "lodash/fp/padStart";
+import clamp from "lodash/fp/clamp";
 
 const nodeType = {
   title: "RGBSlider",
@@ -45,6 +45,9 @@ const defineNodeType = ({ LGraphNode }) => {
           green: 0,
           blue: 0
         };
+
+        this.activeMousePos = null;
+        this.activeColourKey = null;
       }
 
       onDrawForeground(ctx) {
@@ -111,7 +114,8 @@ const defineNodeType = ({ LGraphNode }) => {
       }
 
       onMouseDown(evt, pos, canvas) {
-        let capture = false;
+        this.activeMousePos = null;
+        this.activeColourKey = null;
 
         ["red", "green", "blue"].forEach((key) => {
           const sliderCoordinate = this.sliderCoordinates[key];
@@ -122,21 +126,44 @@ const defineNodeType = ({ LGraphNode }) => {
             pos[0] < sliderCoordinate[0] + sliderCoordinate[2] &&
             pos[1] < sliderCoordinate[1] + sliderCoordinate[3]
           ) {
-            let ratio = (pos[0] - sliderCoordinate[0]) / sliderCoordinate[2];
-            this.sliderValues[key] = Math.round(255 * ratio);
-            capture = true;
+            this.sliderValues[key] = Math.round(
+              255 * ((pos[0] - sliderCoordinate[0]) / sliderCoordinate[2])
+            );
+
+            this.activeMousePos = pos;
+            this.activeColourKey = key;
           }
         });
 
-        if (capture) {
+        if (this.activeMousePos !== null && this.activeColourKey !== null) {
           this.captureInput(true);
           return true;
         }
       }
 
-      onMouseMove(evt) {}
+      onMouseMove(evt, pos, canvas) {
+        if (this.activeMousePos !== null && this.activeColourKey !== null) {
+          const sliderCoordinate = this.sliderCoordinates[this.activeColourKey];
 
-      onMouseUp(evt, pos, canvas) {}
+          const sliderBaseValue = Math.round(
+            255 *
+              ((this.activeMousePos[0] - sliderCoordinate[0]) /
+                sliderCoordinate[2])
+          );
+
+          this.sliderValues[this.activeColourKey] = clamp(
+            0,
+            255
+          )(sliderBaseValue + (pos[0] - this.activeMousePos[0]));
+
+          this.setDirtyCanvas(true);
+        }
+      }
+
+      onMouseUp(evt, pos, canvas) {
+        this.captureInput(false);
+        this.activeMousePos = null;
+      }
 
       onExecute() {
         this.setOutputData(
