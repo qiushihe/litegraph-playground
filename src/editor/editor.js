@@ -5,6 +5,7 @@ import identity from "lodash/fp/identity";
 import matches from "lodash/fp/matches";
 import replace from "lodash/fp/replace";
 import isNil from "lodash/fp/isNil";
+import noop from "lodash/fp/noop";
 
 import {
   LGraph,
@@ -145,6 +146,7 @@ const Editor = ({ className, autoStart }) => {
       });
 
       graphCanvas.allow_searchbox = false;
+      graphCanvas.onShowNodePanel = noop;
 
       graphCanvas.getMenuOptions = () => [
         {

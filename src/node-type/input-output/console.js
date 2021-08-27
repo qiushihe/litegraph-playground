@@ -10,7 +10,7 @@ const nodeType = {
 };
 
 const CONFIG = {
-  offset: [10, 60, 10, 100],
+  spacing: [10, 60, 10, 100],
   history: 100
 };
 
@@ -36,10 +36,15 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         ctx.strokeStyle = "white";
         ctx.lineWidth = 1;
 
-        const boxWidth = this.size[0] - CONFIG.offset[3] - CONFIG.offset[1];
-        const boxHeight = this.size[1] - CONFIG.offset[0] - CONFIG.offset[2];
+        const boxWidth = this.size[0] - CONFIG.spacing[3] - CONFIG.spacing[1];
+        const boxHeight = this.size[1] - CONFIG.spacing[0] - CONFIG.spacing[2];
 
-        ctx.strokeRect(CONFIG.offset[3], CONFIG.offset[0], boxWidth, boxHeight);
+        ctx.strokeRect(
+          CONFIG.spacing[3],
+          CONFIG.spacing[0],
+          boxWidth,
+          boxHeight
+        );
 
         ctx.font = "12px monospace";
 
@@ -54,8 +59,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         const maxLines = Math.floor(boxHeight / letterHeight);
 
         const textOrigin = [
-          CONFIG.offset[3],
-          CONFIG.offset[0] + fontBoundingBoxAscent
+          CONFIG.spacing[3],
+          CONFIG.spacing[0] + fontBoundingBoxAscent
         ];
 
         const visibleLines = flow([reverse, slice(0, maxLines), reverse])(
