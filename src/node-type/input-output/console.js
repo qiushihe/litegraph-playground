@@ -28,6 +28,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.addOutput("event", LiteGraph.EVENT);
 
         this.size = [640, 220];
+        this.resizable = true;
+
         this.tasks = [];
         this.messageLines = [];
       }

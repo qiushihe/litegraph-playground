@@ -15,6 +15,8 @@ const defineNodeType = ({ LGraphNode }) => {
 
         this.addInput("array", "");
         this.addOutput("reversed", "");
+
+        this.resizable = false;
       }
 
       onExecute() {

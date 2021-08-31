@@ -52,6 +52,8 @@ const defineNodeType = ({ LGraphNode }) => {
           CONFIG.spacing[3] + CONFIG.radius * 2 + CONFIG.spacing[1],
           CONFIG.spacing[0] + CONFIG.radius * 2 + CONFIG.spacing[2]
         ];
+
+        this.resizable = false;
       }
 
       onDrawForeground(ctx) {

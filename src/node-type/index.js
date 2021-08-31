@@ -1,6 +1,7 @@
 import { registerNodes as registerArrayNodes } from "./array";
 import { registerNodes as registerBooleanNodes } from "./boolean";
 import { registerNodes as registerCollectionNodes } from "./collection";
+import { registerNodes as registerColourNodes } from "./colour";
 import { registerNodes as registerExternalNodes } from "./external";
 import { registerNodes as registerFlowControlNodes } from "./flow-control";
 import { registerNodes as registerFnNodes } from "./fn";
@@ -17,6 +18,7 @@ export const registerNodes = (prefix, register, context) => {
   registerArrayNodes(`${prefix}array/`, register, context);
   registerBooleanNodes(`${prefix}boolean/`, register, context);
   registerCollectionNodes(`${prefix}collection/`, register, context);
+  registerColourNodes(`${prefix}colour/`, register, context);
   registerExternalNodes(`${prefix}external/`, register, context);
   registerFlowControlNodes(`${prefix}flow-control/`, register, context);
   registerFnNodes(`${prefix}fn/`, register, context);

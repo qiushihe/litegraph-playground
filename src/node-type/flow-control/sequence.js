@@ -24,6 +24,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
           this.addOutput("", LiteGraph.EVENT);
         })(OUTPUTS_COUNT);
 
+        this.resizable = false;
+
         this.tasks = [];
       }
 

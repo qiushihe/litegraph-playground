@@ -65,8 +65,8 @@ const defineNodeType = ({ LGraphNode }) => {
         this.addOutput("hex", "");
         this.addOutput("int[]", "");
 
-        this.resizable = false;
         this.size = [100, 100];
+        this.resizable = false;
 
         this.sliderCoordinates = {};
         this.sliderValues = {

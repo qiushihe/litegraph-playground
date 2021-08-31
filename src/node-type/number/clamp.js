@@ -17,6 +17,8 @@ const defineNodeType = ({ LGraphNode }) => {
         this.addInput("min", "");
         this.addInput("max", "");
         this.addOutput("clamped", "");
+
+        this.resizable = false;
       }
 
       onExecute() {

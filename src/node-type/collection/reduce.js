@@ -23,6 +23,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.addOutput("done", LiteGraph.EVENT);
         this.addOutput("final", "");
 
+        this.resizable = false;
+
         this.index = 0;
         this.accumulator = null;
 

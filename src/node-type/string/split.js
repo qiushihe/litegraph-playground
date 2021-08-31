@@ -1,7 +1,7 @@
-import set from "lodash/fp/set";
+import split from "lodash/fp/split";
 
 const nodeType = {
-  title: "Set",
+  title: "Split",
   defaultClass: null
 };
 
@@ -13,10 +13,9 @@ const defineNodeType = ({ LGraphNode }) => {
       constructor() {
         super(nodeType.title);
 
-        this.addInput("object", "");
-        this.addInput("key", "");
-        this.addInput("value", "");
-        this.addOutput("object", "");
+        this.addInput("string", "");
+        this.addInput("separator", "");
+        this.addOutput("string[]", "");
 
         this.resizable = false;
       }
@@ -24,7 +23,7 @@ const defineNodeType = ({ LGraphNode }) => {
       onExecute() {
         this.setOutputData(
           0,
-          set(this.getInputData(1), this.getInputData(2))(this.getInputData(0))
+          split(this.getInputData(1))(this.getInputData(0))
         );
       }
     };

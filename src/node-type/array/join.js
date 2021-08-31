@@ -16,6 +16,8 @@ const defineNodeType = ({ LGraphNode }) => {
         this.addInput("array", "");
         this.addInput("separator", "");
         this.addOutput("string", "");
+
+        this.resizable = false;
       }
 
       onExecute() {

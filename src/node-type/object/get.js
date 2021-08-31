@@ -16,6 +16,8 @@ const defineNodeType = ({ LGraphNode }) => {
         this.addInput("object", "");
         this.addInput("key", "");
         this.addOutput("value", "");
+
+        this.resizable = false;
       }
 
       onExecute() {

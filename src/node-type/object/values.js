@@ -1,7 +1,7 @@
-import set from "lodash/fp/set";
+import values from "lodash/fp/values";
 
 const nodeType = {
-  title: "Set",
+  title: "Values",
   defaultClass: null
 };
 
@@ -14,18 +14,13 @@ const defineNodeType = ({ LGraphNode }) => {
         super(nodeType.title);
 
         this.addInput("object", "");
-        this.addInput("key", "");
-        this.addInput("value", "");
-        this.addOutput("object", "");
+        this.addOutput("value[]", "");
 
         this.resizable = false;
       }
 
       onExecute() {
-        this.setOutputData(
-          0,
-          set(this.getInputData(1), this.getInputData(2))(this.getInputData(0))
-        );
+        this.setOutputData(0, values(this.getInputData(0)));
       }
     };
   }

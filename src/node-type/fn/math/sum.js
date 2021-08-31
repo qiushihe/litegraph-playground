@@ -14,6 +14,8 @@ const defineNodeType = ({ LGraphNode }) => {
         this.addOutput("fn", "function");
 
         this.execute = this.execute.bind(this);
+
+        this.resizable = false;
       }
 
       execute(a, b) {

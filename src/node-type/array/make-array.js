@@ -20,6 +20,8 @@ const defineNodeType = ({ LGraphNode }) => {
         })(INPUTS_COUNT);
 
         this.addOutput("array", "");
+
+        this.resizable = false;
       }
 
       onExecute() {

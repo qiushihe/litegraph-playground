@@ -15,6 +15,7 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
 
         this.properties = { label: "A Button", fontSize: 16 };
         this.size = [164, 84];
+        this.resizable = false;
 
         this.active = false;
       }

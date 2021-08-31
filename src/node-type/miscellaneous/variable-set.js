@@ -20,6 +20,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.addOutput("event", LiteGraph.EVENT);
 
         this.properties = { name: "my-var" };
+        this.resizable = false;
+
         this.tasks = [];
 
         this.storage = VariableStorage.getDefaultInstance();

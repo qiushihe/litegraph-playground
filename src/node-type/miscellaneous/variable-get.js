@@ -19,6 +19,7 @@ const defineNodeType = ({ LGraphNode }) => {
         this.addOutput("value", "");
 
         this.properties = { name: "my-var" };
+        this.resizable = false;
 
         this.storage = VariableStorage.getDefaultInstance();
       }

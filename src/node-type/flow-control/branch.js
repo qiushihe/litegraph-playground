@@ -1,5 +1,5 @@
 const nodeType = {
-  title: "ScriptExit",
+  title: "Branch",
   defaultClass: null
 };
 
@@ -12,28 +12,18 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         super(nodeType.title);
 
         this.addInput("action", LiteGraph.ACTION);
-        this.addInput("data", "");
+        this.addInput("B?", "");
+        this.addOutput("event A", LiteGraph.EVENT);
+        this.addOutput("event B", LiteGraph.EVENT);
 
-        this.properties = { name: "my-exit" };
         this.resizable = false;
 
         this.tasks = [];
-        this.listeners = [];
-      }
-
-      // Called externally by graph runner.
-      addListener(listener) {
-        this.listeners.push(listener);
-      }
-
-      // Called externally by graph runner.
-      fireEvent(param) {
-        this.tasks.push({ name: "fire-event", param });
       }
 
       onAction(action, param) {
         if (action === "action") {
-          this.fireEvent(param);
+          this.tasks.push({ name: "send-signal", param });
         }
       }
 
@@ -41,10 +31,16 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();
 
-          if (task.name === "fire-event") {
-            this.listeners.forEach((listener) => {
-              listener(this.getInputData(1));
-            });
+          if (task.name === "send-signal") {
+            if (!!this.getInputData(1)) {
+              setTimeout(() => {
+                this.triggerSlot(1, "");
+              }, 1);
+            } else {
+              setTimeout(() => {
+                this.triggerSlot(0, "");
+              }, 1);
+            }
           }
         }
       }

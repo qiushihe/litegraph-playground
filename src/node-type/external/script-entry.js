@@ -17,6 +17,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.addOutput("data", "");
 
         this.properties = { name: "my-entry" };
+        this.resizable = false;
+
         this.tasks = [];
       }
 

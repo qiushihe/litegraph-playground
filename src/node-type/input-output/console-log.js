@@ -14,6 +14,8 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.addInput("action", LiteGraph.ACTION);
         this.addInput("data", "");
 
+        this.resizable = false;
+
         this.tasks = [];
         this.silent = false;
       }
