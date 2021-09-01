@@ -12,7 +12,10 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         super(nodeType.title);
 
         this.addInput("action", LiteGraph.ACTION);
-        this.addInput("data", "");
+        this.addInput("in", "");
+
+        this.addOutput("event", LiteGraph.EVENT);
+        this.addOutput("out", "");
 
         this.resizable = false;
 
@@ -37,9 +40,13 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
       onExecute() {
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();
+
           if (task.name === "log-data") {
             if (!this.silent) {
               console.log(this.getInputData(1));
+
+              this.triggerSlot(0, "");
+              this.setOutputData(1, this.getInputData(1));
             }
           }
         }
