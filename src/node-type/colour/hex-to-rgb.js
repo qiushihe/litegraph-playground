@@ -1,3 +1,7 @@
+import flow from "lodash/fp/flow";
+import trim from "lodash/fp/trim";
+import toLower from "lodash/fp/toLower";
+
 const nodeType = {
   title: "HexToRGB",
   defaultClass: null
@@ -22,13 +26,14 @@ const defineNodeType = ({ LGraphNode }) => {
       }
 
       onExecute() {
-        const matchResult =
-          `${this.getInputData(0)}`.match(HEX_TO_RGB_REGEXP) || [];
+        const colourString = flow([trim, toLower])(this.getInputData(0));
+
+        const colourMatches = colourString.match(HEX_TO_RGB_REGEXP) || [];
 
         this.setOutputData(0, [
-          parseInt(matchResult[1], 16),
-          parseInt(matchResult[2], 16),
-          parseInt(matchResult[3], 16)
+          parseInt(colourMatches[1], 16),
+          parseInt(colourMatches[2], 16),
+          parseInt(colourMatches[3], 16)
         ]);
       }
     };
