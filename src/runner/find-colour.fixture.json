@@ -1,6 +1,6 @@
 {
-  "last_node_id": 154,
-  "last_link_id": 245,
+  "last_node_id": 156,
+  "last_link_id": 248,
   "nodes": [
     {
       "id": 3,
@@ -22,7 +22,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 49,
+      "order": 50,
       "mode": 0,
       "inputs": [
         {
@@ -67,7 +67,7 @@
         26
       ],
       "flags": {},
-      "order": 42,
+      "order": 43,
       "mode": 0,
       "inputs": [
         {
@@ -221,7 +221,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 65,
+      "order": 67,
       "mode": 0,
       "inputs": [
         {
@@ -309,7 +309,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 76,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -427,7 +427,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 85,
+      "order": 87,
       "mode": 0,
       "inputs": [
         {
@@ -503,7 +503,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 92,
+      "order": 94,
       "mode": 0,
       "inputs": [
         {
@@ -553,7 +553,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 99,
+      "order": 101,
       "mode": 0,
       "inputs": [
         {
@@ -713,7 +713,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 52,
+      "order": 53,
       "mode": 0,
       "inputs": [
         {
@@ -802,7 +802,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 64,
+      "order": 66,
       "mode": 0,
       "inputs": [
         {
@@ -849,7 +849,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 75,
+      "order": 77,
       "mode": 0,
       "inputs": [
         {
@@ -889,7 +889,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 63,
+      "order": 65,
       "mode": 0,
       "inputs": [
         {
@@ -929,7 +929,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 74,
+      "order": 76,
       "mode": 0,
       "inputs": [
         {
@@ -979,7 +979,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 82,
+      "order": 84,
       "mode": 0,
       "inputs": [
         {
@@ -1026,7 +1026,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 91,
+      "order": 93,
       "mode": 0,
       "inputs": [
         {
@@ -1192,7 +1192,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 43,
+      "order": 44,
       "mode": 0,
       "inputs": [
         {
@@ -1507,7 +1507,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 66,
+      "order": 68,
       "mode": 0,
       "inputs": [
         {
@@ -1552,7 +1552,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 57,
+      "order": 59,
       "mode": 0,
       "inputs": [
         {
@@ -1597,7 +1597,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 68,
+      "order": 70,
       "mode": 0,
       "inputs": [
         {
@@ -1642,7 +1642,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 79,
+      "order": 81,
       "mode": 0,
       "inputs": [
         {
@@ -1723,7 +1723,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 56,
+      "order": 58,
       "mode": 0,
       "inputs": [
         {
@@ -1812,7 +1812,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 87,
+      "order": 89,
       "mode": 0,
       "inputs": [
         {
@@ -1857,7 +1857,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 98,
+      "order": 100,
       "mode": 0,
       "inputs": [
         {
@@ -1904,7 +1904,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 94,
+      "order": 96,
       "mode": 0,
       "inputs": [
         {
@@ -1949,7 +1949,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 100,
+      "order": 102,
       "mode": 0,
       "inputs": [
         {
@@ -1989,7 +1989,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 93,
+      "order": 95,
       "mode": 0,
       "inputs": [
         {
@@ -2029,7 +2029,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 86,
+      "order": 88,
       "mode": 0,
       "inputs": [
         {
@@ -2076,7 +2076,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 78,
+      "order": 80,
       "mode": 0,
       "inputs": [
         {
@@ -2126,7 +2126,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 67,
+      "order": 69,
       "mode": 0,
       "inputs": [
         {
@@ -2250,7 +2250,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 50,
+      "order": 51,
       "mode": 0,
       "inputs": [
         {
@@ -2339,7 +2339,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 58,
+      "order": 60,
       "mode": 0,
       "inputs": [
         {
@@ -2386,7 +2386,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 69,
+      "order": 71,
       "mode": 0,
       "inputs": [
         {
@@ -2510,7 +2510,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 44,
+      "order": 45,
       "mode": 0,
       "inputs": [
         {
@@ -2586,7 +2586,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 77,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -2633,7 +2633,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 31,
+      "order": 25,
       "mode": 0,
       "inputs": [
         {
@@ -2675,7 +2675,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 83,
+      "order": 85,
       "mode": 0,
       "inputs": [
         {
@@ -2720,7 +2720,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 84,
+      "order": 86,
       "mode": 0,
       "inputs": [
         {
@@ -2765,7 +2765,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 97,
+      "order": 99,
       "mode": 0,
       "inputs": [
         {
@@ -2812,7 +2812,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 32,
+      "order": 26,
       "mode": 0,
       "inputs": [
         {
@@ -2854,7 +2854,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 45,
+      "order": 46,
       "mode": 0,
       "inputs": [
         {
@@ -2894,7 +2894,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 51,
+      "order": 52,
       "mode": 0,
       "inputs": [
         {
@@ -2985,7 +2985,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 35,
+      "order": 27,
       "mode": 0,
       "inputs": [
         {
@@ -3027,13 +3027,13 @@
         "1": 46
       },
       "flags": {},
-      "order": 55,
+      "order": 57,
       "mode": 0,
       "inputs": [
         {
           "name": "action",
           "type": -1,
-          "link": 244
+          "link": 248
         },
         {
           "name": "in",
@@ -3074,7 +3074,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 36,
+      "order": 28,
       "mode": 0,
       "inputs": [
         {
@@ -3116,7 +3116,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 37,
+      "order": 29,
       "mode": 0,
       "inputs": [
         {
@@ -3139,68 +3139,6 @@
       }
     },
     {
-      "id": 151,
-      "type": "_custom::flow-control/sequence",
-      "pos": {
-        "0": 290,
-        "1": 10,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 140,
-        "1": 106
-      },
-      "flags": {},
-      "order": 48,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "action",
-          "type": -1,
-          "link": 238
-        }
-      ],
-      "outputs": [
-        {
-          "name": "",
-          "type": -1,
-          "links": [
-            240
-          ]
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": [
-            244
-          ]
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": []
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": null
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": null
-        }
-      ],
-      "properties": {}
-    },
-    {
       "id": 152,
       "type": "_custom::input-output/colour-block",
       "pos": {
@@ -3220,7 +3158,7 @@
         120
       ],
       "flags": {},
-      "order": 46,
+      "order": 47,
       "mode": 0,
       "inputs": [
         {
@@ -3257,7 +3195,7 @@
         89.41576593572444
       ],
       "flags": {},
-      "order": 54,
+      "order": 55,
       "mode": 0,
       "inputs": [
         {
@@ -3305,7 +3243,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 38,
+      "order": 30,
       "mode": 0,
       "inputs": [
         {
@@ -3347,7 +3285,7 @@
         120
       ],
       "flags": {},
-      "order": 53,
+      "order": 54,
       "mode": 0,
       "inputs": [
         {
@@ -3384,7 +3322,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 47,
+      "order": 48,
       "mode": 0,
       "inputs": [
         {
@@ -3425,7 +3363,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 39,
+      "order": 31,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3461,7 +3399,7 @@
         54
       ],
       "flags": {},
-      "order": 41,
+      "order": 32,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -3490,7 +3428,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 60,
+      "order": 62,
       "mode": 0,
       "inputs": [
         {
@@ -3536,7 +3474,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 59,
+      "order": 61,
       "mode": 0,
       "inputs": [
         {
@@ -3581,7 +3519,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 26,
+      "order": 33,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3617,7 +3555,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 25,
+      "order": 34,
       "mode": 0,
       "inputs": [
         {
@@ -3659,7 +3597,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 70,
+      "order": 72,
       "mode": 0,
       "inputs": [
         {
@@ -3704,7 +3642,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 80,
+      "order": 82,
       "mode": 0,
       "inputs": [
         {
@@ -3756,7 +3694,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 89,
+      "order": 91,
       "mode": 0,
       "inputs": [
         {
@@ -3803,7 +3741,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 30,
+      "order": 35,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3839,7 +3777,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 71,
+      "order": 73,
       "mode": 0,
       "inputs": [
         {
@@ -3889,7 +3827,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 61,
+      "order": 63,
       "mode": 0,
       "inputs": [
         {
@@ -3939,7 +3877,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 27,
+      "order": 36,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3975,7 +3913,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 96,
+      "order": 98,
       "mode": 0,
       "inputs": [
         {
@@ -4015,7 +3953,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 88,
+      "order": 90,
       "mode": 0,
       "inputs": [
         {
@@ -4062,7 +4000,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 95,
+      "order": 97,
       "mode": 0,
       "inputs": [
         {
@@ -4102,7 +4040,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 73,
+      "order": 75,
       "mode": 0,
       "inputs": [
         {
@@ -4149,7 +4087,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 81,
+      "order": 83,
       "mode": 0,
       "inputs": [
         {
@@ -4196,7 +4134,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 90,
+      "order": 92,
       "mode": 0,
       "inputs": [
         {
@@ -4236,7 +4174,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 72,
+      "order": 74,
       "mode": 0,
       "inputs": [
         {
@@ -4281,7 +4219,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 33,
+      "order": 37,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4317,7 +4255,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 28,
+      "order": 38,
       "mode": 0,
       "inputs": [
         {
@@ -4359,7 +4297,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 29,
+      "order": 39,
       "mode": 0,
       "inputs": [
         {
@@ -4401,7 +4339,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 62,
+      "order": 64,
       "mode": 0,
       "inputs": [
         {
@@ -4447,7 +4385,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 34,
+      "order": 40,
       "mode": 0,
       "inputs": [
         {
@@ -4470,6 +4408,151 @@
       }
     },
     {
+      "id": 156,
+      "type": "_custom::string/constant-string",
+      "pos": {
+        "0": 490,
+        "1": 70,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 140,
+        "1": 26
+      },
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "",
+          "links": [
+            246
+          ]
+        }
+      ],
+      "properties": {
+        "value": "000000"
+      }
+    },
+    {
+      "id": 151,
+      "type": "_custom::flow-control/sequence",
+      "pos": {
+        "0": 290,
+        "1": -10,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 140,
+        "1": 106
+      },
+      "flags": {},
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "action",
+          "type": -1,
+          "link": 238
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": -1,
+          "links": [
+            240
+          ]
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": [
+            247
+          ]
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": [
+            248
+          ]
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": null
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": null
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": 155,
+      "type": "_custom::miscellaneous/variableSet",
+      "pos": {
+        "0": 720,
+        "1": 10,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 56,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "action",
+          "type": -1,
+          "link": 247
+        },
+        {
+          "name": "in",
+          "type": 0,
+          "link": 246
+        }
+      ],
+      "outputs": [
+        {
+          "name": "event",
+          "type": -1,
+          "links": null
+        }
+      ],
+      "properties": {
+        "name": "closestColourValue"
+      }
+    },
+    {
       "id": 6,
       "type": "_custom::user-interaction/button",
       "pos": {
@@ -4489,7 +4572,7 @@
         84
       ],
       "flags": {},
-      "order": 40,
+      "order": 41,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -5445,20 +5528,36 @@
       0
     ],
     [
-      244,
-      151,
-      1,
-      149,
-      0,
-      -1
-    ],
-    [
       245,
       148,
       0,
       153,
       1,
       0
+    ],
+    [
+      246,
+      156,
+      0,
+      155,
+      1,
+      0
+    ],
+    [
+      247,
+      151,
+      1,
+      155,
+      0,
+      -1
+    ],
+    [
+      248,
+      151,
+      2,
+      149,
+      0,
+      -1
     ]
   ],
   "groups": [],
