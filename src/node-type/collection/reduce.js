@@ -12,7 +12,7 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         super(nodeType.title);
 
         this.addInput("start", LiteGraph.ACTION);
-        this.addInput("array", "");
+        this.addInput("input", "");
         this.addInput("initial", "");
         this.addInput("iterate", LiteGraph.ACTION);
         this.addInput("accumulator", "");
