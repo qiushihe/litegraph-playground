@@ -31,52 +31,42 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
         this.tasks = [];
       }
 
+      getInputArray() {
+        return this.getInputData(1) || [];
+      }
+
       onAction(action) {
         if (action === "start") {
-          this.tasks.push("reset");
+          this.index = 0;
+          this.accumulator = this.getInputData(2);
+
+          if (this.getInputArray().length <= 0) {
+            this.tasks.push("output-final");
+          } else {
+            this.tasks.push("output-iterator");
+          }
         } else if (action === "iterate") {
-          this.tasks.push("update-accumulator");
-          this.tasks.push("increment-index");
+          this.accumulator = this.getInputData(4);
+          this.index = this.index + 1;
+
+          if (this.index <= this.getInputArray().length - 1) {
+            this.tasks.push("output-iterator");
+          } else {
+            this.tasks.push("output-final");
+          }
         }
       }
 
       onExecute() {
-        const inputArray = this.getInputData(1) || [];
-
         if (this.tasks.length > 0) {
           const task = this.tasks.shift();
 
-          if (task === "reset") {
-            this.index = 0;
-            this.accumulator = this.getInputData(2);
-
-            if (inputArray.length <= 0) {
-              this.tasks.push("output-final");
-              this.tasks.push("signal-done");
-            } else {
-              this.tasks.push("output-iterator");
-              this.tasks.push("signal-iterator");
-            }
-          } else if (task === "update-accumulator") {
-            this.accumulator = this.getInputData(4);
-          } else if (task === "increment-index") {
-            this.index = this.index + 1;
-
-            if (this.index <= inputArray.length - 1) {
-              this.tasks.push("output-iterator");
-              this.tasks.push("signal-iterator");
-            } else {
-              this.tasks.push("output-final");
-              this.tasks.push("signal-done");
-            }
-          } else if (task === "output-iterator") {
+          if (task === "output-iterator") {
             this.setOutputData(1, this.accumulator);
-            this.setOutputData(2, inputArray[this.index]);
-          } else if (task === "signal-iterator") {
+            this.setOutputData(2, this.getInputArray()[this.index]);
             this.triggerSlot(0, "");
           } else if (task === "output-final") {
             this.setOutputData(4, this.accumulator);
-          } else if (task === "signal-done") {
             this.triggerSlot(3, "");
           }
         }

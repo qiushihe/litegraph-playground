@@ -33,13 +33,9 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
 
           if (task.name === "send-signal") {
             if (!!this.getInputData(1)) {
-              setTimeout(() => {
-                this.triggerSlot(1, "");
-              }, 1);
+              this.triggerSlot(1, "");
             } else {
-              setTimeout(() => {
-                this.triggerSlot(0, "");
-              }, 1);
+              this.triggerSlot(0, "");
             }
           }
         }

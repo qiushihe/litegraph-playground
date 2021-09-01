@@ -1,7 +1,4 @@
-import flow from "lodash/fp/flow";
 import times from "lodash/fp/times";
-import reduce from "lodash/fp/reduce";
-import reverse from "lodash/fp/reverse";
 
 const nodeType = {
   title: "Sequence",
@@ -40,23 +37,11 @@ const defineNodeType = ({ LGraphNode, LiteGraph }) => {
           const task = this.tasks.shift();
 
           if (task.name === "send-signal") {
-            const sendSequentialSignals = flow([
-              times((index) => () => {
-                if (this.isOutputConnected(index)) {
-                  this.triggerSlot(index, task.param);
-                }
-              }),
-              reverse,
-              reduce(
-                (acc, fn) => () => {
-                  fn();
-                  setTimeout(() => acc(), 1);
-                },
-                () => {}
-              )
-            ])(OUTPUTS_COUNT);
-
-            sendSequentialSignals();
+            times((index) => {
+              if (this.isOutputConnected(index)) {
+                this.triggerSlot(index, task.param);
+              }
+            })(OUTPUTS_COUNT);
           }
         }
       }
