@@ -7,12 +7,7 @@ import replace from "lodash/fp/replace";
 import isNil from "lodash/fp/isNil";
 import noop from "lodash/fp/noop";
 
-import {
-  LGraph,
-  LGraphCanvas,
-  LGraphNode,
-  LiteGraph
-} from "litegraph.js/build/litegraph.core";
+import { LGraph, LGraphCanvas, LGraphNode, LiteGraph } from "../litegraph-core";
 
 import { PREFIX } from "../enum/node-type.enum";
 import { getUploadedTextContent } from "../util/upload";
@@ -42,7 +37,7 @@ import {
 
 const CUSTOM_MENU_PREFIX_REGEXP = new RegExp(`^${PREFIX}`);
 
-const EXECUTION_RATE = 1000 / 30;
+const EXECUTION_RATE = 1000 / 60;
 
 const Editor = ({ className, autoStart }) => {
   const graphRef = useRef(new LGraph());
