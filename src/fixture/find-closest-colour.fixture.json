@@ -132,7 +132,7 @@
     },
     {
       "id": 4,
-      "type": "_custom::input-output/url-hash-parameter",
+      "type": "_custom::external/url-hash-parameter",
       "pos": {
         "0": 300,
         "1": 310,
@@ -297,7 +297,7 @@
     },
     {
       "id": 13,
-      "type": "_custom::input-output/colour-block",
+      "type": "_custom::output/colour-block",
       "pos": {
         "0": 530,
         "1": 410,
@@ -334,7 +334,7 @@
     },
     {
       "id": 12,
-      "type": "_custom::input-output/colour-block",
+      "type": "_custom::output/colour-block",
       "pos": {
         "0": 800,
         "1": 410,
@@ -371,7 +371,7 @@
     },
     {
       "id": 8,
-      "type": "_custom::input-output/console",
+      "type": "_custom::output/console",
       "pos": {
         "0": 800,
         "1": 260,

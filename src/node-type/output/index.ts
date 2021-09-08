@@ -3,7 +3,7 @@ import ColourBlockNode from "./colour-block";
 import ConsoleNode from "./console";
 import ConsoleLogNode from "./console-log";
 import ImageNode from "./image";
-import UrlHashParameterNode from "./url-hash-parameter";
+import TableNode from "./table";
 
 export const registerNodes = (
   prefix: string,
@@ -13,5 +13,5 @@ export const registerNodes = (
   register(`${prefix}console`, ConsoleNode);
   register(`${prefix}console-log`, ConsoleLogNode);
   register(`${prefix}image`, ImageNode);
-  register(`${prefix}url-hash-parameter`, UrlHashParameterNode);
+  register(`${prefix}table`, TableNode);
 };

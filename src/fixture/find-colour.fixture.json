@@ -49,7 +49,7 @@
     },
     {
       "id": 1,
-      "type": "_custom::input-output/url-hash-parameter",
+      "type": "_custom::external/url-hash-parameter",
       "pos": {
         "0": 260,
         "1": 230,
@@ -3140,7 +3140,7 @@
     },
     {
       "id": 152,
-      "type": "_custom::input-output/colour-block",
+      "type": "_custom::output/colour-block",
       "pos": {
         "0": 490,
         "1": -150,
@@ -3177,7 +3177,7 @@
     },
     {
       "id": 145,
-      "type": "_custom::input-output/console",
+      "type": "_custom::output/console",
       "pos": {
         "0": 490,
         "1": -280,
@@ -3267,7 +3267,7 @@
     },
     {
       "id": 153,
-      "type": "_custom::input-output/colour-block",
+      "type": "_custom::output/colour-block",
       "pos": {
         "0": 30,
         "1": -150,

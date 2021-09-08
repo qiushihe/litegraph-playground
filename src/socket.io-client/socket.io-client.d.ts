@@ -2,6 +2,8 @@ declare module "socket.io-client" {
   type SocketEventHandler = (evt: string, data: unknown) => void;
 
   declare class Socket {
+    connected: boolean;
+
     on(evt: string, handler: SocketEventHandler): void;
 
     open(): Socket;

@@ -640,7 +640,7 @@
     },
     {
       "id": 47,
-      "type": "_custom::input-output/console",
+      "type": "_custom::output/console",
       "pos": {
         "0": 990,
         "1": 530,
@@ -690,7 +690,7 @@
     },
     {
       "id": 46,
-      "type": "_custom::input-output/console",
+      "type": "_custom::output/console",
       "pos": {
         "0": 990,
         "1": 740,
