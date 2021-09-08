@@ -883,7 +883,7 @@
     },
     {
       "id": 21,
-      "type": "_custom::input-output/console",
+      "type": "_custom::output/console",
       "pos": {
         "0": 600,
         "1": 800,
@@ -931,7 +931,7 @@
     },
     {
       "id": 26,
-      "type": "_custom::input-output/console",
+      "type": "_custom::output/console",
       "pos": {
         "0": 600,
         "1": 950,
@@ -979,7 +979,7 @@
     },
     {
       "id": 28,
-      "type": "_custom::input-output/image",
+      "type": "_custom::output/image",
       "pos": {
         "0": 600,
         "1": 1090,
