@@ -22,6 +22,10 @@ class ButtonNode extends BaseNode {
   }
 
   onDrawForeground(ctx: CanvasRenderingContext2D) {
+    if (this.flags.collapsed) {
+      return;
+    }
+
     const margin = 10;
     ctx.fillStyle = "black";
     ctx.fillRect(

@@ -1,11 +1,11 @@
 import BaseNode from "../../base-node";
-import FindNode from "./find";
-import ReduceNode from "./reduce";
+import EqualNode from "./equal";
+import GetNode from "./get";
 
 export const registerNodes = (
   prefix: string,
   register: (key: string, nodeType: { new (): BaseNode }) => void
 ): void => {
-  register(`${prefix}find`, FindNode);
-  register(`${prefix}reduce`, ReduceNode);
+  register(`${prefix}equal`, EqualNode);
+  register(`${prefix}get`, GetNode);
 };
