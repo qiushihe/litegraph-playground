@@ -92,6 +92,10 @@ class TableNode extends BaseNode {
   }
 
   onDrawForeground(ctx: CanvasRenderingContext2D) {
+    if (this.flags.collapsed) {
+      return;
+    }
+
     const defaultFill = ctx.fillStyle;
     const defaultTextBaseline = ctx.textBaseline;
 

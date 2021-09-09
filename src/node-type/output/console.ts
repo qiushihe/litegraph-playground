@@ -34,6 +34,10 @@ class ConsoleNode extends BaseNode {
   }
 
   onDrawForeground(ctx: CanvasRenderingContext2D) {
+    if (this.flags.collapsed) {
+      return;
+    }
+
     ctx.strokeStyle = "white";
     ctx.lineWidth = 1;
 

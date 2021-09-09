@@ -55,6 +55,10 @@ class ColourBlockNode extends BaseNode {
   }
 
   onDrawForeground(ctx: CanvasRenderingContext2D) {
+    if (this.flags.collapsed) {
+      return;
+    }
+
     let colourCode;
     if (this.isInputConnected(0)) {
       colourCode =

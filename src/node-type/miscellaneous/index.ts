@@ -1,7 +1,7 @@
+import BaseNode from "../base-node";
 import PortalNode from "./portal";
 import VariableGetNode from "./variable-get";
 import VariableSetNode from "./variable-set";
-import BaseNode from "../base-node";
 
 export const registerNodes = (
   prefix: string,
