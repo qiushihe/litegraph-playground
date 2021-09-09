@@ -200,7 +200,6 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
     }
   }, []);
 
-  // @ts-ignore
   return (
     <Base className={className || ""}>
       <GlobalStyle />
@@ -213,10 +212,7 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
         <ControlSeparator />
         <Status>
           Status:
-          <StatusText
-            // @ts-ignore
-            $isRunning={graphIsRunning}
-          >
+          <StatusText $isRunning={graphIsRunning}>
             {graphIsRunning ? "Running" : "Stopped"}
           </StatusText>
         </Status>
@@ -231,7 +227,6 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
         </div>
         <ControlSeparator />
         <ToggleGridSnapButton
-          // @ts-ignore
           $isActive={snapToGrid}
           onClick={handleToggleGridSnap}
         />

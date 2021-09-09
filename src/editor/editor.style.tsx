@@ -1,10 +1,15 @@
 import React from "react";
-import styled, { createGlobalStyle, css } from "styled-components";
 import flow from "lodash/fp/flow";
 import get from "lodash/fp/get";
 import cond from "lodash/fp/cond";
 import constant from "lodash/fp/constant";
 import stubTrue from "lodash/fp/stubTrue";
+
+import styled, {
+  createGlobalStyle,
+  css,
+  StyledComponent
+} from "styled-components";
 
 import {
   Play as PlayIcon,
@@ -166,7 +171,12 @@ export const DownloadButton = styled.button.attrs({
   ${buttonStyle({ svgFill: "none", svgStroke: "black" })};
 `;
 
-export const ToggleGridSnapButton = styled.button.attrs({
+export const ToggleGridSnapButton: StyledComponent<
+  "button",
+  any,
+  { $isActive: boolean; children: JSX.Element },
+  "children"
+> = styled.button.attrs({
   children: <ToggleGridSnapIcon />
 })`
   ${flow([
@@ -185,7 +195,11 @@ export const Status = styled.span`
   align-items: center;
 `;
 
-export const StatusText = styled.span`
+export const StatusText: StyledComponent<
+  "span",
+  any,
+  { $isRunning: boolean }
+> = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
