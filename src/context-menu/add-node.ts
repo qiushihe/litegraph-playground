@@ -20,10 +20,17 @@ import slice from "lodash/fp/slice";
 import isEmpty from "lodash/fp/isEmpty";
 import startsWith from "lodash/fp/startsWith";
 
+import {
+  LiteGraph,
+  LGraphNode,
+  LGraphCanvas,
+  ContextMenu
+} from "../litegraph-core";
+
 import plainSet from "../util/plain-set";
 import plainGet from "../util/plain-get";
 
-const nodeTypesIndexer = ({ LiteGraph, filterNodeTypes }) =>
+const nodeTypesIndexer = (filterNodeTypes: (node: LGraphNode) => boolean) =>
   flow([
     keys,
     filter(filterNodeTypes),
@@ -53,18 +60,17 @@ const nodeTypesIndexer = ({ LiteGraph, filterNodeTypes }) =>
         ])(acc),
       {}
     )
-  ]);
+  ]) as (nodeTypes: Record<string, LGraphNode>) => Record<string, LGraphNode>;
 
-const menuBuilder = ({
-  LiteGraph,
-  indexedNodeTypes,
-  mapMenuLabel,
-  mapEntryLabel,
-  canvas,
-  evt,
-  callback
-}) => {
-  const buildMenu = (baseCategory, parentMenu) => {
+const menuBuilder = (
+  indexedNodeTypes: Record<string, unknown>,
+  mapMenuLabel: (key: string, path: string) => string,
+  mapEntryLabel: (key: string, path: string) => string,
+  canvas: LGraphCanvas,
+  evt: unknown,
+  callback: (node: LGraphNode) => void
+) => {
+  const buildMenu = (baseCategory: string, parentMenu: ContextMenu) => {
     const entry = isEmpty(baseCategory)
       ? indexedNodeTypes
       : plainGet(baseCategory)(indexedNodeTypes) || {};
@@ -81,14 +87,19 @@ const menuBuilder = ({
       filter((entryPath) =>
         plainGet(`${entryPath}.@@@isMenu`)(indexedNodeTypes)
       ),
-      map((categoryPath) => ({
+      map((categoryPath: string) => ({
         value: categoryPath,
         content: mapMenuLabel(
           flow([split("."), last])(categoryPath),
           categoryPath
         ),
         has_submenu: true,
-        callback: (entry, evt, mouseEvt, ctxMenu) => {
+        callback: (
+          entry: { value: string },
+          evt: unknown,
+          mouseEvt: unknown,
+          ctxMenu: ContextMenu
+        ) => {
           buildMenu(entry.value, ctxMenu);
         }
       }))
@@ -110,7 +121,12 @@ const menuBuilder = ({
           value: nodeTypeKey,
           content: mapEntryLabel(nodeType.title, nodeTypeKey),
           has_submenu: false,
-          callback: (entry, evt, mouseEvt, ctxMenu) => {
+          callback: (
+            entry: { value: string },
+            evt: unknown,
+            mouseEvt: unknown,
+            ctxMenu: ContextMenu
+          ) => {
             canvas.graph.beforeChange();
 
             const node = LiteGraph.createNode(
@@ -145,33 +161,36 @@ const menuBuilder = ({
 };
 
 const addNode =
-  ({
-    LGraphCanvas,
-    LiteGraph,
-    filterNodeTypes = constant(true),
-    mapMenuLabel = identity,
-    mapEntryLabel = identity
-  } = {}) =>
-  (node, options, evt, parentMenu, callback) => {
+  (
+    filterNodeTypes: (node: LGraphNode) => boolean = constant(true),
+    mapMenuLabel: (key: string, path: string) => string = identity,
+    mapEntryLabel: (key: string, path: string) => string = identity
+  ) =>
+  (
+    node: LGraphNode,
+    options: unknown,
+    evt: unknown,
+    parentMenu: ContextMenu,
+    callback: (node: LGraphNode) => void
+  ) => {
     const canvas = LGraphCanvas.active_canvas;
 
     if (!canvas.graph) {
       return;
     }
 
-    const indexNodeTypes = nodeTypesIndexer({ LiteGraph, filterNodeTypes });
+    const indexNodeTypes = nodeTypesIndexer(filterNodeTypes);
 
     const indexedNodeTypes = indexNodeTypes(LiteGraph.registered_node_types);
 
-    const buildMenu = menuBuilder({
-      LiteGraph,
+    const buildMenu = menuBuilder(
       indexedNodeTypes,
       mapMenuLabel,
       mapEntryLabel,
       canvas,
       evt,
       callback
-    });
+    );
 
     buildMenu("", parentMenu);
 

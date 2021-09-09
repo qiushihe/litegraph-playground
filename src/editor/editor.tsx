@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { InferProps } from "prop-types";
 import constant from "lodash/fp/constant";
 import identity from "lodash/fp/identity";
 import matches from "lodash/fp/matches";
@@ -7,7 +7,7 @@ import replace from "lodash/fp/replace";
 import isNil from "lodash/fp/isNil";
 import noop from "lodash/fp/noop";
 
-import { LGraph, LGraphCanvas, LGraphNode, LiteGraph } from "../litegraph-core";
+import { LGraph, LGraphCanvas } from "../litegraph-core";
 
 import { PREFIX } from "../enum/node-type.enum";
 import { getUploadedTextContent } from "../util/upload";
@@ -39,10 +39,25 @@ const CUSTOM_MENU_PREFIX_REGEXP = new RegExp(`^${PREFIX}`);
 
 const EXECUTION_RATE = 1000 / 60;
 
-const Editor = ({ className, autoStart }) => {
-  const graphRef = useRef(new LGraph());
-  const graphCanvasRef = useRef(null);
-  const canvasRef = useRef(null);
+const PROP_TYPES = {
+  className: PropTypes.string,
+  autoStart: PropTypes.bool
+};
+
+const DEFAULT_PROPS = {
+  className: "",
+  autoStart: false
+};
+
+const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
+  className,
+  autoStart
+}) => {
+  const graphRef = useRef<LGraph>(new LGraph());
+  const graphCanvasRef = useRef<LGraphCanvas>(
+    null
+  ) as React.MutableRefObject<LGraphCanvas>;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [graphIsRunning, setGraphIsRunning] = useState(false);
   const [filename, setFilename] = useState("untitled.json");
   const [snapToGrid, setSnapToGrid] = useState(false);
@@ -70,17 +85,28 @@ const Editor = ({ className, autoStart }) => {
           console.error(uploadErr);
         } else {
           let data;
-          try {
-            data = JSON.parse(uploaded);
-          } catch (err) {
+          if (!uploaded) {
             data = null;
             // TODO: Display nicer error message.
-            console.error("JSON parse error", err);
+            console.error("No uploaded data");
+          } else {
+            try {
+              data = JSON.parse(uploaded);
+            } catch (err) {
+              data = null;
+              // TODO: Display nicer error message.
+              console.error("JSON parse error", err);
+            }
           }
 
           if (!isNil(data)) {
             graph.configure(data, false);
-            setFilename(filename);
+
+            if (!filename) {
+              setFilename("Untitled.json");
+            } else {
+              setFilename(filename);
+            }
           }
         }
       }
@@ -97,8 +123,14 @@ const Editor = ({ className, autoStart }) => {
   }, [graphRef, filename]);
 
   const handleFilenameChange = useCallback(
-    ({ target: { value: newFilename } = {} } = {}) => {
-      setFilename(newFilename);
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      const { target: { value: newFilename } = {} } = evt;
+
+      if (!newFilename) {
+        setFilename("Untitled.json");
+      } else {
+        setFilename(newFilename);
+      }
     },
     []
   );
@@ -107,12 +139,12 @@ const Editor = ({ className, autoStart }) => {
     const { current: graphCanvas } = graphCanvasRef;
 
     if (graphCanvas) {
-      graphCanvas.align_to_grid = !snapToGrid;
+      (graphCanvas as LGraphCanvas).align_to_grid = !snapToGrid;
       setSnapToGrid(!snapToGrid);
     }
   }, [graphCanvasRef, snapToGrid]);
 
-  useCustomNodeTypes({ prefix: PREFIX, LiteGraph, LGraphNode });
+  useCustomNodeTypes(PREFIX);
 
   useEffect(() => {
     const { current: graph } = graphRef;
@@ -134,9 +166,10 @@ const Editor = ({ className, autoStart }) => {
 
   useEffect(() => {
     const { current: graph } = graphRef;
+    const { current: canvas } = canvasRef;
 
-    if (graph) {
-      const graphCanvas = new LGraphCanvas(canvasRef.current, graph, {
+    if (graph && canvas) {
+      const graphCanvas = new LGraphCanvas(canvas, graph, {
         autoresize: true
       });
 
@@ -147,24 +180,19 @@ const Editor = ({ className, autoStart }) => {
         {
           content: "Add Node",
           has_submenu: true,
-          callback: addNode({
-            LGraphCanvas,
-            LiteGraph,
-            filterNodeTypes: constant(true),
-            mapMenuLabel: (entry, path) =>
-              matches(CUSTOM_MENU_PREFIX_REGEXP)(path)
+          callback: addNode(
+            constant(true),
+            (entry, path) =>
+              matches(CUSTOM_MENU_PREFIX_REGEXP)(path as never)
                 ? replace(CUSTOM_MENU_PREFIX_REGEXP, "")(entry)
                 : entry,
-            mapEntryLabel: identity
-          })
+            identity
+          )
         },
         {
           content: "Add Group",
           has_submenu: false,
-          callback: addGroup({
-            LGraphCanvas,
-            LiteGraph
-          })
+          callback: addGroup()
         }
       ];
 
@@ -172,8 +200,9 @@ const Editor = ({ className, autoStart }) => {
     }
   }, []);
 
+  // @ts-ignore
   return (
-    <Base className={className}>
+    <Base className={className || ""}>
       <GlobalStyle />
       <ControlsContainer>
         {graphIsRunning ? (
@@ -184,7 +213,10 @@ const Editor = ({ className, autoStart }) => {
         <ControlSeparator />
         <Status>
           Status:
-          <StatusText $isRunning={graphIsRunning}>
+          <StatusText
+            // @ts-ignore
+            $isRunning={graphIsRunning}
+          >
             {graphIsRunning ? "Running" : "Stopped"}
           </StatusText>
         </Status>
@@ -199,6 +231,7 @@ const Editor = ({ className, autoStart }) => {
         </div>
         <ControlSeparator />
         <ToggleGridSnapButton
+          // @ts-ignore
           $isActive={snapToGrid}
           onClick={handleToggleGridSnap}
         />
@@ -218,14 +251,7 @@ const Editor = ({ className, autoStart }) => {
   );
 };
 
-Editor.propTypes = {
-  className: PropTypes.string,
-  autoStart: PropTypes.bool
-};
-
-Editor.defaultProps = {
-  className: "",
-  autoStart: false
-};
+Editor.propTypes = PROP_TYPES;
+Editor.defaultProps = DEFAULT_PROPS;
 
 export default Editor;

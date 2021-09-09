@@ -15,6 +15,7 @@ import {
 } from "react-feather";
 
 /* eslint-disable  import/no-webpack-loader-syntax */
+// @ts-ignore
 import LiteGraphCss from "!!raw-loader!litegraph.js/css/litegraph.css";
 /* eslint-enable  import/no-webpack-loader-syntax */
 
@@ -75,7 +76,13 @@ export const ControlSpacer = styled.div`
   height: 100%;
 `;
 
-const buttonStyle = ({ svgFill, svgStroke }) => css`
+const buttonStyle = ({
+  svgFill,
+  svgStroke
+}: {
+  svgFill: string;
+  svgStroke: string;
+}) => css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,6 +153,7 @@ export const UploadButton = styled(({ className, onChange }) => {
     width: 100%;
     height: 100%;
 
+    // noinspection CssInvalidPseudoSelector
     &::file-selector-button {
       visibility: hidden;
     }

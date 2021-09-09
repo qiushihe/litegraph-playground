@@ -1,8 +1,4 @@
-import {
-  LGraph,
-  LGraphNode,
-  LiteGraph
-} from "litegraph.js/build/litegraph.core";
+import { LGraph, LiteGraph } from "../litegraph-core";
 
 import flow from "lodash/fp/flow";
 import find from "lodash/fp/find";
@@ -11,15 +7,22 @@ import eq from "lodash/fp/eq";
 
 import { PREFIX } from "../enum/node-type.enum";
 import { registerNodes } from "../node-type";
+import ConsoleLogNode from "../node-type/output/console-log";
+import ScriptExitNode from "../node-type/external/script-exit";
 
 class Runner {
+  graph: LGraph;
+  promise: Promise<unknown>;
+  resolvePromise: (data: unknown) => void;
+  rejectPromise: (data: unknown) => void;
+
   constructor() {
-    registerNodes(PREFIX, LiteGraph.registerNodeType.bind(LiteGraph), {
-      LGraphNode,
-      LiteGraph
-    });
+    registerNodes(PREFIX, LiteGraph.registerNodeType.bind(LiteGraph));
 
     this.graph = new LGraph();
+
+    this.resolvePromise = () => {};
+    this.rejectPromise = () => {};
 
     this.promise = new Promise((resolve, reject) => {
       this.resolvePromise = resolve;
@@ -27,17 +30,17 @@ class Runner {
     });
   }
 
-  loadGraphData(data) {
+  loadGraphData(data: unknown) {
     this.graph.configure(data, false);
   }
 
   silentConsoleLog() {
     this.graph
       .findNodesByType(`${PREFIX}input-output/console-log`)
-      .forEach((node) => node.disableOutput());
+      .forEach((node) => (node as ConsoleLogNode).disableOutput());
   }
 
-  run({ entryName, exitName, entryParam } = {}) {
+  run(entryName: string, exitName: string, entryParam: unknown) {
     this.graph.start();
 
     const entry = find(flow([get("properties.name"), eq(entryName)]))(
@@ -47,9 +50,9 @@ class Runner {
     if (entry) {
       entry.sendSignal(entryParam);
 
-      const exit = find(flow([get("properties.name"), eq(exitName)]))(
-        this.graph.findNodesByType(`${PREFIX}external/script-exit`)
-      );
+      const exit: ScriptExitNode = find(
+        flow([get("properties.name"), eq(exitName)])
+      )(this.graph.findNodesByType(`${PREFIX}external/script-exit`));
 
       if (exit) {
         exit.addListener((data) => this.resolvePromise(data));

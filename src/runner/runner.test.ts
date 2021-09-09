@@ -9,14 +9,10 @@ describe("runner", () => {
     runner.loadGraphData(reduceFixture);
     runner.silentConsoleLog();
 
-    const result = await runner.run({
-      entryName: "mainEntry",
-      exitName: "mainExit",
-      entryParam: {
-        inputData: {
-          numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-          baseSum: 20
-        }
+    const result = await runner.run("mainEntry", "mainExit", {
+      inputData: {
+        numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        baseSum: 20
       }
     });
 

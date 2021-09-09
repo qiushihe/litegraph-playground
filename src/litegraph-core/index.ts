@@ -2,5 +2,6 @@ export {
   LGraph,
   LGraphCanvas,
   LGraphNode,
-  LiteGraph
+  LiteGraph,
+  ContextMenu
 } from "litegraph.js/build/litegraph.core";
