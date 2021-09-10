@@ -32,6 +32,7 @@ import {
   ToggleGridSnapButton,
   Status,
   StatusText,
+  Filename,
   FilenameInput
 } from "./editor.style";
 
@@ -221,10 +222,10 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
         <ControlSpacer />
         <DownloadButton onClick={handleDownload} />
         <ControlSpacer />
-        <div>
+        <Filename>
           Filename:{" "}
           <FilenameInput value={filename} onChange={handleFilenameChange} />
-        </div>
+        </Filename>
         <ControlSeparator />
         <ToggleGridSnapButton
           $isActive={snapToGrid}

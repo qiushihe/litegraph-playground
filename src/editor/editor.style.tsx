@@ -24,6 +24,9 @@ import {
 import LiteGraphCss from "!!raw-loader!litegraph.js/css/litegraph.css";
 /* eslint-enable  import/no-webpack-loader-syntax */
 
+const TEXT_COLOUR = "#999999";
+const STROKE_COLOUR = "#999999";
+
 export const GlobalStyle = createGlobalStyle`
   ${LiteGraphCss};
 `;
@@ -43,18 +46,29 @@ export const ControlsContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   padding: 8px 14px;
+  background-color: #333333;
+  box-shadow: inset 0px -1px 0 0 black;
 `;
 
 export const CanvasContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  background-color: #1a1a1a;
+
+  // Match Chrome's bottom corner radius.
+  border-radius: 0 0 10px 10px;
 `;
 
 export const Canvas = styled.canvas`
   width: 100%;
   height: 100%;
-  box-shadow: inset 0 0 6px 0 black;
+
+  // The point of this inner glow is so that I would know if the canvas element is ever rendered
+  // with incorrect dimension/position. Because if the canvas element is rendered correctly, then
+  // all 4 edges of the inner glow should be visible. If the canvas is ever not rendered correctly,
+  // then some of the glow would not be visible, and that'd be easy to tell/fix.
+  box-shadow: inset 0 0 6px 0 #cccccc;
 `;
 
 export const ControlSeparator = styled.div`
@@ -70,7 +84,7 @@ export const ControlSeparator = styled.div`
     left: 50%;
     bottom: 0;
     width: 1px;
-    background-color: #bbbbbb;
+    background-color: ${STROKE_COLOUR};
     transform: translateX(-50%);
   }
 `;
@@ -93,7 +107,7 @@ const buttonStyle = ({
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid #696969;
+  border: 1px solid ${STROKE_COLOUR};
   border-radius: 8px;
   background-color: transparent;
   cursor: pointer;
@@ -137,7 +151,7 @@ export const UploadButton = styled(({ className, onChange }) => {
     </div>
   );
 })`
-  ${buttonStyle({ svgFill: "none", svgStroke: "black" })};
+  ${buttonStyle({ svgFill: "none", svgStroke: STROKE_COLOUR })};
 
   position: relative;
 
@@ -168,7 +182,7 @@ export const UploadButton = styled(({ className, onChange }) => {
 export const DownloadButton = styled.button.attrs({
   children: <DownloadIcon />
 })`
-  ${buttonStyle({ svgFill: "none", svgStroke: "black" })};
+  ${buttonStyle({ svgFill: "none", svgStroke: STROKE_COLOUR })};
 `;
 
 export const ToggleGridSnapButton: StyledComponent<
@@ -183,7 +197,7 @@ export const ToggleGridSnapButton: StyledComponent<
     get("$isActive"),
     cond([
       [Boolean, constant("green")],
-      [stubTrue, constant("black")]
+      [stubTrue, constant(STROKE_COLOUR)]
     ]),
     (svgStroke) => buttonStyle({ svgFill: "none", svgStroke })
   ])};
@@ -193,6 +207,7 @@ export const Status = styled.span`
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: ${TEXT_COLOUR};
 `;
 
 export const StatusText: StyledComponent<
@@ -223,14 +238,24 @@ export const StatusText: StyledComponent<
   ])};
 `;
 
+export const Filename = styled.span`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: ${TEXT_COLOUR};
+`;
+
 export const FilenameInput = styled.input.attrs({
   type: "text"
 })`
   font-family: monospace;
   font-size: 14px;
-  border: 1px solid #969696;
+  border: 1px solid ${STROKE_COLOUR};
   border-radius: 6px;
   height: 28px;
   width: 200px;
+  margin-left: 6px;
   padding: 0 8px;
+  background-color: transparent;
+  color: white;
 `;
