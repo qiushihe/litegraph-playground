@@ -2,7 +2,7 @@ import reverse from "lodash/fp/reverse";
 
 import BaseNode, { dataSocket } from "../base-node";
 
-const TITLE = "ReverseNode";
+const TITLE = "Reverse";
 
 class ReverseNode extends BaseNode {
   static title = TITLE;

@@ -1,6 +1,6 @@
 import BaseNode, { dataSocket, signalSocket } from "../base-node";
 
-const TITLE = "ScriptEntryNode";
+const TITLE = "ScriptEntry";
 
 type SignalParam = {
   inputData?: unknown;
