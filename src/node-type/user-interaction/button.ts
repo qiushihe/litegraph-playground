@@ -1,3 +1,5 @@
+import { preserve2DContext } from "../../util/canvas";
+
 import BaseNode, { signalSocket } from "../base-node";
 
 const TITLE = "Button";
@@ -25,6 +27,8 @@ class ButtonNode extends BaseNode {
     if (this.flags.collapsed) {
       return;
     }
+
+    const [restore2DContext] = preserve2DContext(ctx);
 
     const margin = 10;
     ctx.fillStyle = "black";
@@ -60,6 +64,8 @@ class ButtonNode extends BaseNode {
       this.size[1] * 0.5 + this.getPropertyOr<number>(0, "fontSize") * 0.3
     );
     ctx.textAlign = "left";
+
+    restore2DContext();
   }
 
   onMouseDown(evt: unknown, pos: [number, number]) {

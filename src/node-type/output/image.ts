@@ -1,3 +1,5 @@
+import { preserve2DContext } from "../../util/canvas";
+
 import BaseNode, { dataSocket } from "../base-node";
 
 const TITLE = "Image";
@@ -21,6 +23,8 @@ class ImageNode extends BaseNode {
     if (this.flags.collapsed) {
       return;
     }
+
+    const [restore2DContext] = preserve2DContext(ctx);
 
     const image = this.getMeta<HTMLImageElement>("image");
     if (!image) {
@@ -53,6 +57,8 @@ class ImageNode extends BaseNode {
       renderImageSize[0],
       renderImageSize[1]
     );
+
+    restore2DContext();
   }
 
   onExecute() {

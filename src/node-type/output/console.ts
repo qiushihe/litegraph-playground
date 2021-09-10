@@ -4,6 +4,8 @@ import slice from "lodash/fp/slice";
 import map from "lodash/fp/map";
 import toString from "lodash/fp/toString";
 
+import { preserve2DContext } from "../../util/canvas";
+
 import BaseNode, { dataSocket, signalSocket } from "../base-node";
 
 const TITLE = "Console";
@@ -37,6 +39,8 @@ class ConsoleNode extends BaseNode {
     if (this.flags.collapsed) {
       return;
     }
+
+    const [restore2DContext] = preserve2DContext(ctx);
 
     ctx.strokeStyle = "white";
     ctx.lineWidth = 1;
@@ -79,6 +83,8 @@ class ConsoleNode extends BaseNode {
         textOrigin[1] + letterHeight * lineIndex
       );
     }
+
+    restore2DContext();
   }
 
   onExecute() {

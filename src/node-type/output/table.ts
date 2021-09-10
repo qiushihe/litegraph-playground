@@ -21,17 +21,11 @@ import toString from "lodash/fp/toString";
 
 import { flags } from "../../util/property";
 
-import {
-  COR_TL,
-  POS_X,
-  POS_Y,
-  REGION_META,
-  SIZE_HEIGHT,
-  SIZE_WIDTH
-} from "../../enum/canvas.enum";
+import { COR_TL, POS_X, POS_Y, REGION_META } from "../../enum/canvas.enum";
 
 import {
   Region,
+  preserve2DContext,
   horizontalStack,
   verticalStack,
   newCoordinate,
@@ -84,20 +78,13 @@ class TableNode extends BaseNode {
     this.resizable = false;
   }
 
-  updateSize(width: number, height: number): void {
-    if (this.size[SIZE_WIDTH] !== width || this.size[SIZE_HEIGHT] !== height) {
-      this.size = [width, height];
-      this.setDirtyCanvas(true);
-    }
-  }
-
   onDrawForeground(ctx: CanvasRenderingContext2D) {
     if (this.flags.collapsed) {
       return;
     }
 
-    const defaultFill = ctx.fillStyle;
-    const defaultTextBaseline = ctx.textBaseline;
+    const [restore2DContext, { fillStyle: defaultFill }] =
+      preserve2DContext(ctx);
 
     const data = this.getMetaOr<unknown[][]>([], "tableData");
 
@@ -314,8 +301,7 @@ class TableNode extends BaseNode {
       );
     }
 
-    // Not sure why this is the only attribute that needed resetting... but it do be like that.
-    ctx.textBaseline = defaultTextBaseline;
+    restore2DContext();
   }
 
   onExecute() {

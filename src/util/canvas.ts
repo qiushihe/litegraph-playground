@@ -11,6 +11,81 @@ import {
   POS_Y
 } from "../enum/canvas.enum";
 
+type Restore2DContextFunction = () => void;
+
+type Preserved2DContextAttributes = {
+  strokeStyle: typeof CanvasRenderingContext2D.prototype.strokeStyle;
+  fillStyle: typeof CanvasRenderingContext2D.prototype.fillStyle;
+  globalAlpha: typeof CanvasRenderingContext2D.prototype.globalAlpha;
+  lineWidth: typeof CanvasRenderingContext2D.prototype.lineWidth;
+  lineCap: typeof CanvasRenderingContext2D.prototype.lineCap;
+  lineJoin: typeof CanvasRenderingContext2D.prototype.lineJoin;
+  miterLimit: typeof CanvasRenderingContext2D.prototype.miterLimit;
+  lineDashOffset: typeof CanvasRenderingContext2D.prototype.lineDashOffset;
+  shadowOffsetX: typeof CanvasRenderingContext2D.prototype.shadowOffsetX;
+  shadowOffsetY: typeof CanvasRenderingContext2D.prototype.shadowOffsetY;
+  shadowBlur: typeof CanvasRenderingContext2D.prototype.shadowBlur;
+  shadowColor: typeof CanvasRenderingContext2D.prototype.shadowColor;
+  globalCompositeOperation: typeof CanvasRenderingContext2D.prototype.globalCompositeOperation;
+  font: typeof CanvasRenderingContext2D.prototype.font;
+  textAlign: typeof CanvasRenderingContext2D.prototype.textAlign;
+  textBaseline: typeof CanvasRenderingContext2D.prototype.textBaseline;
+  direction: typeof CanvasRenderingContext2D.prototype.direction;
+  imageSmoothingEnabled: typeof CanvasRenderingContext2D.prototype.imageSmoothingEnabled;
+};
+
+// Saved properties: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save
+export const preserve2DContext = (
+  ctx: CanvasRenderingContext2D
+): [Restore2DContextFunction, Preserved2DContextAttributes] => {
+  const {
+    strokeStyle,
+    fillStyle,
+    globalAlpha,
+    lineWidth,
+    lineCap,
+    lineJoin,
+    miterLimit,
+    lineDashOffset,
+    shadowOffsetX,
+    shadowOffsetY,
+    shadowBlur,
+    shadowColor,
+    globalCompositeOperation,
+    font,
+    textAlign,
+    textBaseline,
+    direction,
+    imageSmoothingEnabled
+  } = ctx;
+
+  ctx.save();
+
+  return [
+    () => ctx.restore(),
+    {
+      strokeStyle,
+      fillStyle,
+      globalAlpha,
+      lineWidth,
+      lineCap,
+      lineJoin,
+      miterLimit,
+      lineDashOffset,
+      shadowOffsetX,
+      shadowOffsetY,
+      shadowBlur,
+      shadowColor,
+      globalCompositeOperation,
+      font,
+      textAlign,
+      textBaseline,
+      direction,
+      imageSmoothingEnabled
+    }
+  ];
+};
+
 export type Coordinate = [number, number];
 
 export type Region = [Coordinate, Coordinate, Coordinate, Coordinate, unknown?];

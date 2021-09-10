@@ -25,6 +25,7 @@ import {
 
 import {
   Region,
+  preserve2DContext,
   horizontalStack,
   verticalStack,
   newCoordinate,
@@ -86,20 +87,13 @@ class RGBSliderNode extends BaseNode {
     this.resizable = false;
   }
 
-  updateSize(width: number, height: number): void {
-    if (this.size[SIZE_WIDTH] !== width || this.size[SIZE_HEIGHT] !== height) {
-      this.size = [width, height];
-      this.setDirtyCanvas(true);
-    }
-  }
-
   onDrawForeground(ctx: CanvasRenderingContext2D) {
     if (this.flags.collapsed) {
       return;
     }
 
-    const defaultFill = ctx.fillStyle;
-    const defaultTextBaseline = ctx.textBaseline;
+    const [restore2DContext, { fillStyle: defaultFill }] =
+      preserve2DContext(ctx);
 
     const rootRegions = verticalStack(newCoordinate(0, 0))([
       regionWithMeta(newRegion(1, CONFIG.spacing[DIR_T]), flags("isGap")),
@@ -312,8 +306,7 @@ class RGBSliderNode extends BaseNode {
       })
     ])(rootRegions);
 
-    // Not sure why this is the only attribute that needed resetting... but it do be like that.
-    ctx.textBaseline = defaultTextBaseline;
+    restore2DContext();
   }
 
   onMouseDown(evt: unknown, pos: [number, number]) {

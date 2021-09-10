@@ -3,6 +3,7 @@ import BaseNode, { dataSocket, signalSocket } from "../base-node";
 import { COR_TL, COR_TR, POS_X, POS_Y, COR_BL } from "../../enum/canvas.enum";
 
 import {
+  preserve2DContext,
   newCoordinate,
   newRegion,
   regionHeight,
@@ -98,8 +99,8 @@ class BobbingSignalNode extends BaseNode {
       return;
     }
 
-    const defaultFill = ctx.fillStyle;
-    const defaultTextBaseline = ctx.textBaseline;
+    const [restore2DContext, { fillStyle: defaultFill }] =
+      preserve2DContext(ctx);
 
     const value = this.getMetaOr<number>(0.0, "value");
     const rangeMax = this.getMetaOr<number>(0.0, "rangeMax");
@@ -176,8 +177,7 @@ class BobbingSignalNode extends BaseNode {
     );
     ctx.fill();
 
-    // Not sure why this is the only attribute that needed resetting... but it do be like that.
-    ctx.textBaseline = defaultTextBaseline;
+    restore2DContext();
   }
 
   onExecute() {

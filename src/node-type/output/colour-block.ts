@@ -1,3 +1,5 @@
+import { preserve2DContext } from "../../util/canvas";
+
 import BaseNode, { dataSocket } from "../base-node";
 
 const TITLE = "ColourBlock";
@@ -59,6 +61,8 @@ class ColourBlockNode extends BaseNode {
       return;
     }
 
+    const [restore2DContext] = preserve2DContext(ctx);
+
     let colourCode;
     if (this.isInputConnected(0)) {
       colourCode =
@@ -107,6 +111,8 @@ class ColourBlockNode extends BaseNode {
       center[0] - labelWidth / 2,
       center[1] + fontBoundingBoxDescent
     );
+
+    restore2DContext();
   }
 
   onExecute() {}

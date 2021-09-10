@@ -193,6 +193,13 @@ class BaseNode extends LGraphNode {
   getInputData<T>(socketIndex: number): T | null {
     return this.getInputDataOr<T | null>(null, socketIndex);
   }
+
+  updateSize(width: number, height: number): void {
+    if (this.size[0] !== width || this.size[1] !== height) {
+      this.size = [width, height];
+      this.setDirtyCanvas(true);
+    }
+  }
 }
 
 export default BaseNode;

@@ -1,13 +1,7 @@
-import {
-  SIZE_HEIGHT,
-  SIZE_WIDTH,
-  DIR_L,
-  DIR_R,
-  DIR_T,
-  DIR_B
-} from "../../enum/canvas.enum";
+import { DIR_L, DIR_R, DIR_T, DIR_B } from "../../enum/canvas.enum";
 
 import {
+  preserve2DContext,
   newCoordinate,
   newRegion,
   regionWidth,
@@ -38,19 +32,12 @@ class LabelNode extends BaseNode {
     this.size = [150, 50];
   }
 
-  updateSize(width: number, height: number): void {
-    if (this.size[SIZE_WIDTH] !== width || this.size[SIZE_HEIGHT] !== height) {
-      this.size = [width, height];
-      this.setDirtyCanvas(true);
-    }
-  }
-
   onDrawForeground(ctx: CanvasRenderingContext2D) {
     if (this.flags.collapsed) {
       return;
     }
 
-    const defaultTextBaseline = ctx.textBaseline;
+    const [restore2DContext] = preserve2DContext(ctx);
 
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -81,8 +68,7 @@ class LabelNode extends BaseNode {
       CONFIG.spacing[DIR_T] + regionHeight(textRegion) + CONFIG.spacing[DIR_B]
     );
 
-    // Not sure why this is the only attribute that needed resetting... but it do be like that.
-    ctx.textBaseline = defaultTextBaseline;
+    restore2DContext();
   }
 
   onExecute() {}
