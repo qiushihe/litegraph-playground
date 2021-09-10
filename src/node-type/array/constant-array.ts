@@ -8,8 +8,7 @@ class ConstantArrayNode extends BaseNode {
   constructor() {
     super(TITLE, {
       sockets: {
-        input: [dataSocket("array")],
-        output: [dataSocket("length")]
+        output: [dataSocket("array"), dataSocket("length")]
       },
       metadata: [["array", []]]
     });
