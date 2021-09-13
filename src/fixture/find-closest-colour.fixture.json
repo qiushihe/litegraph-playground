@@ -3,35 +3,6 @@
   "last_link_id": 14,
   "nodes": [
     {
-      "id": 3,
-      "type": "_custom::user-interaction/label",
-      "pos": {
-        "0": 100,
-        "1": 40,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        1795.85546875,
-        54
-      ],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {
-        "text": "#colours=primary.purple|513394,primary.darkPurple|210A53,primary.teal|81CEC3,secondary.orchid|AF9FEB,secondary.lilac|DAD9FF,secondary.lavender|EBEAFF,surface.darkGray|242239,surface.deepGray|504E61,surface.mediumGray|BEB8C4,surface.silverGray|E2E2EE,surface.lightGray|EDEDF6,surface.lightestGray|F6F6FA",
-        "fontSize": 12
-      }
-    },
-    {
       "id": 1,
       "type": "_custom::user-interaction/button",
       "pos": {
@@ -51,7 +22,7 @@
         84
       ],
       "flags": {},
-      "order": 3,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -88,7 +59,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 6,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
@@ -150,7 +121,7 @@
         26
       ],
       "flags": {},
-      "order": 4,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -185,12 +156,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 1,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -273,12 +244,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -315,7 +286,7 @@
         120
       ],
       "flags": {},
-      "order": 5,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -416,6 +387,35 @@
         }
       ],
       "properties": {}
+    },
+    {
+      "id": 3,
+      "type": "_custom::user-interaction/label",
+      "pos": {
+        "0": 100,
+        "1": -20,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        417,
+        111
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": "#colours=primary.purple|513394,primary.darkPurple|210A53,primary.teal|81CEC3,secondary.orchid|AF9FEB,secondary.lilac|DAD9FF,secondary.lavender|EBEAFF,surface.darkGray|242239,surface.deepGray|504E61,surface.mediumGray|BEB8C4,surface.silverGray|E2E2EE,surface.lightGray|EDEDF6,surface.lightestGray|F6F6FA",
+        "fontSize": 12
+      }
     }
   ],
   "links": [

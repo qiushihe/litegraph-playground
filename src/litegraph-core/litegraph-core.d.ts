@@ -54,6 +54,7 @@ declare module "litegraph.js/build/litegraph.core" {
     onAction(action: string, param: unknown): void;
     onExecute(): void;
     onPropertyChanged(name: string, value: unknown): void;
+    onResize(size: [number, number]): void;
     onMouseDown(evt: unknown, pos: [number, number], canvas: unknown): void;
     onMouseUp(evt: unknown, pos: [number, number], canvas: unknown): void;
 

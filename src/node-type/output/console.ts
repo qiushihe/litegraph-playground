@@ -56,10 +56,7 @@ class ConsoleNode extends BaseNode {
       width: letterWidth,
       fontBoundingBoxAscent,
       fontBoundingBoxDescent
-    } = ctx.measureText(" ") as TextMetrics & {
-      fontBoundingBoxAscent: number;
-      fontBoundingBoxDescent: number;
-    };
+    } = ctx.measureText(" ");
 
     const letterHeight = fontBoundingBoxAscent + fontBoundingBoxDescent;
     const maxLineChars = Math.floor(boxWidth / letterWidth);

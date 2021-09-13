@@ -116,7 +116,10 @@ class BaseNode extends LGraphNode {
 
   setMeta(name: string, value: unknown): void {
     this[METADATA_ATTR_NAME] = set(name, value)(this[METADATA_ATTR_NAME]);
+    this.onMetaChanged(name, value);
   }
+
+  onMetaChanged(_: string, __: unknown): void {}
 
   private initializeSockets(options?: BaseNodeOptions): void {
     const addDataInput = (name: string) => this.addInput(name, "");

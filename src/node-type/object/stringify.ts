@@ -8,7 +8,7 @@ class StringifyNode extends BaseNode {
   constructor() {
     super(TITLE, {
       sockets: {
-        input: [dataSocket("object")],
+        input: [dataSocket("object"), dataSocket("pretty")],
         output: [dataSocket("string")]
       }
     });
@@ -17,7 +17,12 @@ class StringifyNode extends BaseNode {
   }
 
   onExecute() {
-    this.setOutputData(0, JSON.stringify(this.getInputData(0)));
+    this.setOutputData(
+      0,
+      this.getInputDataOr<boolean>(false, 1)
+        ? JSON.stringify(this.getInputData(0), null, 2)
+        : JSON.stringify(this.getInputData(0))
+    );
   }
 }
 
