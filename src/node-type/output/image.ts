@@ -24,12 +24,12 @@ class ImageNode extends BaseNode {
       return;
     }
 
-    const [restore2DContext] = preserve2DContext(ctx);
-
     const image = this.getMeta<HTMLImageElement>("image");
     if (!image) {
       return;
     }
+
+    const [restore2DContext] = preserve2DContext(ctx);
 
     const imageAspectRatio = image.width / image.height;
 
