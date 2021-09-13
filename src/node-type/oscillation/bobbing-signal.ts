@@ -173,7 +173,8 @@ class BobbingSignalNode extends BaseNode {
         (rangeMax * integerIncrementHeight - value * integerIncrementHeight),
       5,
       0,
-      2 * Math.PI
+      2 * Math.PI,
+      false
     );
     ctx.fill();
 

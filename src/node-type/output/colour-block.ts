@@ -101,9 +101,8 @@ class ColourBlockNode extends BaseNode {
     ctx.stroke();
 
     ctx.font = "12px monospace";
-    const { width: labelWidth, fontBoundingBoxDescent } = ctx.measureText(
-      colourValue
-    ) as TextMetrics & { fontBoundingBoxDescent: number };
+    const { width: labelWidth, fontBoundingBoxDescent } =
+      ctx.measureText(colourValue);
 
     ctx.fillStyle = invertedColorValue;
     ctx.fillText(

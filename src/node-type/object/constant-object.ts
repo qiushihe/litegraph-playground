@@ -20,25 +20,26 @@ import {
 
 import BaseNode, { dataSocket } from "../base-node";
 
-const TITLE = "ConstantArray";
+const TITLE = "ConstantObject";
 
 const CONFIG = {
   spacing: [10, 60, 10, 10],
   fontSize: 12
 };
 
-class ConstantArrayNode extends BaseNode {
+class ConstantObjectNode extends BaseNode {
   static title = TITLE;
 
   constructor() {
     super(TITLE, {
       sockets: {
-        output: [dataSocket("array"), dataSocket("length")]
+        output: [dataSocket("object")]
       },
-      metadata: [["array", []]]
+      properties: [["object", {}]],
+      metadata: [["object", {}]]
     });
 
-    this.properties.value = "";
+    this.resizable = false;
     this.size = [140, 50];
   }
 
@@ -73,7 +74,7 @@ class ConstantArrayNode extends BaseNode {
         (fontBoundingBoxAscent + fontBoundingBoxDescent)
     );
 
-    let remainingText = JSON.stringify(this.getMetaOr<unknown[]>([], "array"));
+    let remainingText = JSON.stringify(this.getMeta<unknown>("object"));
 
     for (let lineIndex = 0; lineIndex < linesCount; lineIndex++) {
       ctx.fillStyle = defaultFill;
@@ -90,20 +91,19 @@ class ConstantArrayNode extends BaseNode {
     restore2DContext();
   }
 
-  onPropertyChanged(propertyName: string, propertyValue: unknown) {
-    if (propertyName === "value") {
+  onPropertyChanged(name: string, value: unknown) {
+    if (name === "object") {
       try {
-        this.setMeta("array", JSON.parse(`[${propertyValue}]`));
+        this.setMeta("object", JSON.parse(JSON.stringify(value)));
       } catch {
-        this.setMeta("array", []);
+        this.setMeta("object", null);
       }
     }
   }
 
   onExecute() {
-    this.setOutputData(0, this.getMetaOr([], "array"));
-    this.setOutputData(1, this.getMetaOr([], "array").length);
+    this.setOutputData(0, this.getMeta("object"));
   }
 }
 
-export default ConstantArrayNode;
+export default ConstantObjectNode;

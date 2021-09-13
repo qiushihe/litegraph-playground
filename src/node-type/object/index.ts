@@ -1,4 +1,5 @@
 import BaseNode from "../base-node";
+import ConstantObjectNode from "./constant-object";
 import GetNode from "./get";
 import KeysNode from "./keys";
 import ParseNode from "./parse";
@@ -10,6 +11,7 @@ export const registerNodes = (
   prefix: string,
   register: (key: string, nodeType: { new (): BaseNode }) => void
 ): void => {
+  register(`${prefix}constant-object`, ConstantObjectNode);
   register(`${prefix}get`, GetNode);
   register(`${prefix}keys`, KeysNode);
   register(`${prefix}parse`, ParseNode);

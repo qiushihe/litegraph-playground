@@ -8,8 +8,6 @@ import size from "lodash/fp/size";
 import sum from "lodash/fp/sum";
 import max from "lodash/fp/max";
 import reduce from "lodash/fp/reduce";
-import flatten from "lodash/fp/flatten";
-import slice from "lodash/fp/slice";
 import times from "lodash/fp/times";
 import cond from "lodash/fp/cond";
 import isNumber from "lodash/fp/isNumber";
@@ -20,20 +18,21 @@ import constant from "lodash/fp/constant";
 import toString from "lodash/fp/toString";
 
 import { flags } from "../../util/property";
+import { interleave } from "../../util/array";
 
 import { COR_TL, POS_X, POS_Y, REGION_META } from "../../enum/canvas.enum";
 
 import {
-  Region,
-  preserve2DContext,
   horizontalStack,
-  verticalStack,
   newCoordinate,
   newRegion,
-  regionWithMeta,
-  regionWidth,
+  preserve2DContext,
+  Region,
+  regionCenter,
   regionHeight,
-  regionCenter
+  regionWidth,
+  regionWithMeta,
+  verticalStack
 } from "../../util/canvas";
 
 import BaseNode, { dataSocket } from "../base-node";
@@ -59,9 +58,6 @@ const TITLE = "Table";
 const CONFIG = {
   spacing: [30, 20, 10, 20]
 };
-
-const interleave = (thing: unknown) =>
-  flow([map((n: unknown) => [n, thing]), flatten, slice(0, -1)]);
 
 class TableNode extends BaseNode {
   static title = TITLE;
@@ -112,10 +108,7 @@ class TableNode extends BaseNode {
               width: cellWidth,
               fontBoundingBoxAscent,
               fontBoundingBoxDescent
-            } = ctx.measureText(cellText) as TextMetrics & {
-              fontBoundingBoxAscent: number;
-              fontBoundingBoxDescent: number;
-            };
+            } = ctx.measureText(cellText);
 
             return [
               cellText,

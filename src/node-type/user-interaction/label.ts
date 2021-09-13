@@ -1,12 +1,21 @@
-import { DIR_L, DIR_R, DIR_T, DIR_B } from "../../enum/canvas.enum";
+import {
+  SIZE_WIDTH,
+  SIZE_HEIGHT,
+  DIR_L,
+  DIR_R,
+  DIR_T,
+  DIR_B,
+  COR_TL,
+  POS_X,
+  POS_Y
+} from "../../enum/canvas.enum";
 
 import {
-  preserve2DContext,
   newCoordinate,
   newRegion,
-  regionWidth,
+  preserve2DContext,
   regionHeight,
-  regionCenter
+  regionWidth
 } from "../../util/canvas";
 
 import BaseNode from "../base-node";
@@ -14,7 +23,10 @@ import BaseNode from "../base-node";
 const TITLE = "Label";
 
 const CONFIG = {
-  spacing: [20, 20, 20, 20]
+  spacing: [10, 20, 10, 10],
+  defaultFontSize: 16,
+  defaultLineHeight: 18,
+  defaultTextWidth: 100
 };
 
 class LabelNode extends BaseNode {
@@ -24,12 +36,14 @@ class LabelNode extends BaseNode {
     super(TITLE, {
       properties: [
         ["text", "A Label"],
-        ["fontSize", 16]
+        ["fontSize", CONFIG.defaultFontSize]
       ]
     });
 
-    this.resizable = false;
-    this.size = [150, 50];
+    this.size = [
+      CONFIG.spacing[DIR_L] + CONFIG.defaultTextWidth + CONFIG.spacing[DIR_R],
+      CONFIG.spacing[DIR_T] + CONFIG.defaultLineHeight + CONFIG.spacing[DIR_B]
+    ];
   }
 
   onDrawForeground(ctx: CanvasRenderingContext2D) {
@@ -37,36 +51,44 @@ class LabelNode extends BaseNode {
       return;
     }
 
-    const [restore2DContext] = preserve2DContext(ctx);
+    const [restore2DContext, { fillStyle: defaultFill }] =
+      preserve2DContext(ctx);
 
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = this.properties.fontSize + "px Arial";
+    const textRegion = newRegion(
+      this.size[SIZE_WIDTH] - CONFIG.spacing[DIR_L] - CONFIG.spacing[DIR_R],
+      this.size[SIZE_HEIGHT] - CONFIG.spacing[DIR_T] - CONFIG.spacing[DIR_B],
+      newCoordinate(CONFIG.spacing[DIR_L], CONFIG.spacing[DIR_T])
+    );
+
+    ctx.font = `${this.getPropertyOr<number>(16, "fontSize")}px monospace`;
 
     const {
-      width: textWidth,
+      width: characterWidth,
       fontBoundingBoxAscent,
       fontBoundingBoxDescent
-    } = ctx.measureText(this.getPropertyOr<string>("", "text"));
+    } = ctx.measureText("X");
 
-    const textHeight = fontBoundingBoxAscent + fontBoundingBoxDescent;
-
-    const textOrigin = newCoordinate(
-      CONFIG.spacing[DIR_L],
-      CONFIG.spacing[DIR_T]
+    const charactersCount = Math.floor(
+      regionWidth(textRegion) / characterWidth
     );
 
-    const textRegion = newRegion(textWidth, textHeight, textOrigin);
-
-    ctx.fillText(
-      this.getPropertyOr<string>("", "text"),
-      ...regionCenter(textRegion)
+    const linesCount = Math.floor(
+      regionHeight(textRegion) /
+        (fontBoundingBoxAscent + fontBoundingBoxDescent)
     );
 
-    this.updateSize(
-      CONFIG.spacing[DIR_L] + regionWidth(textRegion) + CONFIG.spacing[DIR_R],
-      CONFIG.spacing[DIR_T] + regionHeight(textRegion) + CONFIG.spacing[DIR_B]
-    );
+    let remainingText = this.getPropertyOr<string>("", "text");
+    for (let lineIndex = 0; lineIndex < linesCount; lineIndex++) {
+      ctx.fillStyle = defaultFill;
+      ctx.fillText(
+        remainingText.slice(0, charactersCount).trim(),
+        textRegion[COR_TL][POS_X],
+        textRegion[COR_TL][POS_Y] +
+          fontBoundingBoxAscent +
+          (fontBoundingBoxAscent + fontBoundingBoxDescent) * lineIndex
+      );
+      remainingText = remainingText.slice(charactersCount).trim();
+    }
 
     restore2DContext();
   }

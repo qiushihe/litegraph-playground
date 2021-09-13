@@ -1,6 +1,6 @@
 {
-  "last_node_id": 156,
-  "last_link_id": 248,
+  "last_node_id": 159,
+  "last_link_id": 253,
   "nodes": [
     {
       "id": 3,
@@ -102,10 +102,10 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -138,10 +138,10 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
       "order": 1,
       "mode": 0,
@@ -351,8 +351,8 @@
         "9": 0
       },
       "size": {
-        "0": 140,
-        "1": 26
+        "0": 190,
+        "1": 40
       },
       "flags": {},
       "order": 3,
@@ -387,8 +387,8 @@
         "9": 0
       },
       "size": {
-        "0": 140,
-        "1": 26
+        "0": 190,
+        "1": 40
       },
       "flags": {},
       "order": 4,
@@ -462,10 +462,10 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
       "order": 5,
       "mode": 0,
@@ -630,10 +630,10 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
       "order": 7,
       "mode": 0,
@@ -1227,10 +1227,10 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
       "order": 12,
       "mode": 0,
@@ -1263,10 +1263,10 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
       "order": 13,
       "mode": 0,
@@ -1383,10 +1383,10 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 46
-      },
+      "size": [
+        140,
+        46
+      ],
       "flags": {},
       "order": 16,
       "mode": 0,
@@ -1425,8 +1425,8 @@
         "9": 0
       },
       "size": {
-        "0": 140,
-        "1": 26
+        "0": 190,
+        "1": 40
       },
       "flags": {},
       "order": 17,
@@ -1683,8 +1683,8 @@
         "9": 0
       },
       "size": {
-        "0": 140,
-        "1": 26
+        "0": 190,
+        "1": 40
       },
       "flags": {},
       "order": 19,
@@ -2531,42 +2531,6 @@
       "properties": {}
     },
     {
-      "id": 94,
-      "type": "_custom::value/constant-value",
-      "pos": {
-        "0": 290,
-        "1": 1880,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "value",
-          "type": "",
-          "links": [
-            140
-          ]
-        }
-      ],
-      "properties": {
-        "value": "{\"colour\": null, \"distance\": 9999 }"
-      }
-    },
-    {
       "id": 28,
       "type": "_custom::miscellaneous/variableSet",
       "pos": {
@@ -2633,7 +2597,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 25,
+      "order": 24,
       "mode": 0,
       "inputs": [
         {
@@ -2812,7 +2776,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 26,
+      "order": 25,
       "mode": 0,
       "inputs": [
         {
@@ -2910,7 +2874,7 @@
         {
           "name": "initial",
           "type": 0,
-          "link": 140
+          "link": 253
         },
         {
           "name": "iterate",
@@ -2985,7 +2949,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 27,
+      "order": 26,
       "mode": 0,
       "inputs": [
         {
@@ -3074,7 +3038,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 28,
+      "order": 27,
       "mode": 0,
       "inputs": [
         {
@@ -3116,7 +3080,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 29,
+      "order": 28,
       "mode": 0,
       "inputs": [
         {
@@ -3243,7 +3207,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 30,
+      "order": 29,
       "mode": 0,
       "inputs": [
         {
@@ -3358,12 +3322,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 31,
+      "order": 30,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3377,35 +3341,6 @@
       ],
       "properties": {
         "value": "81cec4"
-      }
-    },
-    {
-      "id": 154,
-      "type": "_custom::user-interaction/label",
-      "pos": {
-        "0": 30,
-        "1": -440,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        1875.94140625,
-        54
-      ],
-      "flags": {},
-      "order": 32,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {
-        "text": "#colours=primary.purple|#513394,primary.darkPurple|#210A53,primary.teal|#81CEC3,secondary.orchid|#AF9FEB,secondary.lilac|#DAD9FF,secondary.lavender|#EBEAFF,surface.darkGray|#242239,surface.deepGray|#504E61,surface.mediumGray|#BEB8C4,surface.silverGray|#E2E2EE,surface.lightGray|#EDEDF6,surface.lightestGray|#F6F6FA",
-        "fontSize": 12
       }
     },
     {
@@ -3514,12 +3449,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 33,
+      "order": 31,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3555,7 +3490,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 34,
+      "order": 32,
       "mode": 0,
       "inputs": [
         {
@@ -3736,12 +3671,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 35,
+      "order": 33,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3872,12 +3807,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 36,
+      "order": 34,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4214,12 +4149,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 37,
+      "order": 35,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4255,7 +4190,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 38,
+      "order": 36,
       "mode": 0,
       "inputs": [
         {
@@ -4297,7 +4232,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 39,
+      "order": 37,
       "mode": 0,
       "inputs": [
         {
@@ -4385,7 +4320,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 40,
+      "order": 38,
       "mode": 0,
       "inputs": [
         {
@@ -4422,12 +4357,12 @@
         "8": 0,
         "9": 0
       },
-      "size": {
-        "0": 140,
-        "1": 26
-      },
+      "size": [
+        140,
+        26
+      ],
       "flags": {},
-      "order": 42,
+      "order": 39,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4553,6 +4488,35 @@
       }
     },
     {
+      "id": 154,
+      "type": "_custom::user-interaction/label",
+      "pos": {
+        "0": 30,
+        "1": -460,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        519,
+        98
+      ],
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": "#colours=primary.purple|#513394,primary.darkPurple|#210A53,primary.teal|#81CEC3,secondary.orchid|#AF9FEB,secondary.lilac|#DAD9FF,secondary.lavender|#EBEAFF,surface.darkGray|#242239,surface.deepGray|#504E61,surface.mediumGray|#BEB8C4,surface.silverGray|#E2E2EE,surface.lightGray|#EDEDF6,surface.lightestGray|#F6F6FA",
+        "fontSize": 12
+      }
+    },
+    {
       "id": 6,
       "type": "_custom::user-interaction/button",
       "pos": {
@@ -4587,6 +4551,45 @@
       "properties": {
         "label": "Find Closest",
         "fontSize": 16
+      }
+    },
+    {
+      "id": 159,
+      "type": "_custom::value/constant-value",
+      "pos": {
+        "0": 290,
+        "1": 1880,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        140,
+        77.25241921164775
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "value",
+          "type": "",
+          "links": [
+            253
+          ]
+        }
+      ],
+      "properties": {
+        "value": {
+          "colour": null,
+          "distance": 9999
+        }
       }
     }
   ],
@@ -5168,14 +5171,6 @@
       0
     ],
     [
-      140,
-      94,
-      0,
-      92,
-      2,
-      0
-    ],
-    [
       143,
       97,
       0,
@@ -5558,6 +5553,14 @@
       149,
       0,
       -1
+    ],
+    [
+      253,
+      159,
+      0,
+      92,
+      2,
+      0
     ]
   ],
   "groups": [],
