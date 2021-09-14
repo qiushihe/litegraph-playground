@@ -27,6 +27,7 @@ import {
   ContextMenu
 } from "../litegraph-core";
 
+import { addNodeToCanvas } from "../util/litegraph";
 import plainSet from "../util/plain-set";
 import plainGet from "../util/plain-get";
 
@@ -68,7 +69,7 @@ const menuBuilder = (
   mapEntryLabel: (key: string, path: string) => string,
   canvas: LGraphCanvas,
   evt: unknown,
-  callback: (node: LGraphNode) => void
+  callback: (node: LGraphNode | null) => void
 ) => {
   const buildMenu = (baseCategory: string, parentMenu: ContextMenu) => {
     const entry = isEmpty(baseCategory)
@@ -127,24 +128,16 @@ const menuBuilder = (
             mouseEvt: unknown,
             ctxMenu: ContextMenu
           ) => {
-            canvas.graph.beforeChange();
+            const ctxMenuEvt = ctxMenu.getFirstEvent();
 
-            const node = LiteGraph.createNode(
-              flow([split("."), join("/")])(entry.value)
+            const node = addNodeToCanvas(canvas)(
+              flow([split("."), join("/")])(entry.value),
+              [ctxMenuEvt.clientX, ctxMenuEvt.clientY]
             );
-
-            if (node) {
-              node.pos = canvas.convertEventToCanvasOffset(
-                ctxMenu.getFirstEvent()
-              );
-              canvas.graph.add(node);
-            }
 
             if (callback) {
               callback(node);
             }
-
-            canvas.graph.afterChange();
           }
         };
       })
@@ -171,7 +164,7 @@ const addNode =
     options: unknown,
     evt: unknown,
     parentMenu: ContextMenu,
-    callback: (node: LGraphNode) => void
+    callback: (node: LGraphNode | null) => void
   ) => {
     const canvas = LGraphCanvas.active_canvas;
 

@@ -24,13 +24,22 @@ declare module "litegraph.js/build/litegraph.core" {
     constructor(elm: HTMLCanvasElement, graph: LGraph, options: unknown): void;
 
     graph: LGraph;
+    canvas: HTMLCanvasElement;
+    selected_nodes: Record<number, LGraphNode>;
     align_to_grid: boolean;
     allow_searchbox: boolean;
 
+    convertCanvasToOffset(
+      pos: [number, number],
+      out?: unknown
+    ): [number, number];
     convertEventToCanvasOffset(evt: unknown): [number, number];
     getCanvasWindow(): unknown;
     onShowNodePanel(): void;
     getMenuOptions(): unknown[];
+    processContextMenu(): void;
+    getNodeMenuOptions(node: LGraphNode): unknown[];
+    onSelectionChange(selectedNodes: Record<number, LGraphNode>): void;
   }
 
   declare class LGraphNode {
@@ -67,17 +76,19 @@ declare module "litegraph.js/build/litegraph.core" {
     setDirtyCanvas(dirty: boolean): void;
 
     captureInput(capture: boolean): void;
+
+    getMenuOptions(canvas: LGraphCanvas): unknown[];
   }
 
   declare class ContextMenu {
-    getFirstEvent(): unknown;
+    getFirstEvent(): { clientX: number; clientY: number };
   }
 
   export const LiteGraph: {
     ACTION: number;
     EVENT: number;
     registered_node_types: Record<string, LGraphNode>;
-    createNode: (key: string) => LGraphNode;
+    createNode: (key: string) => LGraphNode | null;
     ContextMenu: {
       new (entries: unknown, options: unknown, window: unknown): ContextMenu;
     };
