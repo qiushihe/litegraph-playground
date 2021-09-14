@@ -36,7 +36,8 @@ class TextNode extends BaseNode {
     super(TITLE, {
       sockets: {
         input: [dataSocket("")]
-      }
+      },
+      metadata: [["value", null]]
     });
 
     this.size = [
@@ -76,7 +77,7 @@ class TextNode extends BaseNode {
         (fontBoundingBoxAscent + fontBoundingBoxDescent)
     );
 
-    let remainingText = this.getInputDataOr<string>("", 0);
+    let remainingText = (this.getMeta<string>("value") || "").toString();
 
     for (let lineIndex = 0; lineIndex < linesCount; lineIndex++) {
       ctx.fillStyle = defaultFill;
@@ -93,7 +94,15 @@ class TextNode extends BaseNode {
     restore2DContext();
   }
 
-  onExecute() {}
+  onExecute() {
+    const textWas = this.getMetaOr<string>("", "value");
+    const text = this.getInputDataOr<string>("", 0);
+
+    if (textWas !== text) {
+      this.setMeta("value", text);
+      this.setDirtyCanvas(true);
+    }
+  }
 }
 
 export default TextNode;
