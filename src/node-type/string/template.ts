@@ -13,7 +13,10 @@ const dynamicTemplate = (
   template: string,
   variables: Record<string, unknown>
 ): string => {
-  return template.replace(/\${(.*?)}/g, (_, name) => variables[name] as string);
+  return template.replace(
+    /\${(.*?)}/g,
+    (_, name) => (variables[name] as string) || ""
+  );
 };
 
 class TemplateNode extends BaseNode {
