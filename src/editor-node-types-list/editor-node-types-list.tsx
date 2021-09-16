@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React, { Children, useState, useCallback } from "react";
 import PropTypes, { InferProps } from "prop-types";
 import { useDrag } from "react-dnd";
 import flow from "lodash/fp/flow";
@@ -89,20 +89,23 @@ const EditorNodeTypesList: React.FunctionComponent<
     toPairs
   ])(manifest);
 
+  const handleToggleCategory = useCallback(
+    (categoryName) => () => {
+      setExpandedCategories({
+        ...expandedCategories,
+        [categoryName]: !expandedCategories[categoryName]
+      });
+    },
+    [expandedCategories]
+  );
+
   return (
     <Panel className={className} title="Node Types">
       {flow([
         map((categoryEntry: [string, { key: string; title: string }[]]) => {
           return (
             <Category>
-              <CategoryLabel
-                onClick={() => {
-                  setExpandedCategories({
-                    ...expandedCategories,
-                    [categoryEntry[0]]: !expandedCategories[categoryEntry[0]]
-                  });
-                }}
-              >
+              <CategoryLabel onClick={handleToggleCategory(categoryEntry[0])}>
                 {expandedCategories[categoryEntry[0]] ? "▼" : "▶"}{" "}
                 {categoryEntry[0]}
               </CategoryLabel>

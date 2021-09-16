@@ -166,8 +166,9 @@ export const useGridSnap = (
 
     if (graphCanvas) {
       (graphCanvas as LGraphCanvas).align_to_grid = !snapToGrid;
-      setSnapToGrid(!snapToGrid);
     }
+
+    setSnapToGrid(!snapToGrid);
   }, [graphCanvasRef, snapToGrid]);
 
   return { snapToGrid, setSnapToGrid, handleToggleGridSnap };
