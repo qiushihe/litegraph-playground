@@ -54,6 +54,8 @@ export const PropertyTitle = styled.div`
 export const PropertyValue = styled.div`
   font-size: 11px;
   color: ${FOREGROUND_1};
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const buttonStyle = css`
@@ -82,7 +84,7 @@ export const EditorFormType = styled.div`
   cursor: default;
 `;
 
-export const EditorFormField = styled.form``;
+export const EditorFormField = styled.div``;
 
 export const EditorFormButtons = styled.div`
   display: flex;
