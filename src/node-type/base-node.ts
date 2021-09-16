@@ -9,6 +9,8 @@ import includes from "lodash/fp/includes";
 
 import { LGraphNode, LiteGraph } from "../litegraph-core";
 
+export type BaseNodeClass = typeof BaseNode;
+
 type BaseNodeSocket = {
   name: string;
   type: "data" | "signal";
@@ -28,6 +30,11 @@ type BaseNodeOptions = {
   properties?: [string, unknown][];
 };
 
+type BaseNodeProperty = {
+  type: string;
+  value: string;
+};
+
 export const dataSocket = (name: string): BaseNodeSocket => ({
   name,
   type: "data"
@@ -38,12 +45,22 @@ export const signalSocket = (name: string): BaseNodeSocket => ({
   type: "signal"
 });
 
+export const propertyValue = (
+  type: string,
+  value: unknown
+): BaseNodeProperty => ({
+  type,
+  value: JSON.stringify(value)
+});
+
 const METADATA_ATTR_NAME = "__node_type_meta";
 
 const isDataIO = flow([get("type"), eq("data")]);
 const isSignalIO = flow([get("type"), eq("signal")]);
 
 class BaseNode extends LGraphNode {
+  static title: string = "BaseNode";
+
   private [METADATA_ATTR_NAME]: Record<string, unknown>;
 
   constructor(nodeTypeTitle: string, options?: BaseNodeOptions) {
@@ -73,18 +90,70 @@ class BaseNode extends LGraphNode {
   }
 
   getPropertyOr<T>(fallback: T, name: string): T {
-    const value = this.properties[name];
+    const property = this.properties[name] as BaseNodeProperty;
 
-    if (value === undefined) {
+    if (property === null || property === undefined) {
       return fallback;
     } else {
-      return value as T;
+      // It's not possible for `JSON.parse` to produce `undefined` as result (it is possible for it
+      // to produce `null` tho). But as far as the `getOr` logic is concerned, only when the value
+      // is `undefined` should the `fallback` value be returned instead of the stored value.
+      try {
+        return JSON.parse(property.value as string) as T;
+      } catch {
+        // That said ... if `JSON.parse` just completely fails, we should return the `fallback`
+        // value as well.
+        return fallback;
+      }
     }
   }
 
   getProperty<T>(name: string): T | null {
     return this.getPropertyOr<T | null>(null, name);
   }
+
+  onPropertyChanged(name: string, value: unknown) {
+    try {
+      this.onPropertyValueChanged(
+        name,
+        JSON.parse((value as BaseNodeProperty).value)
+      );
+    } catch {
+      this.onPropertyValueChanged(name, null);
+    }
+  }
+
+  getPropertyType(name: string): string {
+    const property = this.properties[name] as BaseNodeProperty;
+
+    if (property === null || property === undefined) {
+      return "UNKNOWN";
+    } else {
+      return property.type;
+    }
+  }
+
+  getPropertyValue(name: string): string | null {
+    const property = this.properties[name] as BaseNodeProperty;
+
+    if (property === null || property === undefined) {
+      return null;
+    } else {
+      return property.value;
+    }
+  }
+
+  setPropertyValue(name: string, value: string) {
+    const property = this.properties[name] as BaseNodeProperty;
+
+    if (property === null || property === undefined) {
+      this.setProperty(name, { type: "UNKNOWN", value });
+    } else {
+      this.setProperty(name, { type: property.type, value });
+    }
+  }
+
+  onPropertyValueChanged(_: string, __: unknown) {}
 
   private initializeMetadata(options?: BaseNodeOptions) {
     this[METADATA_ATTR_NAME] = {};

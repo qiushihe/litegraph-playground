@@ -1,4 +1,4 @@
-import BaseNode, { dataSocket } from "../base-node";
+import BaseNode, { dataSocket, propertyValue } from "../base-node";
 
 import VariableStorage from "./variable-storage";
 
@@ -35,7 +35,7 @@ class VariableGetNode extends BaseNode {
         input: [dataSocket("fallback")],
         output: [dataSocket("value")]
       },
-      properties: [["name", "my-var"]]
+      properties: [["name", propertyValue("string", "my-var")]]
     });
 
     this.resizable = false;

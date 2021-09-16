@@ -1,6 +1,6 @@
 import { preserve2DContext } from "../../util/canvas";
 
-import BaseNode, { signalSocket } from "../base-node";
+import BaseNode, { signalSocket, propertyValue } from "../base-node";
 
 const TITLE = "Button";
 
@@ -13,8 +13,8 @@ class ButtonNode extends BaseNode {
         output: [signalSocket("")]
       },
       properties: [
-        ["label", "A Button"],
-        ["fontSize", 16]
+        ["label", propertyValue("string", "A Button")],
+        ["fontSize", propertyValue("number", 16)]
       ],
       metadata: [["active", false]]
     });
@@ -57,7 +57,7 @@ class ButtonNode extends BaseNode {
     ctx.fillStyle = this.getMetaOr<boolean>(false, "active")
       ? "black"
       : "white";
-    ctx.font = this.properties.fontSize + "px Arial";
+    ctx.font = `${this.getPropertyOr<number>(0, "fontSize")}px Arial`;
     ctx.fillText(
       this.getPropertyOr<string>("", "label"),
       this.size[0] * 0.5,

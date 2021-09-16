@@ -20,7 +20,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket } from "../base-node";
+import BaseNode, { dataSocket, propertyValue } from "../base-node";
 
 const TITLE = "ConstantNumber";
 
@@ -40,7 +40,7 @@ class ConstantNumberNode extends BaseNode {
       sockets: {
         output: [dataSocket("")]
       },
-      properties: [["value", 0]],
+      properties: [["value", propertyValue("number", 0)]],
       metadata: [
         ["value", 0],
         ["plusRegion", newRegion(0, 0)],
@@ -189,13 +189,9 @@ class ConstantNumberNode extends BaseNode {
     }
   }
 
-  onPropertyChanged(name: string, value: unknown) {
+  onPropertyValueChanged(name: string, value: unknown) {
     if (name === "value") {
-      try {
-        this.setMeta("value", parseFloat(value as string) || 0);
-      } catch {
-        this.setMeta("value", null);
-      }
+      this.setMeta("value", value || 0);
     }
   }
 

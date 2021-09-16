@@ -16,7 +16,7 @@ import {
   regionCenter
 } from "../../util/canvas";
 
-import BaseNode, { signalSocket } from "../base-node";
+import BaseNode, { signalSocket, propertyValue } from "../base-node";
 
 const TITLE = "Portal";
 
@@ -37,7 +37,7 @@ class PortalNode extends BaseNode {
         input: [signalSocket("action")],
         output: [signalSocket("event")]
       },
-      properties: [["name", "my-event"]],
+      properties: [["name", propertyValue("string", "my-event")]],
       metadata: [["uuid", uuidv4()]]
     });
 

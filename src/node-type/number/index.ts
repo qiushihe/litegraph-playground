@@ -1,11 +1,11 @@
-import BaseNode from "../base-node";
+import { BaseNodeClass } from "../base-node";
 import ClampNode from "./clamp";
 import ConstantNumberNode from "./constant-number";
 import RandomNode from "./random";
 
 export const registerNodes = (
   prefix: string,
-  register: (key: string, nodeType: { new (): BaseNode }) => void
+  register: (key: string, nodeType: BaseNodeClass) => void
 ): void => {
   register(`${prefix}clamp`, ClampNode);
   register(`${prefix}constant-number`, ConstantNumberNode);

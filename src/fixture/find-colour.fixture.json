@@ -120,7 +120,10 @@
         }
       ],
       "properties": {
-        "value": "colours"
+        "value": {
+          "type": "string",
+          "value": "\"colours\""
+        }
       }
     },
     {
@@ -156,7 +159,10 @@
         }
       ],
       "properties": {
-        "value": "{}"
+        "value": {
+          "type": "object",
+          "value": "{}"
+        }
       }
     },
     {
@@ -198,7 +204,10 @@
         }
       ],
       "properties": {
-        "name": "iterateEvent"
+        "name": {
+          "type": "string",
+          "value": "\"iterateEvent\""
+        }
       }
     },
     {
@@ -368,7 +377,10 @@
         }
       ],
       "properties": {
-        "value": "0"
+        "value": {
+          "type": "number",
+          "value": "0"
+        }
       }
     },
     {
@@ -404,7 +416,10 @@
         }
       ],
       "properties": {
-        "value": "1"
+        "value": {
+          "type": "number",
+          "value": "1"
+        }
       }
     },
     {
@@ -444,7 +459,10 @@
         }
       ],
       "properties": {
-        "name": "gotColoursByName"
+        "name": {
+          "type": "string",
+          "value": "\"gotColoursByName\""
+        }
       }
     },
     {
@@ -480,7 +498,10 @@
         }
       ],
       "properties": {
-        "value": "|"
+        "value": {
+          "type": "string",
+          "value": "\"|\""
+        }
       }
     },
     {
@@ -570,7 +591,10 @@
         }
       ],
       "properties": {
-        "name": "iterateEvent"
+        "name": {
+          "type": "string",
+          "value": "\"iterateEvent\""
+        }
       }
     },
     {
@@ -612,7 +636,10 @@
         }
       ],
       "properties": {
-        "name": "gotColoursByName"
+        "name": {
+          "type": "string",
+          "value": "\"gotColoursByName\""
+        }
       }
     },
     {
@@ -648,7 +675,10 @@
         }
       ],
       "properties": {
-        "value": "{}"
+        "value": {
+          "type": "object",
+          "value": "{}"
+        }
       }
     },
     {
@@ -690,7 +720,10 @@
         }
       ],
       "properties": {
-        "name": "iterateColourEvent"
+        "name": {
+          "type": "string",
+          "value": "\"iterateColourEvent\""
+        }
       }
     },
     {
@@ -826,7 +859,10 @@
         }
       ],
       "properties": {
-        "name": "rgbsByColour"
+        "name": {
+          "type": "string",
+          "value": "\"rgbsByColour\""
+        }
       }
     },
     {
@@ -866,7 +902,10 @@
         }
       ],
       "properties": {
-        "name": "gotRgbsByColour"
+        "name": {
+          "type": "string",
+          "value": "\"gotRgbsByColour\""
+        }
       }
     },
     {
@@ -1003,7 +1042,10 @@
         }
       ],
       "properties": {
-        "name": "runningRgbsByColour"
+        "name": {
+          "type": "string",
+          "value": "\"runningRgbsByColour\""
+        }
       }
     },
     {
@@ -1043,7 +1085,10 @@
         }
       ],
       "properties": {
-        "name": "iterateColourEvent"
+        "name": {
+          "type": "string",
+          "value": "\"iterateColourEvent\""
+        }
       }
     },
     {
@@ -1085,7 +1130,10 @@
         }
       ],
       "properties": {
-        "name": "runningRgbsByColour"
+        "name": {
+          "type": "string",
+          "value": "\"runningRgbsByColour\""
+        }
       }
     },
     {
@@ -1127,7 +1175,10 @@
         }
       ],
       "properties": {
-        "name": "rgbsByColour"
+        "name": {
+          "type": "string",
+          "value": "\"rgbsByColour\""
+        }
       }
     },
     {
@@ -1169,7 +1220,10 @@
         }
       ],
       "properties": {
-        "name": "gotRgbsByColour"
+        "name": {
+          "type": "string",
+          "value": "\"gotRgbsByColour\""
+        }
       }
     },
     {
@@ -1245,7 +1299,10 @@
         }
       ],
       "properties": {
-        "value": ","
+        "value": {
+          "type": "string",
+          "value": "\",\""
+        }
       }
     },
     {
@@ -1281,7 +1338,10 @@
         }
       ],
       "properties": {
-        "value": "{}"
+        "value": {
+          "type": "object",
+          "value": "{}"
+        }
       }
     },
     {
@@ -1323,7 +1383,10 @@
         }
       ],
       "properties": {
-        "name": "gotDistance"
+        "name": {
+          "type": "string",
+          "value": "\"gotDistance\""
+        }
       }
     },
     {
@@ -1365,7 +1428,10 @@
         }
       ],
       "properties": {
-        "name": "runningDistances"
+        "name": {
+          "type": "string",
+          "value": "\"runningDistances\""
+        }
       }
     },
     {
@@ -1406,7 +1472,10 @@
         }
       ],
       "properties": {
-        "value": "0,1,2"
+        "value": {
+          "type": "array",
+          "value": "[0,1,2]"
+        }
       }
     },
     {
@@ -1442,7 +1511,10 @@
         }
       ],
       "properties": {
-        "value": "0"
+        "value": {
+          "type": "number",
+          "value": "0"
+        }
       }
     },
     {
@@ -1484,7 +1556,10 @@
         }
       ],
       "properties": {
-        "name": "rgbsByColour"
+        "name": {
+          "type": "string",
+          "value": "\"rgbsByColour\""
+        }
       }
     },
     {
@@ -1700,7 +1775,10 @@
         }
       ],
       "properties": {
-        "value": "2"
+        "value": {
+          "type": "number",
+          "value": "2"
+        }
       }
     },
     {
@@ -1881,7 +1959,10 @@
         }
       ],
       "properties": {
-        "name": "runningSquareSum"
+        "name": {
+          "type": "string",
+          "value": "\"runningSquareSum\""
+        }
       }
     },
     {
@@ -1966,7 +2047,10 @@
         }
       ],
       "properties": {
-        "name": "iterateComponent"
+        "name": {
+          "type": "string",
+          "value": "\"iterateComponent\""
+        }
       }
     },
     {
@@ -2006,7 +2090,10 @@
         }
       ],
       "properties": {
-        "name": "gotDistance"
+        "name": {
+          "type": "string",
+          "value": "\"gotDistance\""
+        }
       }
     },
     {
@@ -2053,7 +2140,10 @@
         }
       ],
       "properties": {
-        "name": "runningDistances"
+        "name": {
+          "type": "string",
+          "value": "\"runningDistances\""
+        }
       }
     },
     {
@@ -2185,7 +2275,10 @@
         }
       ],
       "properties": {
-        "name": "iterateComponent"
+        "name": {
+          "type": "string",
+          "value": "\"iterateComponent\""
+        }
       }
     },
     {
@@ -2227,7 +2320,10 @@
         }
       ],
       "properties": {
-        "name": "runningSquareSum"
+        "name": {
+          "type": "string",
+          "value": "\"runningSquareSum\""
+        }
       }
     },
     {
@@ -2363,7 +2459,10 @@
         }
       ],
       "properties": {
-        "name": "distances"
+        "name": {
+          "type": "string",
+          "value": "\"distances\""
+        }
       }
     },
     {
@@ -2403,7 +2502,10 @@
         }
       ],
       "properties": {
-        "name": "gotDistances"
+        "name": {
+          "type": "string",
+          "value": "\"gotDistances\""
+        }
       }
     },
     {
@@ -2445,7 +2547,10 @@
         }
       ],
       "properties": {
-        "name": "gotDistances"
+        "name": {
+          "type": "string",
+          "value": "\"gotDistances\""
+        }
       }
     },
     {
@@ -2487,7 +2592,10 @@
         }
       ],
       "properties": {
-        "name": "distances"
+        "name": {
+          "type": "string",
+          "value": "\"distances\""
+        }
       }
     },
     {
@@ -2574,7 +2682,10 @@
         }
       ],
       "properties": {
-        "name": "indexedColours"
+        "name": {
+          "type": "string",
+          "value": "\"indexedColours\""
+        }
       }
     },
     {
@@ -2616,7 +2727,10 @@
         }
       ],
       "properties": {
-        "name": "indexedColours"
+        "name": {
+          "type": "string",
+          "value": "\"indexedColours\""
+        }
       }
     },
     {
@@ -2753,7 +2867,10 @@
         }
       ],
       "properties": {
-        "name": "runningIndexedColours"
+        "name": {
+          "type": "string",
+          "value": "\"runningIndexedColours\""
+        }
       }
     },
     {
@@ -2795,7 +2912,10 @@
         }
       ],
       "properties": {
-        "name": "runningIndexedColours"
+        "name": {
+          "type": "string",
+          "value": "\"runningIndexedColours\""
+        }
       }
     },
     {
@@ -2968,7 +3088,10 @@
         }
       ],
       "properties": {
-        "name": "referenceRgb"
+        "name": {
+          "type": "string",
+          "value": "\"referenceRgb\""
+        }
       }
     },
     {
@@ -3015,7 +3138,10 @@
         }
       ],
       "properties": {
-        "name": "referenceRgb"
+        "name": {
+          "type": "string",
+          "value": "\"referenceRgb\""
+        }
       }
     },
     {
@@ -3057,7 +3183,10 @@
         }
       ],
       "properties": {
-        "name": "closestColourName"
+        "name": {
+          "type": "string",
+          "value": "\"closestColourName\""
+        }
       }
     },
     {
@@ -3099,7 +3228,10 @@
         }
       ],
       "properties": {
-        "name": "closestColourValue"
+        "name": {
+          "type": "string",
+          "value": "\"closestColourValue\""
+        }
       }
     },
     {
@@ -3226,7 +3358,10 @@
         }
       ],
       "properties": {
-        "name": "foundClosestColour"
+        "name": {
+          "type": "string",
+          "value": "\"foundClosestColour\""
+        }
       }
     },
     {
@@ -3340,7 +3475,10 @@
         }
       ],
       "properties": {
-        "value": "81cec4"
+        "value": {
+          "type": "string",
+          "value": "\"81cec4\""
+        }
       }
     },
     {
@@ -3467,7 +3605,10 @@
         }
       ],
       "properties": {
-        "value": "distance"
+        "value": {
+          "type": "string",
+          "value": "\"distance\""
+        }
       }
     },
     {
@@ -3509,7 +3650,10 @@
         }
       ],
       "properties": {
-        "name": "distances"
+        "name": {
+          "type": "string",
+          "value": "\"distances\""
+        }
       }
     },
     {
@@ -3653,7 +3797,10 @@
         }
       ],
       "properties": {
-        "name": "runningClosest"
+        "name": {
+          "type": "string",
+          "value": "\"runningClosest\""
+        }
       }
     },
     {
@@ -3689,7 +3836,10 @@
         }
       ],
       "properties": {
-        "value": "distance"
+        "value": {
+          "type": "string",
+          "value": "\"distance\""
+        }
       }
     },
     {
@@ -3825,7 +3975,10 @@
         }
       ],
       "properties": {
-        "value": "colour"
+        "value": {
+          "type": "string",
+          "value": "\"colour\""
+        }
       }
     },
     {
@@ -3865,7 +4018,10 @@
         }
       ],
       "properties": {
-        "name": "findingClosest"
+        "name": {
+          "type": "string",
+          "value": "\"findingClosest\""
+        }
       }
     },
     {
@@ -3912,7 +4068,10 @@
         }
       ],
       "properties": {
-        "name": "runningClosest"
+        "name": {
+          "type": "string",
+          "value": "\"runningClosest\""
+        }
       }
     },
     {
@@ -3952,7 +4111,10 @@
         }
       ],
       "properties": {
-        "name": "findingClosest"
+        "name": {
+          "type": "string",
+          "value": "\"findingClosest\""
+        }
       }
     },
     {
@@ -3999,7 +4161,10 @@
         }
       ],
       "properties": {
-        "name": "closestColourValue"
+        "name": {
+          "type": "string",
+          "value": "\"closestColourValue\""
+        }
       }
     },
     {
@@ -4046,7 +4211,10 @@
         }
       ],
       "properties": {
-        "name": "closestColourName"
+        "name": {
+          "type": "string",
+          "value": "\"closestColourName\""
+        }
       }
     },
     {
@@ -4086,7 +4254,10 @@
         }
       ],
       "properties": {
-        "name": "foundClosestColour"
+        "name": {
+          "type": "string",
+          "value": "\"foundClosestColour\""
+        }
       }
     },
     {
@@ -4167,7 +4338,10 @@
         }
       ],
       "properties": {
-        "value": "colour"
+        "value": {
+          "type": "string",
+          "value": "\"colour\""
+        }
       }
     },
     {
@@ -4209,7 +4383,10 @@
         }
       ],
       "properties": {
-        "name": "findingClosest"
+        "name": {
+          "type": "string",
+          "value": "\"findingClosest\""
+        }
       }
     },
     {
@@ -4251,7 +4428,10 @@
         }
       ],
       "properties": {
-        "name": "runningClosest"
+        "name": {
+          "type": "string",
+          "value": "\"runningClosest\""
+        }
       }
     },
     {
@@ -4339,7 +4519,10 @@
         }
       ],
       "properties": {
-        "name": "indexedColours"
+        "name": {
+          "type": "string",
+          "value": "\"indexedColours\""
+        }
       }
     },
     {
@@ -4375,7 +4558,10 @@
         }
       ],
       "properties": {
-        "value": "000000"
+        "value": {
+          "type": "string",
+          "value": "\"000000\""
+        }
       }
     },
     {
@@ -4484,7 +4670,10 @@
         }
       ],
       "properties": {
-        "name": "closestColourValue"
+        "name": {
+          "type": "string",
+          "value": "\"closestColourValue\""
+        }
       }
     },
     {
@@ -4512,8 +4701,14 @@
       "inputs": [],
       "outputs": [],
       "properties": {
-        "text": "#colours=primary.purple|#513394,primary.darkPurple|#210A53,primary.teal|#81CEC3,secondary.orchid|#AF9FEB,secondary.lilac|#DAD9FF,secondary.lavender|#EBEAFF,surface.darkGray|#242239,surface.deepGray|#504E61,surface.mediumGray|#BEB8C4,surface.silverGray|#E2E2EE,surface.lightGray|#EDEDF6,surface.lightestGray|#F6F6FA",
-        "fontSize": 12
+        "text": {
+          "type": "string",
+          "value": "\"#colours=primary.purple|#513394,primary.darkPurple|#210A53,primary.teal|#81CEC3,secondary.orchid|#AF9FEB,secondary.lilac|#DAD9FF,secondary.lavender|#EBEAFF,surface.darkGray|#242239,surface.deepGray|#504E61,surface.mediumGray|#BEB8C4,surface.silverGray|#E2E2EE,surface.lightGray|#EDEDF6,surface.lightestGray|#F6F6FA\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "12"
+        }
       }
     },
     {
@@ -4549,8 +4744,14 @@
         }
       ],
       "properties": {
-        "label": "Find Closest",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"Find Closest\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {
@@ -4587,8 +4788,8 @@
       ],
       "properties": {
         "value": {
-          "colour": null,
-          "distance": 9999
+          "type": "object",
+          "value": "{\"colour\":null,\"distance\":9999}"
         }
       }
     }

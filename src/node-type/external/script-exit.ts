@@ -1,4 +1,8 @@
-import BaseNode, { dataSocket, signalSocket } from "../base-node";
+import BaseNode, {
+  dataSocket,
+  signalSocket,
+  propertyValue
+} from "../base-node";
 
 const TITLE = "ScriptExit";
 
@@ -12,10 +16,10 @@ class ScriptExitNode extends BaseNode {
       sockets: {
         input: [signalSocket("action"), dataSocket("data")]
       },
+      properties: [["name", propertyValue("string", "my-exit")]],
       metadata: [["listeners", []]]
     });
 
-    this.properties = { name: "my-exit" };
     this.resizable = false;
   }
 

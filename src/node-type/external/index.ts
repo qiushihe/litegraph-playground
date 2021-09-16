@@ -1,6 +1,6 @@
 import { registerNodes as registerRunwayMLLabNodes } from "./runway-ml-lab";
 
-import BaseNode from "../base-node";
+import { BaseNodeClass } from "../base-node";
 import HttpRequestNode from "./http-request";
 import ScriptEntryNode from "./script-entry";
 import ScriptExitNode from "./script-exit";
@@ -8,7 +8,7 @@ import UrlHashParameterNode from "./url-hash-parameter";
 
 export const registerNodes = (
   prefix: string,
-  register: (key: string, nodeType: { new (): BaseNode }) => void
+  register: (key: string, nodeType: BaseNodeClass) => void
 ): void => {
   registerRunwayMLLabNodes(`${prefix}runway-ml-lab/`, register);
 

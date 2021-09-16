@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket } from "../base-node";
+import BaseNode, { dataSocket, propertyValue } from "../base-node";
 
 const TITLE = "ConstantArray";
 
@@ -35,10 +35,10 @@ class ConstantArrayNode extends BaseNode {
       sockets: {
         output: [dataSocket("array"), dataSocket("length")]
       },
+      properties: [["value", propertyValue("array", [])]],
       metadata: [["array", []]]
     });
 
-    this.properties.value = "";
     this.size = [140, 50];
   }
 
@@ -90,13 +90,9 @@ class ConstantArrayNode extends BaseNode {
     restore2DContext();
   }
 
-  onPropertyChanged(propertyName: string, propertyValue: unknown) {
-    if (propertyName === "value") {
-      try {
-        this.setMeta("array", JSON.parse(`[${propertyValue}]`));
-      } catch {
-        this.setMeta("array", []);
-      }
+  onPropertyValueChanged(name: string, value: unknown) {
+    if (name === "value") {
+      this.setMeta("array", value || []);
     }
   }
 

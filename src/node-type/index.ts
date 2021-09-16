@@ -1,4 +1,4 @@
-import BaseNode from "./base-node";
+import { BaseNodeClass } from "./base-node";
 import { registerNodes as registerArrayNodes } from "./array";
 import { registerNodes as registerBooleanNodes } from "./boolean";
 import { registerNodes as registerCollectionNodes } from "./collection";
@@ -18,7 +18,7 @@ import { registerNodes as registerValueNodes } from "./value";
 
 export const registerNodes = (
   prefix: string,
-  register: (key: string, nodeType: { new (): BaseNode }) => void
+  register: (key: string, nodeType: BaseNodeClass) => void
 ): void => {
   registerArrayNodes(`${prefix}array/`, register);
   registerBooleanNodes(`${prefix}boolean/`, register);

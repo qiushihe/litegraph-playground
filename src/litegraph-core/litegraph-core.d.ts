@@ -3,6 +3,7 @@ declare module "litegraph.js/build/litegraph.core" {
     beforeChange(): void;
     afterChange(): void;
     add(node: LGraphNode): void;
+    remove(node: LGraphNode): void;
     configure(data: unknown, stop: boolean): void;
     findNodesByType(type: string): LGraphNode[];
     start(rate?: number): void;
@@ -33,6 +34,7 @@ declare module "litegraph.js/build/litegraph.core" {
       pos: [number, number],
       out?: unknown
     ): [number, number];
+
     convertEventToCanvasOffset(evt: unknown): [number, number];
     getCanvasWindow(): unknown;
     onShowNodePanel(): void;
@@ -43,6 +45,8 @@ declare module "litegraph.js/build/litegraph.core" {
   }
 
   declare class LGraphNode {
+    title: string;
+    graph: LGraph;
     resizable: boolean;
     size: [number, number];
     pos: [number, number];
@@ -54,29 +58,25 @@ declare module "litegraph.js/build/litegraph.core" {
 
     constructor(title: string);
 
+    clone(): LGraphNode;
     addInput(name: string, type: string | number);
     addOutput(name: string, type: string | number);
-
     isInputConnected(index: number): boolean;
     isOutputConnected(index: number): boolean;
-
     onAction(action: string, param: unknown): void;
     onExecute(): void;
     onPropertyChanged(name: string, value: unknown): void;
     onResize(size: [number, number]): void;
     onMouseDown(evt: unknown, pos: [number, number], canvas: unknown): void;
     onMouseUp(evt: unknown, pos: [number, number], canvas: unknown): void;
-
     getInputData(index: number): unknown;
     setOutputData(index: number, data: unknown);
     triggerSlot(index: number, param: unknown);
-
     onDrawForeground(ctx: CanvasRenderingContext2D): void;
     onDrawBackground(ctx: CanvasRenderingContext2D): void;
-    setDirtyCanvas(dirty: boolean): void;
-
+    setDirtyCanvas(dirtyFg: boolean, dirtyBg?: boolean): void;
+    setProperty(name: string, value: unknown): void;
     captureInput(capture: boolean): void;
-
     getMenuOptions(canvas: LGraphCanvas): unknown[];
   }
 

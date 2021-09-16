@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode from "../base-node";
+import BaseNode, { propertyValue } from "../base-node";
 
 const TITLE = "Label";
 
@@ -35,8 +35,8 @@ class LabelNode extends BaseNode {
   constructor() {
     super(TITLE, {
       properties: [
-        ["text", "A Label"],
-        ["fontSize", CONFIG.defaultFontSize]
+        ["text", propertyValue("string", "A Label")],
+        ["fontSize", propertyValue("number", CONFIG.defaultFontSize)]
       ]
     });
 
