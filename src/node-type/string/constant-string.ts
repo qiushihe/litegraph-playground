@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket } from "../base-node";
+import BaseNode, { dataSocket, propertyValue } from "../base-node";
 
 const TITLE = "ConstantString";
 
@@ -37,7 +37,7 @@ class ConstantStringNode extends BaseNode {
       sockets: {
         output: [dataSocket("")]
       },
-      properties: [["value", "my-string"]]
+      properties: [["value", propertyValue("string", "my-string")]]
     });
 
     this.size = [

@@ -1,10 +1,10 @@
-import BaseNode from "../base-node";
+import { BaseNodeClass } from "../base-node";
 import BranchNode from "./branch";
 import SequenceNode from "./sequence";
 
 export const registerNodes = (
   prefix: string,
-  register: (key: string, nodeType: { new (): BaseNode }) => void
+  register: (key: string, nodeType: BaseNodeClass) => void
 ): void => {
   register(`${prefix}branch`, BranchNode);
   register(`${prefix}sequence`, SequenceNode);

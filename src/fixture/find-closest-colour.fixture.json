@@ -35,8 +35,14 @@
         }
       ],
       "properties": {
-        "label": "A Button",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"A Button\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {
@@ -174,7 +180,10 @@
         }
       ],
       "properties": {
-        "value": "colours"
+        "value": {
+          "type": "string",
+          "value": "\"colours\""
+        }
       }
     },
     {
@@ -263,7 +272,10 @@
         }
       ],
       "properties": {
-        "value": "81CEC4"
+        "value": {
+          "type": "string",
+          "value": "\"81CEC4\""
+        }
       }
     },
     {
@@ -413,8 +425,14 @@
       "inputs": [],
       "outputs": [],
       "properties": {
-        "text": "#colours=primary.purple|513394,primary.darkPurple|210A53,primary.teal|81CEC3,secondary.orchid|AF9FEB,secondary.lilac|DAD9FF,secondary.lavender|EBEAFF,surface.darkGray|242239,surface.deepGray|504E61,surface.mediumGray|BEB8C4,surface.silverGray|E2E2EE,surface.lightGray|EDEDF6,surface.lightestGray|F6F6FA",
-        "fontSize": 12
+        "text": {
+          "type": "string",
+          "value": "\"#colours=primary.purple|513394,primary.darkPurple|210A53,primary.teal|81CEC3,secondary.orchid|AF9FEB,secondary.lilac|DAD9FF,secondary.lavender|EBEAFF,surface.darkGray|242239,surface.deepGray|504E61,surface.mediumGray|BEB8C4,surface.silverGray|E2E2EE,surface.lightGray|EDEDF6,surface.lightestGray|F6F6FA\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "12"
+        }
       }
     }
   ],

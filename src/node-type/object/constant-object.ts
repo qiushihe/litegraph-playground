@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket } from "../base-node";
+import BaseNode, { dataSocket, propertyValue } from "../base-node";
 
 const TITLE = "ConstantObject";
 
@@ -35,7 +35,7 @@ class ConstantObjectNode extends BaseNode {
       sockets: {
         output: [dataSocket("object")]
       },
-      properties: [["object", {}]],
+      properties: [["object", propertyValue("object", {})]],
       metadata: [["object", {}]]
     });
 
@@ -91,13 +91,9 @@ class ConstantObjectNode extends BaseNode {
     restore2DContext();
   }
 
-  onPropertyChanged(name: string, value: unknown) {
+  onPropertyValueChanged(name: string, value: unknown) {
     if (name === "object") {
-      try {
-        this.setMeta("object", JSON.parse(JSON.stringify(value)));
-      } catch {
-        this.setMeta("object", null);
-      }
+      this.setMeta("object", value || {});
     }
   }
 

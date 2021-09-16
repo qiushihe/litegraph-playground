@@ -35,8 +35,14 @@
         }
       ],
       "properties": {
-        "label": "A Button",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"A Button\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {
@@ -146,7 +152,10 @@
         }
       ],
       "properties": {
-        "value": "10"
+        "value": {
+          "type": "number",
+          "value": "10"
+        }
       }
     },
     {
@@ -188,7 +197,10 @@
         }
       ],
       "properties": {
-        "value": "1,2,3,4,5"
+        "value": {
+          "type": "array",
+          "value": "[1,2,3,4,5]"
+        }
       }
     },
     {
@@ -399,7 +411,10 @@
         }
       ],
       "properties": {
-        "value": "final: ${val0}"
+        "value": {
+          "type": "string",
+          "value": "\"final: ${val0}\""
+        }
       }
     }
   ],

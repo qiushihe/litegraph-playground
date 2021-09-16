@@ -35,8 +35,14 @@
         }
       ],
       "properties": {
-        "label": "Connect",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"Connect\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {
@@ -72,8 +78,14 @@
         }
       ],
       "properties": {
-        "label": "Disconnect",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"Disconnect\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {
@@ -161,7 +173,10 @@
         }
       ],
       "properties": {
-        "value": "0"
+        "value": {
+          "type": "number",
+          "value": "0"
+        }
       }
     },
     {
@@ -282,8 +297,14 @@
         }
       ],
       "properties": {
-        "label": "Log",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"Log\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {

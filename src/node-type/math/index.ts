@@ -1,4 +1,4 @@
-import BaseNode from "../base-node";
+import { BaseNodeClass } from "../base-node";
 import DivideNode from "./divide";
 import ExponentNode from "./exponent";
 import LessThanNode from "./less-than";
@@ -8,7 +8,7 @@ import SumNode from "./sum";
 
 export const registerNodes = (
   prefix: string,
-  register: (key: string, nodeType: { new (): BaseNode }) => void
+  register: (key: string, nodeType: BaseNodeClass) => void
 ): void => {
   register(`${prefix}divide`, DivideNode);
   register(`${prefix}exponent`, ExponentNode);

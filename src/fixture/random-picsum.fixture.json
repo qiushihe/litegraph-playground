@@ -142,7 +142,10 @@
         }
       ],
       "properties": {
-        "value": "get"
+        "value": {
+          "type": "string",
+          "value": "\"get\""
+        }
       }
     },
     {
@@ -178,7 +181,10 @@
         }
       ],
       "properties": {
-        "value": "https://picsum.photos/v2/list"
+        "value": {
+          "type": "string",
+          "value": "\"https://picsum.photos/v2/list\""
+        }
       }
     },
     {
@@ -225,7 +231,10 @@
         }
       ],
       "properties": {
-        "name": "allPics"
+        "name": {
+          "type": "string",
+          "value": "\"allPics\""
+        }
       }
     },
     {
@@ -265,7 +274,10 @@
         }
       ],
       "properties": {
-        "name": "gotAllPics"
+        "name": {
+          "type": "string",
+          "value": "\"gotAllPics\""
+        }
       }
     },
     {
@@ -307,7 +319,10 @@
         }
       ],
       "properties": {
-        "name": "gotAllPics"
+        "name": {
+          "type": "string",
+          "value": "\"gotAllPics\""
+        }
       }
     },
     {
@@ -343,8 +358,14 @@
         }
       ],
       "properties": {
-        "label": "Shuffle",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"Shuffle\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {
@@ -380,8 +401,14 @@
         }
       ],
       "properties": {
-        "label": "Fetch",
-        "fontSize": 16
+        "label": {
+          "type": "string",
+          "value": "\"Fetch\""
+        },
+        "fontSize": {
+          "type": "number",
+          "value": "16"
+        }
       }
     },
     {
@@ -423,7 +450,10 @@
         }
       ],
       "properties": {
-        "name": "allPics"
+        "name": {
+          "type": "string",
+          "value": "\"allPics\""
+        }
       }
     },
     {
@@ -470,7 +500,10 @@
         }
       ],
       "properties": {
-        "name": "thePic"
+        "name": {
+          "type": "string",
+          "value": "\"thePic\""
+        }
       }
     },
     {
@@ -598,7 +631,10 @@
         }
       ],
       "properties": {
-        "value": "1"
+        "value": {
+          "type": "number",
+          "value": "1"
+        }
       }
     },
     {
@@ -640,7 +676,10 @@
         }
       ],
       "properties": {
-        "name": "allPics"
+        "name": {
+          "type": "string",
+          "value": "\"allPics\""
+        }
       }
     },
     {
@@ -772,7 +811,10 @@
         }
       ],
       "properties": {
-        "name": "gotPic"
+        "name": {
+          "type": "string",
+          "value": "\"gotPic\""
+        }
       }
     },
     {
@@ -814,7 +856,10 @@
         }
       ],
       "properties": {
-        "name": "gotPic"
+        "name": {
+          "type": "string",
+          "value": "\"gotPic\""
+        }
       }
     },
     {
@@ -1133,7 +1178,10 @@
         }
       ],
       "properties": {
-        "value": "download_url"
+        "value": {
+          "type": "string",
+          "value": "\"download_url\""
+        }
       }
     },
     {
@@ -1169,7 +1217,10 @@
         }
       ],
       "properties": {
-        "value": "author"
+        "value": {
+          "type": "string",
+          "value": "\"author\""
+        }
       }
     },
     {
@@ -1212,7 +1263,10 @@
         }
       ],
       "properties": {
-        "name": "thePic"
+        "name": {
+          "type": "string",
+          "value": "\"thePic\""
+        }
       }
     }
   ],

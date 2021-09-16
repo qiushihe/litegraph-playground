@@ -1,4 +1,8 @@
-import BaseNode, { dataSocket, signalSocket } from "../base-node";
+import BaseNode, {
+  dataSocket,
+  signalSocket,
+  propertyValue
+} from "../base-node";
 
 import VariableStorage from "./variable-storage";
 
@@ -35,7 +39,7 @@ class VariableSetNode extends BaseNode {
         input: [signalSocket("action"), dataSocket("in")],
         output: [signalSocket("event"), dataSocket("out")]
       },
-      properties: [["name", "my-var"]]
+      properties: [["name", propertyValue("string", "my-var")]]
     });
 
     this.resizable = false;

@@ -1,9 +1,9 @@
-import BaseNode from "../../base-node";
+import { BaseNodeClass } from "../../base-node";
 import HeadNode from "./head";
 
 export const registerNodes = (
   prefix: string,
-  register: (key: string, nodeType: { new (): BaseNode }) => void
+  register: (key: string, nodeType: BaseNodeClass) => void
 ): void => {
   register(`${prefix}head`, HeadNode);
 };

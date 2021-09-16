@@ -20,7 +20,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket } from "../base-node";
+import BaseNode, { dataSocket, propertyValue } from "../base-node";
 
 const TITLE = "ConstantBoolean";
 
@@ -42,13 +42,13 @@ class ConstantBooleanNode extends BaseNode {
       sockets: {
         output: [dataSocket("")]
       },
+      properties: [["value", propertyValue("boolean", false)]],
       metadata: [
         ["value", false],
         ["switchRegion", newRegion(0, 0)]
       ]
     });
 
-    this.properties.value = "";
     this.resizable = false;
   }
 
@@ -169,13 +169,9 @@ class ConstantBooleanNode extends BaseNode {
     }
   }
 
-  onPropertyChanged(propertyName: string, propertyValue: unknown) {
-    if (propertyName === "value") {
-      try {
-        this.setMeta("value", !!JSON.parse(`${propertyValue}`));
-      } catch {
-        this.setMeta("value", undefined);
-      }
+  onPropertyValueChanged(name: string, value: unknown) {
+    if (name === "value") {
+      this.setMeta("value", !!value);
     }
   }
 

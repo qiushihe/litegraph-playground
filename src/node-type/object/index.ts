@@ -1,4 +1,4 @@
-import BaseNode from "../base-node";
+import { BaseNodeClass } from "../base-node";
 import ConstantObjectNode from "./constant-object";
 import GetNode from "./get";
 import KeysNode from "./keys";
@@ -9,7 +9,7 @@ import ValuesNode from "./values";
 
 export const registerNodes = (
   prefix: string,
-  register: (key: string, nodeType: { new (): BaseNode }) => void
+  register: (key: string, nodeType: BaseNodeClass) => void
 ): void => {
   register(`${prefix}constant-object`, ConstantObjectNode);
   register(`${prefix}get`, GetNode);
