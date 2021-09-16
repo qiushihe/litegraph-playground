@@ -1,4 +1,10 @@
 import styled, { createGlobalStyle } from "styled-components";
+import flow from "lodash/fp/flow";
+import get from "lodash/fp/get";
+import cond from "lodash/fp/cond";
+import eq from "lodash/fp/eq";
+import constant from "lodash/fp/constant";
+import stubTrue from "lodash/fp/stubTrue";
 
 /* eslint-disable  import/no-webpack-loader-syntax */
 // @ts-ignore
@@ -37,9 +43,17 @@ export const SidebarContainer = styled.div<{ $side: "left" | "right" }>`
   display: flex;
   flex-direction: column;
   flex: 0;
-  min-width: 200px;
   background-color: ${BACKGROUND_2};
   color: ${FOREGROUND_2};
+
+  min-width: ${flow([
+    get("$side"),
+    cond([
+      [eq("left"), constant("250px")],
+      [eq("right"), constant("300px")],
+      [stubTrue, constant("200px")]
+    ])
+  ])};
 `;
 
 export const SidebarScrollableContent = styled.div`
