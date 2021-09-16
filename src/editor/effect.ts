@@ -19,6 +19,11 @@ export const useCustomNodeTypes = (prefix: string) => {
   const statusRef = useRef<Record<string, boolean>>({});
 
   useEffect(() => {
+    // Clear all built-in node types.
+    if (manifest.length <= 0) {
+      LiteGraph.clearRegisteredTypes();
+    }
+
     // Use an intermediate array to prevent unnecessary calls to `setManifest`.
     const registeredManifest: { key: string; title: string }[] = [];
 

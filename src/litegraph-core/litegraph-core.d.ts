@@ -93,5 +93,6 @@ declare module "litegraph.js/build/litegraph.core" {
       new (entries: unknown, options: unknown, window: unknown): ContextMenu;
     };
     registerNodeType: (type: string, base_class: unknown) => void;
+    clearRegisteredTypes(): void;
   };
 }
