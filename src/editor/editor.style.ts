@@ -32,6 +32,7 @@ export const WorkspaceContainer = styled.div`
 `;
 
 export const CanvasContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -66,13 +67,15 @@ export const SidebarScrollableContent = styled.div`
 `;
 
 export const Canvas = styled.canvas`
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   // The point of this inner glow is so that I would know if the canvas element is ever rendered
   // with incorrect dimension/position. Because if the canvas element is rendered correctly, then
   // all 4 edges of the inner glow should be visible. If the canvas is ever not rendered correctly,
   // then some of the glow would not be visible, and that'd be easy to tell/fix.
-  // box-shadow: inset 0 0 6px 0 #cccccc;
+  box-shadow: inset 0 0 6px 0 #cccccc;
 `;
