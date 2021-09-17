@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket, propertyValue } from "../base-node";
+import BaseNode, { dataSocket, nodeProperty } from "../base-node";
 
 const TITLE = "ConstantObject";
 
@@ -35,7 +35,7 @@ class ConstantObjectNode extends BaseNode {
       sockets: {
         output: [dataSocket("object")]
       },
-      properties: [["object", propertyValue("object", {})]],
+      properties: [["object", nodeProperty("object", {})]],
       metadata: [["object", {}]]
     });
 

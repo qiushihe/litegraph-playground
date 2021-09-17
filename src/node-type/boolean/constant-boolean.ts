@@ -20,7 +20,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket, propertyValue } from "../base-node";
+import BaseNode, { dataSocket, nodeProperty } from "../base-node";
 
 const TITLE = "ConstantBoolean";
 
@@ -42,7 +42,7 @@ class ConstantBooleanNode extends BaseNode {
       sockets: {
         output: [dataSocket("")]
       },
-      properties: [["value", propertyValue("boolean", false)]],
+      properties: [["value", nodeProperty("boolean", false)]],
       metadata: [
         ["value", false],
         ["switchRegion", newRegion(0, 0)]
@@ -164,7 +164,10 @@ class ConstantBooleanNode extends BaseNode {
         pos[POS_Y] > switchRegion[COR_TL][POS_Y] &&
         pos[POS_Y] < switchRegion[COR_BR][POS_Y]
       ) {
-        this.setMeta("value", !this.getMetaOr<boolean>(false, "value"));
+        this.setParsedPropertyValue(
+          "value",
+          !this.getParsedPropertyValueOr<boolean>(false, "value")
+        );
       }
     }
   }

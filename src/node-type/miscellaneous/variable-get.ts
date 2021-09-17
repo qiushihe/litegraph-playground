@@ -1,4 +1,4 @@
-import BaseNode, { dataSocket, propertyValue } from "../base-node";
+import BaseNode, { dataSocket, nodeProperty } from "../base-node";
 
 import VariableStorage from "./variable-storage";
 
@@ -35,7 +35,7 @@ class VariableGetNode extends BaseNode {
         input: [dataSocket("fallback")],
         output: [dataSocket("value")]
       },
-      properties: [["name", propertyValue("string", "my-var")]]
+      properties: [["name", nodeProperty("string", "my-var")]]
     });
 
     this.resizable = false;
@@ -45,7 +45,7 @@ class VariableGetNode extends BaseNode {
     const [restore2DContext, { fillStyle: defaultFill }] =
       preserve2DContext(ctx);
 
-    const name = this.getPropertyOr<string>("", "name");
+    const name = this.getParsedPropertyValueOr<string>("", "name");
     const labelText = `var: ${name}`;
 
     ctx.font = "12px monospace";
@@ -88,7 +88,7 @@ class VariableGetNode extends BaseNode {
 
   onExecute() {
     const value = this.getStorage().getValue(
-      this.getPropertyOr<string>("", "name")
+      this.getParsedPropertyValueOr<string>("", "name")
     );
 
     if (value !== undefined) {

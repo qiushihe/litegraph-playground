@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { propertyValue } from "../base-node";
+import BaseNode, { nodeProperty } from "../base-node";
 
 const TITLE = "Label";
 
@@ -35,8 +35,8 @@ class LabelNode extends BaseNode {
   constructor() {
     super(TITLE, {
       properties: [
-        ["text", propertyValue("string", "A Label")],
-        ["fontSize", propertyValue("number", CONFIG.defaultFontSize)]
+        ["text", nodeProperty("string", "A Label")],
+        ["fontSize", nodeProperty("number", CONFIG.defaultFontSize)]
       ]
     });
 
@@ -60,7 +60,10 @@ class LabelNode extends BaseNode {
       newCoordinate(CONFIG.spacing[DIR_L], CONFIG.spacing[DIR_T])
     );
 
-    ctx.font = `${this.getPropertyOr<number>(16, "fontSize")}px monospace`;
+    ctx.font = `${this.getParsedPropertyValueOr<number>(
+      16,
+      "fontSize"
+    )}px monospace`;
 
     const {
       width: characterWidth,
@@ -77,7 +80,7 @@ class LabelNode extends BaseNode {
         (fontBoundingBoxAscent + fontBoundingBoxDescent)
     );
 
-    let remainingText = this.getPropertyOr<string>("", "text");
+    let remainingText = this.getParsedPropertyValueOr<string>("", "text");
     for (let lineIndex = 0; lineIndex < linesCount; lineIndex++) {
       ctx.fillStyle = defaultFill;
       ctx.fillText(
