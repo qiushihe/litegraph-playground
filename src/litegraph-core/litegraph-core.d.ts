@@ -6,6 +6,7 @@ declare module "litegraph.js/build/litegraph.core" {
     remove(node: LGraphNode): void;
     configure(data: unknown, stop: boolean): void;
     findNodesByType(type: string): LGraphNode[];
+    getNodeById(id: number): LGraphNode | null;
     start(rate?: number): void;
     stop(): void;
     serialize(): unknown;

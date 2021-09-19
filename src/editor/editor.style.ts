@@ -72,10 +72,12 @@ export const Canvas = styled.canvas`
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
 
   // The point of this inner glow is so that I would know if the canvas element is ever rendered
   // with incorrect dimension/position. Because if the canvas element is rendered correctly, then
   // all 4 edges of the inner glow should be visible. If the canvas is ever not rendered correctly,
   // then some of the glow would not be visible, and that'd be easy to tell/fix.
-  box-shadow: inset 0 0 6px 0 #cccccc;
+  // box-shadow: inset 0 0 6px 0 #cccccc;
 `;

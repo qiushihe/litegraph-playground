@@ -1,18 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes, { InferProps } from "prop-types";
-import flow from "lodash/fp/flow";
-import values from "lodash/fp/values";
-import noop from "lodash/fp/noop";
-
 import mergeRefs from "react-merge-refs";
-import { useDrop } from "react-dnd";
+import noop from "lodash/fp/noop";
 
 import { LGraph, LGraphCanvas } from "../litegraph-core";
 import { PREFIX } from "../enum/node-type.enum";
-import { addNodeToCanvas } from "../util/litegraph";
 import EditorToolbar from "../editor-toolbar";
 import EditorNodeTypesList from "../editor-node-types-list";
 import EditorNodeInspector from "../editor-node-inspector";
+import { withEditorState, IEditorState } from "../editor-state-provider";
 
 import {
   HorizontalSeparator,
@@ -20,7 +16,9 @@ import {
 } from "../editor-ui/separator.style";
 
 import {
+  useEditorStateDelegate,
   useCustomNodeTypes,
+  useCustomNodeTypesDropZone,
   useRunningState,
   useFilename,
   useUploadDownload,
@@ -42,27 +40,36 @@ const EXECUTION_RATE = 1000 / 60;
 
 const PROP_TYPES = {
   className: PropTypes.string,
+  editorState: PropTypes.object,
   autoStart: PropTypes.bool
 };
 
 const DEFAULT_PROPS = {
   className: "",
+  editorState: {},
   autoStart: false
 };
 
-const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
-  className,
-  autoStart
-}) => {
-  const graphRef = useRef<LGraph>(new LGraph());
-  const graphCanvasRef = useRef<LGraphCanvas | null>(null);
+type EditorProps = InferProps<typeof PROP_TYPES>;
+
+const Editor: React.FunctionComponent<EditorProps> = (props) => {
+  const className = props.className || DEFAULT_PROPS.className;
+  const editorState = (props.editorState ||
+    DEFAULT_PROPS.editorState) as IEditorState;
+  const autoStart = props.autoStart || DEFAULT_PROPS.autoStart;
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [graph] = useState<LGraph>(new LGraph());
+  const [graphCanvas, setGraphCanvas] = useState<LGraphCanvas | null>(null);
+
+  useEditorStateDelegate(graph, editorState);
 
   const { nodeTypesManifest } = useCustomNodeTypes(PREFIX);
+  const { dropZoneRef } = useCustomNodeTypesDropZone(graph, graphCanvas);
 
   const { isRunning, handleStartStop } = useRunningState(
-    graphRef,
-    !!autoStart,
+    graph,
+    autoStart,
     EXECUTION_RATE
   );
 
@@ -70,18 +77,19 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
     useFilename("untitled.json");
 
   const { handleUpload, handleDownload } = useUploadDownload(
-    graphRef,
+    graph,
     filename,
     setFilename
   );
 
-  const { snapToGrid, handleToggleGridSnap } = useGridSnap(graphCanvasRef);
+  const { snapToGrid, handleToggleGridSnap } = useGridSnap(graphCanvas);
 
-  const { selectedNodes, setSelectedNodes, handleRemoveNode, handleCloneNode } =
-    useNodeOperations();
+  const { handleRemoveNode, handleCloneNode } = useNodeOperations(
+    editorState,
+    graphCanvas
+  );
 
   useEffect(() => {
-    const { current: graph } = graphRef;
     const { current: canvas } = canvasRef;
 
     if (graph && canvas) {
@@ -96,41 +104,9 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
       // can all be done through the rest of the app's UI.
       graphCanvas.processContextMenu = () => {};
 
-      graphCanvas.onSelectionChange = (selectedNodes) => {
-        flow([values, setSelectedNodes])(selectedNodes);
-      };
-
-      graphCanvasRef.current = graphCanvas;
+      setGraphCanvas(graphCanvas);
     }
-  }, [setSelectedNodes]);
-
-  const [, dropRef] = useDrop(
-    () => ({
-      accept: "CUSTOM_NODE_TYPE",
-      drop: (item: { nodeTypeKey: string }, monitor) => {
-        const { current: graph } = graphRef;
-        const { current: graphCanvas } = graphCanvasRef;
-        const dropOffset = monitor.getClientOffset();
-        const dragOffset = monitor.getInitialClientOffset();
-        const dragSourceOffset = monitor.getInitialSourceClientOffset();
-
-        if (
-          graph &&
-          graphCanvas &&
-          dropOffset &&
-          dragOffset &&
-          dragSourceOffset
-        ) {
-          addNodeToCanvas(graphCanvas)(item.nodeTypeKey, [
-            dropOffset.x - (dragOffset.x - dragSourceOffset.x),
-            dropOffset.y - (dragOffset.y - dragSourceOffset.y)
-          ]);
-        }
-      },
-      collect: () => ({})
-    }),
-    [graphRef, graphCanvasRef]
-  );
+  }, [graph, setGraphCanvas]);
 
   return (
     <Base className={className || ""}>
@@ -156,7 +132,7 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
         <VerticalSeparator />
         <CanvasContainer>
           <Canvas
-            ref={mergeRefs([canvasRef, dropRef])}
+            ref={mergeRefs([canvasRef, dropZoneRef])}
             // Because the `autoresize` option is set to `true` on the `LGraphCanvas` instance, these
             // numbers are only the "initial" dimension of the canvas. And after the page loads, and
             // subsequently resizes, the `litegraph.js` library itself will automatically maintain and
@@ -169,7 +145,6 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
         <SidebarContainer $side="right">
           <SidebarScrollableContent>
             <EditorNodeInspector
-              nodes={selectedNodes}
               onRemoveNode={handleRemoveNode}
               onCloneNode={handleCloneNode}
             />
@@ -183,4 +158,4 @@ const Editor: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = ({
 Editor.propTypes = PROP_TYPES;
 Editor.defaultProps = DEFAULT_PROPS;
 
-export default Editor;
+export default withEditorState<EditorProps>(Editor);

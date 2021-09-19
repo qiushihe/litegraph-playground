@@ -12,6 +12,7 @@ import BaseNode from "../node-type/base-node";
 import { HorizontalSeparator } from "../editor-ui/separator.style";
 import EditorPropertyField from "../editor-property-field";
 import { interleave } from "../util/array";
+import { IEditorState, withEditorState } from "../editor-state-provider";
 
 import {
   ItemSeparator,
@@ -38,14 +39,14 @@ type InspectorPropertyEntry = {
 
 const PROP_TYPES = {
   className: PropTypes.string,
-  nodes: PropTypes.arrayOf(PropTypes.instanceOf(BaseNode).isRequired),
+  editorState: PropTypes.object,
   onRemoveNode: PropTypes.func,
   onCloneNode: PropTypes.func
 };
 
 const DEFAULT_PROPS = {
   className: "",
-  nodes: [],
+  editorState: {},
   onRemoveNode: () => {},
   onCloneNode: () => {}
 };
@@ -67,13 +68,18 @@ const EmptyStateManySelected = () => (
   </EmptyState>
 );
 
-const EditorNodeInspector: React.FunctionComponent<
-  InferProps<typeof PROP_TYPES>
-> = (props) => {
+type EditorNodeInspectorProps = InferProps<typeof PROP_TYPES>;
+
+const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
+  props
+) => {
   const className = props.className || DEFAULT_PROPS.className;
-  const nodes = props.nodes || DEFAULT_PROPS.nodes;
+  const editorState = (props.editorState ||
+    DEFAULT_PROPS.editorState) as IEditorState;
   const onRemoveNode = props.onRemoveNode || DEFAULT_PROPS.onRemoveNode;
   const onCloneNode = props.onCloneNode || DEFAULT_PROPS.onCloneNode;
+
+  const nodeIds = editorState.getSelectedNodeIds();
 
   const [node, setNode] = useState<BaseNode | null>(null);
 
@@ -120,12 +126,12 @@ const EditorNodeInspector: React.FunctionComponent<
   }, []);
 
   useEffect(() => {
-    if (size(nodes) <= 0 || size(nodes) > 1) {
+    if (size(nodeIds) <= 0 || size(nodeIds) > 1) {
       setNode(null);
     } else {
-      setNode(nodes[0]);
+      setNode(editorState.getNodeById(nodeIds[0]));
     }
-  }, [node, nodes]);
+  }, [node, nodeIds, editorState]);
 
   useEffect(() => {
     if (node) {
@@ -146,11 +152,11 @@ const EditorNodeInspector: React.FunctionComponent<
     <Panel className={className} title="Node Inspector">
       <ToolbarContainer>
         <Toolbar>
-          <ToolbarItem disabled={size(nodes) <= 0} onClick={onRemoveNode}>
+          <ToolbarItem disabled={size(nodeIds) <= 0} onClick={onRemoveNode}>
             Remove
           </ToolbarItem>
           <ItemSpacer />
-          <ToolbarItem disabled={size(nodes) !== 1} onClick={onCloneNode}>
+          <ToolbarItem disabled={size(nodeIds) !== 1} onClick={onCloneNode}>
             Clone
           </ToolbarItem>
           <ItemSeparator />
@@ -159,7 +165,7 @@ const EditorNodeInspector: React.FunctionComponent<
       </ToolbarContainer>
       <HorizontalSeparator />
       {isEmpty(propertyEntries) ? (
-        size(nodes) <= 0 ? (
+        size(nodeIds) <= 0 ? (
           <EmptyStateNoneSelected />
         ) : (
           <EmptyStateManySelected />
@@ -187,4 +193,4 @@ const EditorNodeInspector: React.FunctionComponent<
   );
 };
 
-export default EditorNodeInspector;
+export default withEditorState<EditorNodeInspectorProps>(EditorNodeInspector);
