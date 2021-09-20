@@ -11,6 +11,7 @@ import {
 
 import {
   Base,
+  RunStateLabel,
   UploadInput,
   FilenameInput,
   Checkbox
@@ -61,12 +62,10 @@ const EditorToolbar: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = (
   return (
     <Base>
       <Toolbar className={className}>
-        <ToolbarItem disabled={isRunning} onClick={onStop}>
-          Stopped
-        </ToolbarItem>
-        <ItemSpacer />
-        <ToolbarItem disabled={!isRunning} onClick={onStart}>
-          Running
+        <ToolbarItem onClick={isRunning ? onStop : onStart}>
+          <RunStateLabel $isRunning={isRunning}>
+            ⏻ {isRunning ? "Running" : "Stopped"}
+          </RunStateLabel>
         </ToolbarItem>
         <ItemSeparator />
         <ToolbarItem>

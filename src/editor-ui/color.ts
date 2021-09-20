@@ -10,3 +10,6 @@ export const SEPARATOR = "#494c50";
 
 export const DISABLED = "#5d5d5f";
 export const FOCUSED = "#16649a";
+
+export const RUNNING = "#169a18";
+export const STOPPED = "#9a1616";
