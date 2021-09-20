@@ -39,7 +39,6 @@ class ConstantObjectNode extends BaseNode {
       metadata: [["object", {}]]
     });
 
-    this.resizable = false;
     this.size = [140, 50];
   }
 
