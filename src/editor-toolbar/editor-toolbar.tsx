@@ -91,4 +91,7 @@ const EditorToolbar: React.FunctionComponent<InferProps<typeof PROP_TYPES>> = (
   );
 };
 
+EditorToolbar.propTypes = PROP_TYPES;
+EditorToolbar.defaultProps = DEFAULT_PROPS;
+
 export default EditorToolbar;

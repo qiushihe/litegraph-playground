@@ -139,4 +139,7 @@ const EditorStateProvider: React.FunctionComponent<
   );
 };
 
+EditorStateProvider.propTypes = PROP_TYPES;
+EditorStateProvider.defaultProps = DEFAULT_PROPS;
+
 export default EditorStateProvider;

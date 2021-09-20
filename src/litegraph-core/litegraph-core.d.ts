@@ -46,6 +46,7 @@ declare module "litegraph.js/build/litegraph.core" {
   }
 
   declare class LGraphNode {
+    type: string;
     id: number;
     title: string;
     graph: LGraph;

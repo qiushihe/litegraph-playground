@@ -6,6 +6,8 @@ import keys from "lodash/fp/keys";
 import map from "lodash/fp/map";
 import size from "lodash/fp/size";
 import isEmpty from "lodash/fp/isEmpty";
+import constant from "lodash/fp/constant";
+import noop from "lodash/fp/noop";
 
 import Panel from "../editor-ui/panel";
 import BaseNode from "../node-type/base-node";
@@ -32,6 +34,7 @@ import {
 type InspectorPropertyEntry = {
   title: string;
   type: string;
+  isEditable: boolean;
   isMultiLine: boolean;
   getValue: () => string;
   setValue: (value: string) => void;
@@ -98,6 +101,7 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
           (propertyKey: string): InspectorPropertyEntry => ({
             title: propertyKey,
             type: "json",
+            isEditable: true,
             isMultiLine:
               MULTILINE_FIELD[node.getParsedPropertyType(propertyKey)],
             getValue: () => node.getUnparsedPropertyValue(propertyKey) || "",
@@ -111,8 +115,17 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
 
       setPropertyEntries([
         {
+          title: "Node Type",
+          type: "json",
+          isEditable: false,
+          isMultiLine: false,
+          getValue: constant(node.type),
+          setValue: noop
+        },
+        {
           title: "Title",
           type: "json",
+          isEditable: true,
           isMultiLine: false,
           getValue: () => JSON.stringify(node.title),
           setValue: (value) => {
@@ -182,6 +195,7 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
             map((propertyEntry: InspectorPropertyEntry) => (
               <EditorField>
                 <EditorPropertyField
+                  isEditable={propertyEntry.isEditable}
                   isMultiLine={propertyEntry.isMultiLine}
                   editorType={propertyEntry.type}
                   propertyName={propertyEntry.title}
@@ -198,5 +212,8 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
     </Panel>
   );
 };
+
+EditorNodeInspector.propTypes = PROP_TYPES;
+EditorNodeInspector.defaultProps = DEFAULT_PROPS;
 
 export default withEditorState<EditorNodeInspectorProps>(EditorNodeInspector);

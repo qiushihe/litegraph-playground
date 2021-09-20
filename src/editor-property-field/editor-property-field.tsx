@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import PropTypes, { InferProps, Requireable } from "prop-types";
+import noop from "lodash/fp/noop";
 
 import {
   Base,
@@ -18,6 +19,7 @@ import {
 
 const PROP_TYPES = {
   className: PropTypes.string,
+  isEditable: PropTypes.bool,
   isMultiLine: PropTypes.bool,
   editorType: PropTypes.oneOf(["json"]),
   propertyName: PropTypes.string,
@@ -27,6 +29,7 @@ const PROP_TYPES = {
 
 const DEFAULT_PROPS = {
   className: "",
+  isEditable: false,
   isMultiLine: false,
   editorType: "json",
   propertyName: "Property",
@@ -39,6 +42,7 @@ const EditorPropertyField: React.FunctionComponent<
   InferProps<typeof PROP_TYPES>
 > = (props) => {
   const className = props.className || DEFAULT_PROPS.className;
+  const isEditable = props.isEditable || DEFAULT_PROPS.isEditable;
   const isMultiLine = props.isMultiLine || DEFAULT_PROPS.isMultiLine;
   const editorType = props.editorType || DEFAULT_PROPS.editorType;
   const propertyName = props.propertyName || DEFAULT_PROPS.propertyName;
@@ -77,6 +81,12 @@ const EditorPropertyField: React.FunctionComponent<
     [onChange]
   );
 
+  const handleEditFieldValue = useCallback(() => {
+    if (!isEditing) {
+      setIsEditing(true);
+    }
+  }, [isEditing]);
+
   useEffect(() => {
     setFieldValue(getPropertyValue());
   }, [getPropertyValue]);
@@ -108,7 +118,7 @@ const EditorPropertyField: React.FunctionComponent<
           </EditorFormButtons>
         </EditorForm>
       ) : (
-        <PropertyViewer onClick={() => setIsEditing(true)}>
+        <PropertyViewer onClick={isEditable ? handleEditFieldValue : noop}>
           <PropertyTitle>{propertyName}</PropertyTitle>
           <PropertyValue>{getPropertyValue()}</PropertyValue>
         </PropertyViewer>
@@ -116,5 +126,8 @@ const EditorPropertyField: React.FunctionComponent<
     </Base>
   );
 };
+
+EditorPropertyField.propTypes = PROP_TYPES;
+EditorPropertyField.defaultProps = DEFAULT_PROPS;
 
 export default EditorPropertyField;
