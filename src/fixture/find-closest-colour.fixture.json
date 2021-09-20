@@ -1,411 +1,13 @@
 {
-  "last_node_id": 14,
-  "last_link_id": 14,
+  "last_node_id": 17,
+  "last_link_id": 18,
   "nodes": [
-    {
-      "id": 1,
-      "type": "_custom::user-interaction/button",
-      "pos": {
-        "0": 100,
-        "1": 150,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        164,
-        84
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": -1,
-          "links": [
-            14
-          ]
-        }
-      ],
-      "properties": {
-        "label": {
-          "type": "string",
-          "value": "\"A Button\""
-        },
-        "fontSize": {
-          "type": "number",
-          "value": "16"
-        }
-      }
-    },
-    {
-      "id": 14,
-      "type": "_custom::flow-control/sequence",
-      "pos": {
-        "0": 300,
-        "1": 150,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 140,
-        "1": 106
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "action",
-          "type": -1,
-          "link": 14
-        }
-      ],
-      "outputs": [
-        {
-          "name": "",
-          "type": -1,
-          "links": [
-            12
-          ]
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": [
-            13
-          ]
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": null
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": null
-        },
-        {
-          "name": "",
-          "type": -1,
-          "links": null
-        }
-      ],
-      "properties": {}
-    },
-    {
-      "id": 4,
-      "type": "_custom::external/url-hash-parameter",
-      "pos": {
-        "0": 300,
-        "1": 310,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        170,
-        26
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "name",
-          "type": 0,
-          "link": 1
-        }
-      ],
-      "outputs": [
-        {
-          "name": "value",
-          "type": "",
-          "links": [
-            5
-          ]
-        }
-      ],
-      "properties": {}
-    },
-    {
-      "id": 5,
-      "type": "_custom::string/constant-string",
-      "pos": {
-        "0": 100,
-        "1": 310,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        140,
-        26
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "string",
-          "type": "",
-          "links": [
-            1
-          ]
-        }
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "value": "\"colours\""
-        }
-      }
-    },
-    {
-      "id": 7,
-      "type": "_custom::colour/find-closest",
-      "pos": {
-        "0": 530,
-        "1": 310,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 140,
-        "1": 46
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "spec",
-          "type": 0,
-          "link": 5
-        },
-        {
-          "name": "colour",
-          "type": 0,
-          "link": 9
-        }
-      ],
-      "outputs": [
-        {
-          "name": "name",
-          "type": "",
-          "links": [
-            7
-          ]
-        },
-        {
-          "name": "colour",
-          "type": "",
-          "links": [
-            10
-          ]
-        }
-      ],
-      "properties": {}
-    },
-    {
-      "id": 11,
-      "type": "_custom::string/constant-string",
-      "pos": {
-        "0": 300,
-        "1": 410,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        140,
-        26
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "string",
-          "type": "",
-          "links": [
-            9,
-            11
-          ]
-        }
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "value": "\"81CEC4\""
-        }
-      }
-    },
-    {
-      "id": 13,
-      "type": "_custom::output/colour-block",
-      "pos": {
-        "0": 530,
-        "1": 410,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        170,
-        120
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "hex",
-          "type": 0,
-          "link": 11
-        },
-        {
-          "name": "int[]",
-          "type": 0,
-          "link": null
-        }
-      ],
-      "outputs": [],
-      "properties": {}
-    },
-    {
-      "id": 12,
-      "type": "_custom::output/colour-block",
-      "pos": {
-        "0": 800,
-        "1": 410,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        170,
-        120
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "hex",
-          "type": 0,
-          "link": 10
-        },
-        {
-          "name": "int[]",
-          "type": 0,
-          "link": null
-        }
-      ],
-      "outputs": [],
-      "properties": {}
-    },
-    {
-      "id": 8,
-      "type": "_custom::output/console",
-      "pos": {
-        "0": 800,
-        "1": 260,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        439,
-        100
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "action",
-          "type": -1,
-          "link": 13
-        },
-        {
-          "name": "clear",
-          "type": -1,
-          "link": 12
-        },
-        {
-          "name": "message",
-          "type": 0,
-          "link": 7
-        }
-      ],
-      "outputs": [
-        {
-          "name": "event",
-          "type": -1,
-          "links": null
-        }
-      ],
-      "properties": {}
-    },
     {
       "id": 3,
       "type": "_custom::user-interaction/label",
       "pos": {
-        "0": 100,
-        "1": -20,
+        "0": 50,
+        "1": 80,
         "2": 0,
         "3": 0,
         "4": 0,
@@ -434,39 +36,298 @@
           "value": "12"
         }
       }
+    },
+    {
+      "id": 4,
+      "type": "_custom::external/url-hash-parameter",
+      "pos": {
+        "0": 230,
+        "1": 250,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        170,
+        26
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "name",
+          "type": 0,
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "value",
+          "type": "",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": 7,
+      "type": "_custom::colour/find-closest",
+      "pos": {
+        "0": 440,
+        "1": 250,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "spec",
+          "type": 0,
+          "link": 5
+        },
+        {
+          "name": "colour",
+          "type": 0,
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "name",
+          "type": "",
+          "links": [
+            15
+          ]
+        },
+        {
+          "name": "colour",
+          "type": "",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": 13,
+      "type": "_custom::output/colour-block",
+      "pos": {
+        "0": 440,
+        "1": 360,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        170,
+        120
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "hex",
+          "type": 0,
+          "link": 16
+        },
+        {
+          "name": "int[]",
+          "type": 0,
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "title": "Target",
+      "properties": {}
+    },
+    {
+      "id": 12,
+      "type": "_custom::output/colour-block",
+      "pos": {
+        "0": 720,
+        "1": 360,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        170,
+        120
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "hex",
+          "type": 0,
+          "link": 10
+        },
+        {
+          "name": "int[]",
+          "type": 0,
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "title": "Match",
+      "properties": {}
+    },
+    {
+      "id": 15,
+      "type": "_custom::output/text",
+      "pos": {
+        "0": 720,
+        "1": 280,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        167,
+        36
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": 0,
+          "link": 15
+        }
+      ],
+      "outputs": [],
+      "title": "Match colour name",
+      "properties": {}
+    },
+    {
+      "id": 16,
+      "type": "_custom::user-interaction/rgb-slider",
+      "pos": {
+        "0": 50,
+        "1": 360,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        260,
+        146
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "hex",
+          "type": "",
+          "links": [
+            16,
+            17
+          ]
+        },
+        {
+          "name": "int[]",
+          "type": "",
+          "links": null
+        }
+      ],
+      "title": "Target colour",
+      "properties": {}
+    },
+    {
+      "id": 17,
+      "type": "_custom::string/constant-string",
+      "pos": {
+        "0": 50,
+        "1": 250,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        130,
+        34
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "\"colours\""
+        }
+      }
     }
   ],
   "links": [
     [
-      1,
-      5,
-      0,
-      4,
-      0,
-      0
-    ],
-    [
       5,
       4,
       0,
       7,
       0,
-      0
-    ],
-    [
-      7,
-      7,
-      0,
-      8,
-      2,
-      0
-    ],
-    [
-      9,
-      11,
-      0,
-      7,
-      1,
       0
     ],
     [
@@ -478,36 +339,36 @@
       0
     ],
     [
-      11,
-      11,
+      15,
+      7,
+      0,
+      15,
+      0,
+      0
+    ],
+    [
+      16,
+      16,
       0,
       13,
       0,
       0
     ],
     [
-      12,
-      14,
+      17,
+      16,
       0,
-      8,
+      7,
       1,
-      -1
+      0
     ],
     [
-      13,
-      14,
-      1,
-      8,
+      18,
+      17,
       0,
-      -1
-    ],
-    [
-      14,
-      1,
+      4,
       0,
-      14,
-      0,
-      -1
+      0
     ]
   ],
   "groups": [],

@@ -16,7 +16,7 @@ import {
   regionCenter
 } from "../../util/canvas";
 
-import BaseNode, { signalSocket, propertyValue } from "../base-node";
+import BaseNode, { signalSocket, nodeProperty } from "../base-node";
 
 const TITLE = "Portal";
 
@@ -37,7 +37,7 @@ class PortalNode extends BaseNode {
         input: [signalSocket("action")],
         output: [signalSocket("event")]
       },
-      properties: [["name", propertyValue("string", "my-event")]],
+      properties: [["name", nodeProperty("string", "my-event")]],
       metadata: [["uuid", uuidv4()]]
     });
 
@@ -48,7 +48,7 @@ class PortalNode extends BaseNode {
     const [restore2DContext, { fillStyle: defaultFill }] =
       preserve2DContext(ctx);
 
-    const name = this.getPropertyOr<string>("", "name");
+    const name = this.getParsedPropertyValueOr<string>("", "name");
     const labelText = `evt: ${name}`;
 
     ctx.font = "12px monospace";
@@ -110,8 +110,8 @@ class PortalNode extends BaseNode {
         .filter((portal) => {
           return (
             portal.getUUID() !== this.getUUID() &&
-            portal.getPropertyOr<string>("", "name") ===
-              this.getPropertyOr<string>("", "name")
+            portal.getParsedPropertyValueOr<string>("", "name") ===
+              this.getParsedPropertyValueOr<string>("", "name")
           );
         })
         .forEach((portal) => {

@@ -1,8 +1,4 @@
-import BaseNode, {
-  dataSocket,
-  signalSocket,
-  propertyValue
-} from "../base-node";
+import BaseNode, { dataSocket, signalSocket, nodeProperty } from "../base-node";
 
 import VariableStorage from "./variable-storage";
 
@@ -39,7 +35,7 @@ class VariableSetNode extends BaseNode {
         input: [signalSocket("action"), dataSocket("in")],
         output: [signalSocket("event"), dataSocket("out")]
       },
-      properties: [["name", propertyValue("string", "my-var")]]
+      properties: [["name", nodeProperty("string", "my-var")]]
     });
 
     this.resizable = false;
@@ -49,7 +45,7 @@ class VariableSetNode extends BaseNode {
     const [restore2DContext, { fillStyle: defaultFill }] =
       preserve2DContext(ctx);
 
-    const name = this.getPropertyOr<string>("", "name");
+    const name = this.getParsedPropertyValueOr<string>("", "name");
     const labelText = `var: ${name}`;
 
     ctx.font = "12px monospace";
@@ -96,7 +92,7 @@ class VariableSetNode extends BaseNode {
     if (taskName === "action::action") {
       if (this.isInputConnected(1)) {
         this.getStorage().setValue(
-          this.getPropertyOr<string>("", "name"),
+          this.getParsedPropertyValueOr<string>("", "name"),
           this.getInputData(1)
         );
       }

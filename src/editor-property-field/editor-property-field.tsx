@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import PropTypes, { InferProps, Requireable } from "prop-types";
 
 import {
@@ -76,6 +76,10 @@ const EditorPropertyField: React.FunctionComponent<
     },
     [onChange]
   );
+
+  useEffect(() => {
+    setFieldValue(getPropertyValue());
+  }, [getPropertyValue]);
 
   return (
     <Base className={className}>

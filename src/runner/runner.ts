@@ -41,21 +41,21 @@ class Runner {
   }
 
   run(entryName: string, exitName: string, entryParam: unknown) {
-    this.graph.start();
-
     const entry = find(
-      flow([get("properties.name"), eq(JSON.stringify(entryName))])
+      flow([get("properties.name.value"), eq(JSON.stringify(entryName))])
     )(this.graph.findNodesByType(`${PREFIX}external/script-entry`));
 
     if (entry) {
       entry.sendSignal(entryParam);
 
       const exit: ScriptExitNode = find(
-        flow([get("properties.name"), eq(JSON.stringify(exitName))])
+        flow([get("properties.name.value"), eq(JSON.stringify(exitName))])
       )(this.graph.findNodesByType(`${PREFIX}external/script-exit`));
 
       if (exit) {
         exit.addListener((data) => this.resolvePromise(data));
+
+        this.graph.start();
       } else {
         this.resolvePromise(null);
       }

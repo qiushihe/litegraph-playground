@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket, propertyValue } from "../base-node";
+import BaseNode, { dataSocket, nodeProperty } from "../base-node";
 
 const TITLE = "ConstantArray";
 
@@ -35,7 +35,7 @@ class ConstantArrayNode extends BaseNode {
       sockets: {
         output: [dataSocket("array"), dataSocket("length")]
       },
-      properties: [["value", propertyValue("array", [])]],
+      properties: [["value", nodeProperty("array", [])]],
       metadata: [["array", []]]
     });
 

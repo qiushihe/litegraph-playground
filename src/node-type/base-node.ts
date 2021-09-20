@@ -35,6 +35,10 @@ type BaseNodeProperty = {
   value: string;
 };
 
+type BaseNodeEventName = "property-change" | "meta-change";
+
+type BaseNodeEventListener = (node: BaseNode, payload?: unknown) => void;
+
 export const dataSocket = (name: string): BaseNodeSocket => ({
   name,
   type: "data"
@@ -45,13 +49,16 @@ export const signalSocket = (name: string): BaseNodeSocket => ({
   type: "signal"
 });
 
-export const propertyValue = (
+export const nodeProperty = (
   type: string,
   value: unknown
 ): BaseNodeProperty => ({
   type,
   value: JSON.stringify(value)
 });
+
+export const nodePropertyValue = (value: unknown): string =>
+  JSON.stringify(value);
 
 const METADATA_ATTR_NAME = "__node_type_meta";
 
@@ -62,6 +69,7 @@ class BaseNode extends LGraphNode {
   static title: string = "BaseNode";
 
   private [METADATA_ATTR_NAME]: Record<string, unknown>;
+  private eventListeners: Record<string, BaseNodeEventListener[]> = {};
 
   constructor(nodeTypeTitle: string, options?: BaseNodeOptions) {
     super(nodeTypeTitle);
@@ -89,7 +97,7 @@ class BaseNode extends LGraphNode {
     ])(options);
   }
 
-  getPropertyOr<T>(fallback: T, name: string): T {
+  getParsedPropertyValueOr<T>(fallback: T, name: string): T {
     const property = this.properties[name] as BaseNodeProperty;
 
     if (property === null || property === undefined) {
@@ -108,22 +116,11 @@ class BaseNode extends LGraphNode {
     }
   }
 
-  getProperty<T>(name: string): T | null {
-    return this.getPropertyOr<T | null>(null, name);
+  getParsedPropertyValue<T>(name: string): T | null {
+    return this.getParsedPropertyValueOr<T | null>(null, name);
   }
 
-  onPropertyChanged(name: string, value: unknown) {
-    try {
-      this.onPropertyValueChanged(
-        name,
-        JSON.parse((value as BaseNodeProperty).value)
-      );
-    } catch {
-      this.onPropertyValueChanged(name, null);
-    }
-  }
-
-  getPropertyType(name: string): string {
+  getParsedPropertyType(name: string): string {
     const property = this.properties[name] as BaseNodeProperty;
 
     if (property === null || property === undefined) {
@@ -133,7 +130,7 @@ class BaseNode extends LGraphNode {
     }
   }
 
-  getPropertyValue(name: string): string | null {
+  getUnparsedPropertyValue(name: string): string | null {
     const property = this.properties[name] as BaseNodeProperty;
 
     if (property === null || property === undefined) {
@@ -143,7 +140,7 @@ class BaseNode extends LGraphNode {
     }
   }
 
-  setPropertyValue(name: string, value: string) {
+  setUnparsedPropertyValue(name: string, value: string) {
     const property = this.properties[name] as BaseNodeProperty;
 
     if (property === null || property === undefined) {
@@ -151,6 +148,22 @@ class BaseNode extends LGraphNode {
     } else {
       this.setProperty(name, { type: property.type, value });
     }
+  }
+
+  setParsedPropertyValue(name: string, value: unknown) {
+    this.setUnparsedPropertyValue(name, JSON.stringify(value));
+  }
+
+  onPropertyChanged(name: string, value: unknown) {
+    let parsedValue;
+    try {
+      parsedValue = JSON.parse((value as BaseNodeProperty).value);
+    } catch {
+      parsedValue = null;
+    }
+
+    this.onPropertyValueChanged(name, parsedValue);
+    this.triggerEvent("property-change", { name, value: parsedValue });
   }
 
   onPropertyValueChanged(_: string, __: unknown) {}
@@ -186,6 +199,7 @@ class BaseNode extends LGraphNode {
   setMeta(name: string, value: unknown): void {
     this[METADATA_ATTR_NAME] = set(name, value)(this[METADATA_ATTR_NAME]);
     this.onMetaChanged(name, value);
+    this.triggerEvent("meta-change", { name, value });
   }
 
   onMetaChanged(_: string, __: unknown): void {}
@@ -270,6 +284,34 @@ class BaseNode extends LGraphNode {
     if (this.size[0] !== width || this.size[1] !== height) {
       this.size = [width, height];
       this.setDirtyCanvas(true);
+    }
+  }
+
+  addEventListener(
+    evtName: BaseNodeEventName,
+    evtListener: BaseNodeEventListener
+  ) {
+    this.eventListeners[evtName] = this.eventListeners[evtName] || [];
+    this.eventListeners[evtName].push(evtListener);
+  }
+
+  removeEventListener(
+    evtName: BaseNodeEventName,
+    evtListener: BaseNodeEventListener
+  ) {
+    if (this.eventListeners[evtName]) {
+      const index = this.eventListeners[evtName].indexOf(evtListener);
+      if (index > -1) {
+        this.eventListeners[evtName].splice(index, 1);
+      }
+    }
+  }
+
+  triggerEvent(evtName: BaseNodeEventName, payload?: unknown) {
+    if (this.eventListeners[evtName]) {
+      this.eventListeners[evtName].forEach((eventListener) => {
+        eventListener(this, payload);
+      });
     }
   }
 }

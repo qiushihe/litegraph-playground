@@ -18,7 +18,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket, propertyValue } from "../base-node";
+import BaseNode, { dataSocket, nodeProperty } from "../base-node";
 
 const TITLE = "ConstantString";
 
@@ -37,7 +37,7 @@ class ConstantStringNode extends BaseNode {
       sockets: {
         output: [dataSocket("")]
       },
-      properties: [["value", propertyValue("string", "my-string")]]
+      properties: [["value", nodeProperty("string", "my-string")]]
     });
 
     this.size = [
@@ -77,7 +77,7 @@ class ConstantStringNode extends BaseNode {
         (fontBoundingBoxAscent + fontBoundingBoxDescent)
     );
 
-    let remainingText = this.getPropertyOr<string>("", "value");
+    let remainingText = this.getParsedPropertyValueOr<string>("", "value");
 
     for (let lineIndex = 0; lineIndex < linesCount; lineIndex++) {
       ctx.fillStyle = defaultFill;
@@ -95,7 +95,7 @@ class ConstantStringNode extends BaseNode {
   }
 
   onExecute() {
-    this.setOutputData(0, this.getPropertyOr<string>("", "value"));
+    this.setOutputData(0, this.getParsedPropertyValueOr<string>("", "value"));
   }
 }
 

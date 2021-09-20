@@ -20,7 +20,7 @@ import {
   regionWidth
 } from "../../util/canvas";
 
-import BaseNode, { dataSocket, propertyValue } from "../base-node";
+import BaseNode, { dataSocket, nodeProperty } from "../base-node";
 
 const TITLE = "ConstantNumber";
 
@@ -40,7 +40,7 @@ class ConstantNumberNode extends BaseNode {
       sockets: {
         output: [dataSocket("")]
       },
-      properties: [["value", propertyValue("number", 0)]],
+      properties: [["value", nodeProperty("number", 0)]],
       metadata: [
         ["value", 0],
         ["plusRegion", newRegion(0, 0)],
@@ -173,7 +173,10 @@ class ConstantNumberNode extends BaseNode {
         pos[POS_Y] > minusRegion[COR_TL][POS_Y] &&
         pos[POS_Y] < minusRegion[COR_BR][POS_Y]
       ) {
-        this.setMeta("value", this.getMetaOr<number>(0, "value") - 1);
+        this.setParsedPropertyValue(
+          "value",
+          this.getParsedPropertyValueOr<number>(0, "value") - 1
+        );
       }
     }
 
@@ -184,7 +187,10 @@ class ConstantNumberNode extends BaseNode {
         pos[POS_Y] > plusRegion[COR_TL][POS_Y] &&
         pos[POS_Y] < plusRegion[COR_BR][POS_Y]
       ) {
-        this.setMeta("value", this.getMetaOr<number>(0, "value") + 1);
+        this.setParsedPropertyValue(
+          "value",
+          this.getParsedPropertyValueOr<number>(0, "value") + 1
+        );
       }
     }
   }

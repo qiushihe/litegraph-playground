@@ -1,13 +1,19 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
+import { useDrop } from "react-dnd";
 import isNil from "lodash/fp/isNil";
 import isEmpty from "lodash/fp/isEmpty";
-import forEach from "lodash/fp/forEach";
+import flow from "lodash/fp/flow";
+import values from "lodash/fp/values";
+import map from "lodash/fp/map";
+import get from "lodash/fp/get";
 
+import { addNodeToCanvas } from "../util/litegraph";
 import { LiteGraph, LGraph, LGraphCanvas } from "../litegraph-core";
 import BaseNode, { BaseNodeClass } from "../node-type/base-node";
 import { registerNodes } from "../node-type";
 import { getUploadedTextContent } from "../util/upload";
 import { sendAsTextDownload } from "../util/download";
+import { IEditorState, IEditorStateDelegate } from "../editor-state-provider";
 
 export const useCustomNodeTypes = (prefix: string) => {
   const [manifest, setManifest] = useState<{ key: string; title: string }[]>(
@@ -44,25 +50,21 @@ export const useCustomNodeTypes = (prefix: string) => {
 };
 
 export const useRunningState = (
-  graphRef: React.MutableRefObject<LGraph>,
+  graph: LGraph,
   autoStart: boolean,
   executionRate: number
 ) => {
   const [isRunning, setIsRunning] = useState(false);
 
   const handleStartStop = useCallback(() => {
-    const { current: graph } = graphRef;
-
     if (isRunning) {
       graph.stop();
     } else {
       graph.start();
     }
-  }, [isRunning, graphRef]);
+  }, [isRunning, graph]);
 
   useEffect(() => {
-    const { current: graph } = graphRef;
-
     if (graph) {
       graph.onPlayEvent = () => {
         setIsRunning(true);
@@ -76,7 +78,7 @@ export const useRunningState = (
         graph.start(executionRate);
       }
     }
-  }, [autoStart, executionRate, graphRef]);
+  }, [autoStart, executionRate, graph]);
 
   return {
     isRunning,
@@ -104,14 +106,12 @@ export const useFilename = (defaultFilename: string) => {
 };
 
 export const useUploadDownload = (
-  graphRef: React.MutableRefObject<LGraph>,
+  graph: LGraph,
   filename: string,
   setFilename: (filename: string) => void
 ) => {
   const handleUpload = useCallback(
     async (evt) => {
-      const { current: graph } = graphRef;
-
       if (graph) {
         const [filename, uploaded, uploadErr] = await getUploadedTextContent(
           evt
@@ -147,63 +147,105 @@ export const useUploadDownload = (
         }
       }
     },
-    [graphRef, setFilename]
+    [graph, setFilename]
   );
 
   const handleDownload = useCallback(() => {
-    const { current: graph } = graphRef;
-
     if (graph) {
       sendAsTextDownload(filename, JSON.stringify(graph.serialize(), null, 2));
     }
-  }, [graphRef, filename]);
+  }, [graph, filename]);
 
   return { handleUpload, handleDownload };
 };
 
-export const useGridSnap = (
-  graphCanvasRef: React.MutableRefObject<LGraphCanvas | null>
-) => {
+export const useGridSnap = (graphCanvas: LGraphCanvas | null) => {
   const [snapToGrid, setSnapToGrid] = useState(false);
 
   const handleToggleGridSnap = useCallback(() => {
-    const { current: graphCanvas } = graphCanvasRef;
-
     if (graphCanvas) {
       (graphCanvas as LGraphCanvas).align_to_grid = !snapToGrid;
     }
 
     setSnapToGrid(!snapToGrid);
-  }, [graphCanvasRef, snapToGrid]);
+  }, [graphCanvas, snapToGrid]);
 
   return { snapToGrid, setSnapToGrid, handleToggleGridSnap };
 };
 
-export const useNodeOperations = () => {
-  const [selectedNodes, setSelectedNodes] = useState<BaseNode[]>([]);
+export const useNodeOperations = (
+  editorState: IEditorState,
+  graphCanvas: LGraphCanvas | null
+) => {
+  useEffect(() => {
+    if (graphCanvas) {
+      graphCanvas.onSelectionChange = (selectedNodes) => {
+        const selectedNodeIds = flow([values, map(get("id"))])(selectedNodes);
+        editorState.setSelectedNodeIds(selectedNodeIds);
+      };
+    }
+  }, [graphCanvas, editorState]);
 
   const handleRemoveNode = useCallback(() => {
-    forEach((node: BaseNode) => {
-      const graph = node.graph;
-      graph.beforeChange();
-      graph.remove(node);
-      graph.afterChange();
-      node.setDirtyCanvas(true, true);
-    })(selectedNodes);
-  }, [selectedNodes]);
+    editorState.removeNodesByIds(editorState.getSelectedNodeIds());
+  }, [editorState]);
 
   const handleCloneNode = useCallback(() => {
-    forEach((node: BaseNode) => {
-      const newNode = node.clone();
-      if (newNode) {
-        newNode.pos = [node.pos[0] + 5, node.pos[1] + 5];
-        node.graph.beforeChange();
-        node.graph.add(newNode);
-        node.graph.afterChange();
-        node.setDirtyCanvas(true, true);
-      }
-    })(selectedNodes);
-  }, [selectedNodes]);
+    editorState.cloneNodesByIds(editorState.getSelectedNodeIds());
+  }, [editorState]);
 
-  return { selectedNodes, setSelectedNodes, handleRemoveNode, handleCloneNode };
+  return { handleRemoveNode, handleCloneNode };
+};
+
+export const useEditorStateDelegate = (
+  graph: LGraph,
+  editorState: IEditorState
+) => {
+  const [editorStateDelegate, setEditorStateDelegate] =
+    useState<IEditorStateDelegate | null>(null);
+
+  useEffect(() => {
+    setEditorStateDelegate({
+      getNodeById: (id: number) => graph.getNodeById(id) as BaseNode | null
+    });
+  }, [graph]);
+
+  useEffect(() => {
+    if (editorStateDelegate !== null) {
+      editorState.setDelegate(editorStateDelegate);
+    }
+  }, [editorState, editorStateDelegate]);
+};
+
+export const useCustomNodeTypesDropZone = (
+  graph: LGraph,
+  graphCanvas: LGraphCanvas | null
+) => {
+  const [, dropZoneRef] = useDrop(
+    () => ({
+      accept: "CUSTOM_NODE_TYPE",
+      drop: (item: { nodeTypeKey: string }, monitor) => {
+        const dropOffset = monitor.getClientOffset();
+        const dragOffset = monitor.getInitialClientOffset();
+        const dragSourceOffset = monitor.getInitialSourceClientOffset();
+
+        if (
+          graph &&
+          graphCanvas &&
+          dropOffset &&
+          dragOffset &&
+          dragSourceOffset
+        ) {
+          addNodeToCanvas(graphCanvas)(item.nodeTypeKey, [
+            dropOffset.x - (dragOffset.x - dragSourceOffset.x),
+            dropOffset.y - (dragOffset.y - dragSourceOffset.y)
+          ]);
+        }
+      },
+      collect: () => ({})
+    }),
+    [graph, graphCanvas]
+  );
+
+  return { dropZoneRef };
 };
