@@ -125,6 +125,10 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
     }
   }, []);
 
+  const handleLogNode = useCallback(() => {
+    console.log(node);
+  }, [node]);
+
   useEffect(() => {
     if (size(nodeIds) <= 0 || size(nodeIds) > 1) {
       setNode(null);
@@ -152,15 +156,17 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
     <Panel className={className} title="Node Inspector">
       <ToolbarContainer>
         <Toolbar>
-          <ToolbarItem disabled={size(nodeIds) <= 0} onClick={onRemoveNode}>
-            Remove
-          </ToolbarItem>
-          <ItemSpacer />
           <ToolbarItem disabled={size(nodeIds) !== 1} onClick={onCloneNode}>
             Clone
           </ToolbarItem>
+          <ItemSpacer />
+          <ToolbarItem disabled={size(nodeIds) <= 0} onClick={onRemoveNode}>
+            Remove
+          </ToolbarItem>
           <ItemSeparator />
-          <ToolbarItem disabled={true}>Focus</ToolbarItem>
+          <ToolbarItem disabled={size(nodeIds) !== 1} onClick={handleLogNode}>
+            Log
+          </ToolbarItem>
         </Toolbar>
       </ToolbarContainer>
       <HorizontalSeparator />
