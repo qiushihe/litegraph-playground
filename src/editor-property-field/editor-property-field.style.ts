@@ -97,6 +97,7 @@ export const EditorFormMultiLine = styled.label`
   flex: 1;
   align-items: center;
   justify-content: flex-end;
+  user-select: none;
 `;
 
 export const EditorFormField = styled.div``;
