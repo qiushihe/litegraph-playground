@@ -18,6 +18,7 @@ const fieldStyle = css`
   border: 1px solid ${SEPARATOR};
   background-color: ${BACKGROUND_1};
   color: ${FOREGROUND_2};
+  font-family: monospace;
   font-size: 13px;
   outline: none;
   padding: 3px 6px;
