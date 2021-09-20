@@ -74,14 +74,29 @@ const buttonStyle = css`
 
 export const EditorForm = styled.form``;
 
+export const EditorMeta = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const EditorFormType = styled.div`
   display: inline-flex;
+  flex-direction: row;
   margin: 6px 0;
   padding: 3px 9px;
   color: ${FOREGROUND_1};
   border: 1px solid ${SEPARATOR};
   border-radius: 9999px;
   cursor: default;
+`;
+
+export const EditorFormMultiLine = styled.label`
+  display: inline-flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 export const EditorFormField = styled.div``;

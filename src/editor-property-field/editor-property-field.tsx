@@ -10,7 +10,9 @@ import {
   PropertyTitle,
   PropertyValue,
   EditorForm,
+  EditorMeta,
   EditorFormType,
+  EditorFormMultiLine,
   EditorFormField,
   EditorFormButtons,
   SaveButton,
@@ -51,7 +53,12 @@ const EditorPropertyField: React.FunctionComponent<
   const onChange = props.onChange || DEFAULT_PROPS.onChange;
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isCurrentlyMultiLine, setIsCurrentlyMultiLine] = useState(isMultiLine);
   const [fieldValue, setFieldValue] = useState(getPropertyValue());
+
+  const handleToggleMultiLine = useCallback(() => {
+    setIsCurrentlyMultiLine(!isCurrentlyMultiLine);
+  }, [isCurrentlyMultiLine]);
 
   const handleFieldChange = useCallback(
     (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -96,9 +103,19 @@ const EditorPropertyField: React.FunctionComponent<
       {isEditing ? (
         <EditorForm onSubmit={handleFormSubmit}>
           <PropertyTitle>{propertyName}</PropertyTitle>
-          <EditorFormType>type: {editorType}</EditorFormType>
+          <EditorMeta>
+            <EditorFormType>type: {editorType}</EditorFormType>
+            <EditorFormMultiLine>
+              <input
+                type="checkbox"
+                checked={isCurrentlyMultiLine}
+                onChange={handleToggleMultiLine}
+              />
+              MultiLine
+            </EditorFormMultiLine>
+          </EditorMeta>
           <EditorFormField>
-            {isMultiLine ? (
+            {isCurrentlyMultiLine ? (
               <MultiLineField
                 name="propertyValue"
                 value={fieldValue}
