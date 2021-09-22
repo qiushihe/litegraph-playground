@@ -14,6 +14,8 @@ import { registerNodes } from "../node-type";
 import { getUploadedTextContent } from "../util/upload";
 import { sendAsTextDownload } from "../util/download";
 import { IEditorState, IEditorStateDelegate } from "../editor-state-provider";
+import { Coordinate } from "../util/canvas";
+import { POS_X, POS_Y } from "../enum/canvas.enum";
 
 export const useCustomNodeTypes = (prefix: string) => {
   const [manifest, setManifest] = useState<{ key: string; title: string }[]>(
@@ -194,11 +196,16 @@ export const useNodeOperations = (
     editorState.cloneNodesByIds(editorState.getSelectedNodeIds());
   }, [editorState]);
 
-  return { handleRemoveNode, handleCloneNode };
+  const handleFocusNode = useCallback(() => {
+    editorState.focusNodesByIds(editorState.getSelectedNodeIds());
+  }, [editorState]);
+
+  return { handleRemoveNode, handleCloneNode, handleFocusNode };
 };
 
 export const useEditorStateDelegate = (
   graph: LGraph,
+  graphCanvas: LGraphCanvas | null,
   editorState: IEditorState
 ) => {
   const [editorStateDelegate, setEditorStateDelegate] =
@@ -206,9 +213,28 @@ export const useEditorStateDelegate = (
 
   useEffect(() => {
     setEditorStateDelegate({
-      getNodeById: (id: number) => graph.getNodeById(id) as BaseNode | null
+      getNodeById: (id: number) => graph.getNodeById(id) as BaseNode | null,
+      setCanvasCenter: (coordinate: Coordinate) => {
+        if (graphCanvas) {
+          const { width: canvasWidth, height: canvasHeight } =
+            graphCanvas.canvas.getBoundingClientRect();
+
+          const canvasCenter = [
+            canvasWidth / 2,
+            canvasHeight / 2
+          ] as Coordinate;
+
+          graphCanvas.ds.offset = [
+            canvasCenter[POS_X] - coordinate[POS_X],
+            canvasCenter[POS_Y] - coordinate[POS_Y]
+          ];
+
+          graphCanvas.ds.computeVisibleArea();
+          graphCanvas.draw(true, true);
+        }
+      }
     });
-  }, [graph]);
+  }, [graph, graphCanvas]);
 
   useEffect(() => {
     if (editorStateDelegate !== null) {

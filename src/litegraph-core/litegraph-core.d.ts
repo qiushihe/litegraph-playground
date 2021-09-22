@@ -1,4 +1,6 @@
 declare module "litegraph.js/build/litegraph.core" {
+  import { Coordinate } from "../util/canvas";
+
   declare class LGraph {
     beforeChange(): void;
     afterChange(): void;
@@ -25,6 +27,7 @@ declare module "litegraph.js/build/litegraph.core" {
 
     constructor(elm: HTMLCanvasElement, graph: LGraph, options: unknown): void;
 
+    ds: DragAndScale;
     graph: LGraph;
     canvas: HTMLCanvasElement;
     selected_nodes: Record<number, LGraphNode>;
@@ -43,6 +46,7 @@ declare module "litegraph.js/build/litegraph.core" {
     processContextMenu(): void;
     getNodeMenuOptions(node: LGraphNode): unknown[];
     onSelectionChange(selectedNodes: Record<number, LGraphNode>): void;
+    draw(forceFgCanvas: boolean, forceBgCanvas: boolean): void;
   }
 
   declare class LGraphNode {
@@ -85,6 +89,11 @@ declare module "litegraph.js/build/litegraph.core" {
 
   declare class ContextMenu {
     getFirstEvent(): { clientX: number; clientY: number };
+  }
+
+  declare class DragAndScale {
+    offset: Coordinate;
+    computeVisibleArea: () => void;
   }
 
   export const LiteGraph: {

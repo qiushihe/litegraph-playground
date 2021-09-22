@@ -88,6 +88,8 @@ export const preserve2DContext = (
 
 export type Coordinate = [number, number];
 
+export type Dimension = [number, number];
+
 export type Region = [Coordinate, Coordinate, Coordinate, Coordinate, unknown?];
 
 export const newCoordinate = (x: number, y: number): Coordinate => [

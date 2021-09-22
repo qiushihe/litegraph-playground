@@ -44,14 +44,16 @@ const PROP_TYPES = {
   className: PropTypes.string,
   editorState: PropTypes.object,
   onRemoveNode: PropTypes.func,
-  onCloneNode: PropTypes.func
+  onCloneNode: PropTypes.func,
+  onFocusNode: PropTypes.func
 };
 
 const DEFAULT_PROPS = {
   className: "",
   editorState: {},
   onRemoveNode: () => {},
-  onCloneNode: () => {}
+  onCloneNode: () => {},
+  onFocusNode: () => {}
 };
 
 const MULTILINE_FIELD: Record<string, boolean> = {
@@ -81,6 +83,7 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
     DEFAULT_PROPS.editorState) as IEditorState;
   const onRemoveNode = props.onRemoveNode || DEFAULT_PROPS.onRemoveNode;
   const onCloneNode = props.onCloneNode || DEFAULT_PROPS.onCloneNode;
+  const onFocusNode = props.onFocusNode || DEFAULT_PROPS.onFocusNode;
 
   const nodeIds = editorState.getSelectedNodeIds();
 
@@ -139,7 +142,9 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
   }, []);
 
   const handleLogNode = useCallback(() => {
-    console.log(node);
+    if (node) {
+      console.log(node);
+    }
   }, [node]);
 
   useEffect(() => {
@@ -177,6 +182,10 @@ const EditorNodeInspector: React.FunctionComponent<EditorNodeInspectorProps> = (
             Remove
           </ToolbarItem>
           <ItemSeparator />
+          <ToolbarItem disabled={size(nodeIds) <= 0} onClick={onFocusNode}>
+            Focus
+          </ToolbarItem>
+          <ItemSpacer />
           <ToolbarItem disabled={size(nodeIds) !== 1} onClick={handleLogNode}>
             Log
           </ToolbarItem>

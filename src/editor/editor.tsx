@@ -62,7 +62,7 @@ const Editor: React.FunctionComponent<EditorProps> = (props) => {
   const [graph] = useState<LGraph>(new LGraph());
   const [graphCanvas, setGraphCanvas] = useState<LGraphCanvas | null>(null);
 
-  useEditorStateDelegate(graph, editorState);
+  useEditorStateDelegate(graph, graphCanvas, editorState);
 
   const { nodeTypesManifest } = useCustomNodeTypes(PREFIX);
   const { dropZoneRef } = useCustomNodeTypesDropZone(graph, graphCanvas);
@@ -84,10 +84,8 @@ const Editor: React.FunctionComponent<EditorProps> = (props) => {
 
   const { snapToGrid, handleToggleGridSnap } = useGridSnap(graphCanvas);
 
-  const { handleRemoveNode, handleCloneNode } = useNodeOperations(
-    editorState,
-    graphCanvas
-  );
+  const { handleRemoveNode, handleCloneNode, handleFocusNode } =
+    useNodeOperations(editorState, graphCanvas);
 
   useEffect(() => {
     const { current: canvas } = canvasRef;
@@ -147,6 +145,7 @@ const Editor: React.FunctionComponent<EditorProps> = (props) => {
             <EditorNodeInspector
               onRemoveNode={handleRemoveNode}
               onCloneNode={handleCloneNode}
+              onFocusNode={handleFocusNode}
             />
           </SidebarScrollableContent>
         </SidebarContainer>
