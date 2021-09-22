@@ -1,6 +1,6 @@
 {
-  "last_node_id": 67,
-  "last_link_id": 94,
+  "last_node_id": 68,
+  "last_link_id": 100,
   "nodes": [
     {
       "id": 4,
@@ -22,7 +22,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 15,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -128,7 +128,7 @@
         {
           "name": "action",
           "type": -1,
-          "link": 8
+          "link": 99
         },
         {
           "name": "data",
@@ -220,10 +220,10 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        74
-      ],
+      "size": {
+        "0": 140,
+        "1": 74
+      },
       "flags": {},
       "order": 27,
       "mode": 0,
@@ -275,10 +275,10 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        74
-      ],
+      "size": {
+        "0": 140,
+        "1": 74
+      },
       "flags": {},
       "order": 30,
       "mode": 0,
@@ -330,10 +330,10 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        54
-      ],
+      "size": {
+        "0": 140,
+        "1": 54
+      },
       "flags": {},
       "order": 31,
       "mode": 0,
@@ -373,10 +373,10 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        74
-      ],
+      "size": {
+        "0": 140,
+        "1": 74
+      },
       "flags": {},
       "order": 21,
       "mode": 0,
@@ -444,7 +444,7 @@
         {
           "name": "clear",
           "type": -1,
-          "link": 67
+          "link": 98
         },
         {
           "name": "message",
@@ -494,7 +494,7 @@
         {
           "name": "clear",
           "type": -1,
-          "link": 68
+          "link": 100
         },
         {
           "name": "message",
@@ -528,10 +528,10 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        142.419921875,
-        54
-      ],
+      "size": {
+        "0": 142.419921875,
+        "1": 54
+      },
       "flags": {},
       "order": 28,
       "mode": 0,
@@ -645,50 +645,6 @@
       }
     },
     {
-      "id": 45,
-      "type": "_custom::user-interaction/button",
-      "pos": {
-        "0": 580,
-        "1": 430,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        164,
-        84
-      ],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": -1,
-          "links": [
-            67,
-            68
-          ]
-        }
-      ],
-      "properties": {
-        "label": {
-          "type": "string",
-          "value": "\"Clear\""
-        },
-        "fontSize": {
-          "type": "number",
-          "value": "16"
-        }
-      }
-    },
-    {
       "id": 59,
       "type": "_custom::array/make-array",
       "pos": {
@@ -768,7 +724,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 16,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
@@ -883,50 +839,6 @@
       "properties": {}
     },
     {
-      "id": 57,
-      "type": "_custom::array/constant-array",
-      "pos": {
-        "0": 50,
-        "1": 370,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        140,
-        46
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "array",
-          "type": "",
-          "links": [
-            82
-          ]
-        },
-        {
-          "name": "length",
-          "type": "",
-          "links": null
-        }
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "value": "[1,2,3,4,5]"
-        }
-      }
-    },
-    {
       "id": 62,
       "type": "_custom::string/constant-string",
       "pos": {
@@ -946,7 +858,7 @@
         34
       ],
       "flags": {},
-      "order": 3,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -985,7 +897,7 @@
         50
       ],
       "flags": {},
-      "order": 4,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1024,7 +936,7 @@
         34
       ],
       "flags": {},
-      "order": 5,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1058,12 +970,12 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        40
-      ],
+      "size": {
+        "0": 140,
+        "1": 40
+      },
       "flags": {},
-      "order": 6,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1102,7 +1014,7 @@
         34
       ],
       "flags": {},
-      "order": 7,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1186,7 +1098,7 @@
         34
       ],
       "flags": {},
-      "order": 8,
+      "order": 6,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1220,12 +1132,12 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        54
-      ],
+      "size": {
+        "0": 140,
+        "1": 54
+      },
       "flags": {},
-      "order": 9,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -1265,12 +1177,12 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        54
-      ],
+      "size": {
+        "0": 140,
+        "1": 54
+      },
       "flags": {},
-      "order": 10,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -1310,12 +1222,12 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        54
-      ],
+      "size": {
+        "0": 140,
+        "1": 54
+      },
       "flags": {},
-      "order": 11,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -1355,12 +1267,12 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        142.419921875,
-        54
-      ],
+      "size": {
+        "0": 142.419921875,
+        "1": 54
+      },
       "flags": {},
-      "order": 12,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -1400,12 +1312,12 @@
         "8": 0,
         "9": 0
       },
-      "size": [
-        140,
-        54
-      ],
+      "size": {
+        "0": 140,
+        "1": 54
+      },
       "flags": {},
-      "order": 13,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
@@ -1450,7 +1362,7 @@
         34
       ],
       "flags": {},
-      "order": 14,
+      "order": 12,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1470,11 +1382,75 @@
       }
     },
     {
+      "id": 68,
+      "type": "_custom::flow-control/sequence",
+      "pos": {
+        "0": 230,
+        "1": 50,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 140,
+        "1": 106
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "action",
+          "type": -1,
+          "link": 95
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": -1,
+          "links": [
+            98
+          ]
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": [
+            100
+          ]
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": [
+            99
+          ]
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": null
+        },
+        {
+          "name": "",
+          "type": -1,
+          "links": null
+        }
+      ],
+      "properties": {}
+    },
+    {
       "id": 1,
       "type": "_custom::user-interaction/button",
       "pos": {
         "0": 30,
-        "1": 60,
+        "1": 50,
         "2": 0,
         "3": 0,
         "4": 0,
@@ -1489,7 +1465,7 @@
         84
       ],
       "flags": {},
-      "order": 1,
+      "order": 13,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1497,7 +1473,7 @@
           "name": "",
           "type": -1,
           "links": [
-            8
+            95
           ]
         }
       ],
@@ -1509,6 +1485,50 @@
         "fontSize": {
           "type": "number",
           "value": "16"
+        }
+      }
+    },
+    {
+      "id": 57,
+      "type": "_custom::array/constant-array",
+      "pos": {
+        "0": 50,
+        "1": 370,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        140,
+        52
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "array",
+          "type": "",
+          "links": [
+            82
+          ]
+        },
+        {
+          "name": "length",
+          "type": "",
+          "links": null
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "value": "[1,2,3,4,5]"
         }
       }
     }
@@ -1529,14 +1549,6 @@
       10,
       1,
       0
-    ],
-    [
-      8,
-      1,
-      0,
-      10,
-      0,
-      -1
     ],
     [
       10,
@@ -1665,22 +1677,6 @@
       46,
       2,
       0
-    ],
-    [
-      67,
-      45,
-      0,
-      47,
-      1,
-      -1
-    ],
-    [
-      68,
-      45,
-      0,
-      46,
-      1,
-      -1
     ],
     [
       69,
@@ -1817,6 +1813,38 @@
       59,
       0,
       0
+    ],
+    [
+      95,
+      1,
+      0,
+      68,
+      0,
+      -1
+    ],
+    [
+      98,
+      68,
+      0,
+      47,
+      1,
+      -1
+    ],
+    [
+      99,
+      68,
+      2,
+      10,
+      0,
+      -1
+    ],
+    [
+      100,
+      68,
+      1,
+      46,
+      1,
+      -1
     ]
   ],
   "groups": [],

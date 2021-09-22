@@ -1,6 +1,6 @@
 import Runner from "./runner";
 
-import testGraph from "./hello-world-scriptable.json";
+import testGraph from "../../fixture/hello-world-scriptable.json";
 
 describe("Hello World (Scriptable)", () => {
   it("should test reduce fixture", async () => {

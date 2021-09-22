@@ -1,6 +1,6 @@
 import Runner from "./runner";
 
-import reduceFixture from "../fixture/reduce.fixture.json";
+import reduceFixture from "../../fixture/reduce.fixture.json";
 
 describe("runner", () => {
   it("should test reduce fixture", async () => {
