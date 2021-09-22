@@ -1,4 +1,4 @@
-import { LGraph, LiteGraph } from "../litegraph-core";
+import { LGraph } from "../litegraph-core";
 
 import flow from "lodash/fp/flow";
 import find from "lodash/fp/find";
@@ -6,7 +6,6 @@ import get from "lodash/fp/get";
 import eq from "lodash/fp/eq";
 
 import { PREFIX } from "../enum/node-type.enum";
-import { registerNodes } from "../node-type";
 import ConsoleLogNode from "../node-type/output/console-log";
 import ScriptExitNode from "../node-type/external/script-exit";
 
@@ -16,10 +15,8 @@ class Runner {
   resolvePromise: (data: unknown) => void;
   rejectPromise: (data: unknown) => void;
 
-  constructor() {
-    registerNodes(PREFIX, LiteGraph.registerNodeType.bind(LiteGraph));
-
-    this.graph = new LGraph();
+  constructor(graph: LGraph) {
+    this.graph = graph;
 
     this.resolvePromise = () => {};
     this.rejectPromise = () => {};
