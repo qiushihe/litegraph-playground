@@ -1,7 +1,10 @@
-import "../styles/globals.css";
+import React from "react";
 import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
+import "../styles/globals.css";
+
+const LiteGraphPlaygroundApp = ({ Component, pageProps }: AppProps) => {
   return <Component {...pageProps} />;
-}
-export default MyApp;
+};
+
+export default LiteGraphPlaygroundApp;
