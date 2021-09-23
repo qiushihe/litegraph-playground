@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
+import PageHead from "../components/page-head";
 
 const HomePage: NextPage = () => {
   const { basePath } = useRouter();
@@ -15,11 +16,10 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>LiteGraph Playground</title>
-        <meta name="description" content="A LiteGraph Playground" />
-        <link rel="icon" href={`${basePath}/favicon.ico`} />
-      </Head>
+      <PageHead
+        title="LiteGraph Playground"
+        description="A LiteGraph Playground"
+      />
       <div>
         <Link href="/playground">
           <a>LiteGraph Playground</a>
