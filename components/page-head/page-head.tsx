@@ -13,9 +13,9 @@ const DEFAULT_PROPS = {
   description: ""
 };
 
-type EditorProps = InferProps<typeof PROP_TYPES>;
+type PageHeadProps = InferProps<typeof PROP_TYPES>;
 
-const PageHead: React.FunctionComponent<EditorProps> = (props) => {
+const PageHead: React.FunctionComponent<PageHeadProps> = (props) => {
   const title = props.title || DEFAULT_PROPS.title;
   const description = props.description || DEFAULT_PROPS.description;
 
