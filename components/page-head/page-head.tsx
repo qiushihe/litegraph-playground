@@ -5,12 +5,14 @@ import { useRouter } from "next/router";
 
 const PROP_TYPES = {
   title: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  children: PropTypes.any
 };
 
 const DEFAULT_PROPS = {
   title: "",
-  description: ""
+  description: "",
+  children: null
 };
 
 type PageHeadProps = InferProps<typeof PROP_TYPES>;
@@ -18,6 +20,7 @@ type PageHeadProps = InferProps<typeof PROP_TYPES>;
 const PageHead: React.FunctionComponent<PageHeadProps> = (props) => {
   const title = props.title || DEFAULT_PROPS.title;
   const description = props.description || DEFAULT_PROPS.description;
+  const children = props.children || DEFAULT_PROPS.children;
 
   const { basePath } = useRouter();
 
@@ -26,6 +29,7 @@ const PageHead: React.FunctionComponent<PageHeadProps> = (props) => {
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="icon" href={`${basePath}/favicon.ico`} />
+      {children}
     </Head>
   );
 };
